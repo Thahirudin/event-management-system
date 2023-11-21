@@ -18,11 +18,11 @@ class CreateTblEventsTable extends Migration
             $table->integer('id_organizer');
             $table->string('nama_event');
             $table->date('tanggal');
-            $table->text('detail');
-            $table->decimal('harga');
-            $table->integer('kontak');
-            $table->rememberToken();
-            $table->timestamps();
+          $table->text('detail');
+          $table->decimal('harga');
+          $table->integer('kontak');
+          $table->rememberToken();
+           $table->timestamps();
         });
         
     }
