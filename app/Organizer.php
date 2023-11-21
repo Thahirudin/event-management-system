@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organizer extends Model
 {
+    protected $table = 'tbl_organizers';
     protected $fillable = [
         'nama',
         'tanggal_lahir',
