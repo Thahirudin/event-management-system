@@ -15,15 +15,12 @@
                 </div>
             </div>
             <div class="iq-search-bar ml-auto">
-                <form action="#" class="searchbox">
-                    <input type="text" class="text search-input" placeholder="Search Here...">
-                    <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                </form>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-label="Toggle navigation">
+                    <i class="ri-menu-3-line"></i>
+                </button>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-                <i class="ri-menu-3-line"></i>
-            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto navbar-list">
                     <li class="nav-item nav-icon search-content">
@@ -105,8 +102,7 @@
                     </li>
                     <li class="line-height pt-3">
                         <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                            <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3"
-                                alt="user">
+                            <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                             <div class="iq-card shadow-none m-0">
