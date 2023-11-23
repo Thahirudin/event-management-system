@@ -37,13 +37,13 @@
 
                     </ul>
                 </li>
-                <li>
+                <li class="@yield('list-organizer') @yield('list-member')">
                     <a href="#pengguna" class="iq-waves-effect collapsed" data-toggle="collapse"
                         aria-expanded="false"><i class="las la-user-friends"></i><span>Pengguna</span><i
                             class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul id="pengguna" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li><a href="organizer.html"><i class="las la-sign-in-alt"></i>Organizer</a></li>
-                        <li><a href="member.html"><i class="ri-login-circle-line"></i>Member</a></li>
+                        <li class="@yield('list-organizer')"><a href="{{ route('admin-list-organizer') }}"><i class="las la-sign-in-alt"></i>Organizer</a></li>
+                        <li class="@yield('list-member')"><a href="{{ route('admin-list-member') }}"><i class="ri-login-circle-line"></i>Member</a></li>
                     </ul>
                 </li>
                 <li><a href="keuangan.html" class="iq-waves-effect"><i

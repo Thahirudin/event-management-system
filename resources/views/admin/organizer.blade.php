@@ -3,7 +3,7 @@
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-    List Event
+    List Organizer
 @endsection
 @section('list-organizer')
     active active-menu
