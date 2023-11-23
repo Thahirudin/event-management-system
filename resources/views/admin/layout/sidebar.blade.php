@@ -19,21 +19,21 @@
             <ul id="iq-sidebar-toggle" class="iq-menu">
                 <li class=" @yield('dashboard')"><a href="{{ route('admin-dashboard') }}" class="iq-waves-effect"><i
                             class="las la-home iq-arrow-left"></i><span>Dashboard</span></a></li>
-                <li class=" @yield('order')"><a href="order.html" class="iq-waves-effect"><i
+                <li class=" @yield('order')"><a href="{{ route('admin-list-order') }}" class="iq-waves-effect"><i
                             class="ri-price-tag-line"></i><span>Order</span></a></li>
-                <li class=" @yield('kategori')"><a href="kategori.html" class="iq-waves-effect"><i
-                            class="ri-price-tag-line"></i><span>Kategori</span></a></li>
+                <li class=" @yield('kategori')"><a href="{{ route('admin-list-kategori') }}" class="iq-waves-effect"><i
+                            class="ri-apps-line"></i><span>Kategori</span></a></li>
                 <li class=" @yield('event')">
                     <a href="#event" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i
                             class="lab la-elementor iq-arrow-left"></i><span>Event</span><i
                             class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul id="event" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class=" @yield('list event')"><a href="{{ route('admin-list-event') }}"><i
-                                    class="las la-sign-in-alt"></i>List Event</a></li>
+                                    class="ri-file-list-3-line"></i>List Event</a></li>
                         <li class=" @yield('event akan datang')"><a href="event_akan_datang.html"><i
-                                    class="ri-login-circle-line"></i>Event Akan Datang</a></li>
-                        <li class=" @yield('event selesai')"><a href="event_selesai.html"><i
-                                    class="ri-login-circle-line"></i>Event Selesai</a></li>
+                                    class="ri-calendar-event-line"></i>Event Akan Datang</a></li>
+                        <li class=" @yield('event selesai')"><a href="event_selesai.html"><i 
+                                    class="ri-calendar-check-line"></i>Event Selesai</a></li>
 
                     </ul>
                 </li>
@@ -42,8 +42,8 @@
                         aria-expanded="false"><i class="las la-user-friends"></i><span>Pengguna</span><i
                             class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul id="pengguna" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li class="@yield('list-organizer')"><a href="{{ route('admin-list-organizer') }}"><i class="las la-sign-in-alt"></i>Organizer</a></li>
-                        <li class="@yield('list-member')"><a href="{{ route('admin-list-member') }}"><i class="ri-login-circle-line"></i>Member</a></li>
+                        <li class="@yield('list-organizer')"><a href="{{ route('admin-list-organizer') }}"><i class="las la-user"></i>Organizer</a></li>
+                        <li class="@yield('list-member')"><a href="{{ route('admin-list-member') }}"><i class="las la-user"></i>Member</a></li>
                     </ul>
                 </li>
                 <li><a href="keuangan.html" class="iq-waves-effect"><i
