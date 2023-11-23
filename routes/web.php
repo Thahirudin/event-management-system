@@ -41,6 +41,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-keuangan', function () {
         return view('admin/keuangan');
     })->name('admin-list-keuangan');
+    Route::get('/admin/tambah-kategori', function () {
+        return view('admin.tambah-kategori');
+    })->name('admin-tambah-kategori');
     
 });
 
