@@ -1,10 +1,12 @@
-
 @extends('admin.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-    Title
+    Admin - Dashboard
+@endsection
+@section('dashboard')
+active active-menu
 @endsection
 @section('content')
     <div class="row">
@@ -408,8 +410,7 @@
                                             <div class="iq-movie">
                                                 <a href="javascript:void(0);"><img
                                                         src="../assets/images/movie-thumb/01.jpg"
-                                                        class="img-border-radius avatar-40 img-fluid"
-                                                        alt=""></a>
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                             </div>
                                             <div class="media-body text-white text-left ml-3">
                                                 <p class="mb-0">Champions</p>
@@ -432,8 +433,7 @@
                                             <div class="iq-movie">
                                                 <a href="javascript:void(0);"><img
                                                         src="../assets/images/show-thumb/05.jpg"
-                                                        class="img-border-radius avatar-40 img-fluid"
-                                                        alt=""></a>
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                             </div>
                                             <div class="media-body text-white text-left ml-3">
                                                 <p class="mb-0">Last Race</p>
@@ -455,8 +455,7 @@
                                             <div class="iq-movie">
                                                 <a href="javascript:void(0);"><img
                                                         src="../assets/images/show-thumb/07.jpg"
-                                                        class="img-border-radius avatar-40 img-fluid"
-                                                        alt=""></a>
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                             </div>
                                             <div class="media-body text-white text-left ml-3">
                                                 <p class="mb-0">Boop Bitty</p>
@@ -478,8 +477,7 @@
                                             <div class="iq-movie">
                                                 <a href="javascript:void(0);"><img
                                                         src="../assets/images/show-thumb/10.jpg"
-                                                        class="img-border-radius avatar-40 img-fluid"
-                                                        alt=""></a>
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                             </div>
                                             <div class="media-body text-white text-left ml-3">
                                                 <p class="mb-0">Dino Land</p>
@@ -501,8 +499,7 @@
                                             <div class="iq-movie">
                                                 <a href="javascript:void(0);"><img
                                                         src="../assets/images/show-thumb/04.jpg"
-                                                        class="img-border-radius avatar-40 img-fluid"
-                                                        alt=""></a>
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                             </div>
                                             <div class="media-body text-white text-left ml-3">
                                                 <p class="mb-0">The Last Breath</p>
@@ -527,5 +524,5 @@
     </div>
 @endsection
 @section('addJs')
-{{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
+    {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
 @endsection

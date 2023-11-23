@@ -6,6 +6,12 @@
 @section('title')
     List Event
 @endsection
+@section('event')
+active active-menu
+@endsection
+@section('list event')
+active active-menu
+@endsection
 @section('content')
 <div class="row">
                   <div class="col-sm-12">
