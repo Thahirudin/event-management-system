@@ -11,9 +11,21 @@
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
+// routes/web.php
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin-dashboard');
 });
+
+Route::middleware(['auth', 'organizer'])->group(function () {
+    Route::get('/organizer/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('organizer-dashboard');
+});
+
 Route::get('/admin/list-event', function () {
     return view('admin/list-event');
 });
+Auth::routes();
