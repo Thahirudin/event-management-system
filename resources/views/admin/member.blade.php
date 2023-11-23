@@ -29,6 +29,43 @@
                                     <th>Password</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>john_doe</td>
+                                    <td>1990-05-15</td>
+                                    <td>john.doe@example.com</td>
+                                    <td>secret123</td>
+                                </tr>
+                                <tr>
+                                    <td>Jane Smith</td>
+                                    <td>jane_smith</td>
+                                    <td>1985-08-22</td>
+                                    <td>jane.smith@example.com</td>
+                                    <td>password123</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Johnson</td>
+                                    <td>michael_j</td>
+                                    <td>1982-12-10</td>
+                                    <td>michael.j@example.com</td>
+                                    <td>mypass123</td>
+                                </tr>
+                                <tr>
+                                    <td>Emily Davis</td>
+                                    <td>emily_d</td>
+                                    <td>1995-03-28</td>
+                                    <td>emily.d@example.com</td>
+                                    <td>12345678</td>
+                                </tr>
+                                <tr>
+                                    <td>William Brown</td>
+                                    <td>will_brown</td>
+                                    <td>1988-07-05</td>
+                                    <td>william.b@example.com</td>
+                                    <td>pass1234</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -38,4 +75,12 @@
 @endsection
 @section('addJs')
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+    </script>
 @endsection
