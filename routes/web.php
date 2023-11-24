@@ -22,7 +22,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('admin-list-event');
     Route::get('/admin/event-akan-datang', function () {
         return view('admin/event-akan-datang');
-    })->name('admin-list-event');
+    })->name('admin-event-akan-datang');
     Route::get('/admin/event-selesai', function () {
         return view('admin/event-selesai');
     })->name('admin-event-selesai');

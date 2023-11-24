@@ -3,7 +3,7 @@
         <a href="index.html" class="header-logo">
             <img src="../assets/images/logo.png" class="img-fluid rounded-normal" alt="">
             <div class="logo-title">
-                <span class="text-primary text-uppercase">EventLab</span>
+                <span class="text-primary text-uppercase">Gamelab Event</span>
             </div>
         </a>
         <div class="iq-menu-bt-sidebar">
@@ -30,9 +30,9 @@
                     <ul id="event" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class=" @yield('list event')"><a href="{{ route('admin-list-event') }}"><i
                                     class="ri-file-list-3-line"></i>List Event</a></li>
-                        <li class=" @yield('event akan datang')"><a href="event_akan_datang.html"><i
+                        <li class=" @yield('event akan datang')"><a href="{{ route('admin-event-akan-datang') }}"><i
                                     class="ri-calendar-event-line"></i>Event Akan Datang</a></li>
-                        <li class=" @yield('event selesai')"><a href="event_selesai.html"><i 
+                        <li class=" @yield('event selesai')"><a href="{{ route('admin-event-selesai') }}"><i 
                                     class="ri-calendar-check-line"></i>Event Selesai</a></li>
 
                     </ul>
@@ -46,7 +46,7 @@
                         <li class="@yield('list-member')"><a href="{{ route('admin-list-member') }}"><i class="las la-user"></i>Member</a></li>
                     </ul>
                 </li>
-                <li><a href="keuangan.html" class="iq-waves-effect"><i
+                <li><a href="{{ route('admin-list-keuangan') }}" class="iq-waves-effect"><i
                             class="las la-file-alt iq-arrow-left"></i><span>Keuangan</span></a></li>
             </ul>
             </li>
