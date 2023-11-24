@@ -15,16 +15,20 @@ class CreateTblEventsTable extends Migration
     {
         Schema::create('tbl_events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_organizer');
+            $table->unsignedBigInteger('id_organizer');
+            $table->unsignedBigInteger('id_kategori');
             $table->string('nama_event');
-            $table->date('tanggal');
-          $table->text('detail');
-          $table->decimal('harga');
-          $table->integer('kontak');
-          $table->rememberToken();
-           $table->timestamps();
+            $table->dateTime('waktu');
+            $table->dateTime('lokasi');
+            $table->text('detail');
+            $table->string('kontak');
+            $table->rememberToken();
+            $table->timestamps();
+
+            $table->foreign('id_organizer')->references('id')->on('tbl_users');
+            $table->foreign('id_kategori')->references('id')->on('tbl_kategoris')->onDelete('cascade');
         });
-        
+
     }
 
     /**

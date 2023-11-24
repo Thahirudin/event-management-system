@@ -29,15 +29,33 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-order', function () {
         return view('admin/order');
     })->name('admin-list-order');
+    Route::get('/admin/tambah-order', function () {
+        return view('admin.tambah-order');
+    })->name('admin-tambah-order');
+    Route::get('/admin/edit-order', function () {
+        return view('admin.edit-order');
+    })->name('admin-edit-order');
     Route::get('/admin/list-kategori', function () {
         return view('admin/kategori');
     })->name('admin-list-kategori');
     Route::get('/admin/list-organizer', function () {
         return view('admin/organizer');
     })->name('admin-list-organizer');
+    Route::get('/admin/tambah-organizer', function () {
+        return view('admin.tambah-organizer');
+    })->name('admin-tambah-organizer');
+    Route::get('/admin/edit-organizer', function () {
+        return view('admin.edit-organizer');
+    })->name('admin-edit-organizer');
     Route::get('/admin/list-member', function () {
         return view('admin/member');
     })->name('admin-list-member');
+    Route::get('/admin/tambah-member', function () {
+        return view('admin.tambah-member');
+    })->name('admin-tambah-member');
+    Route::get('/admin/edit-member', function () {
+        return view('admin.edit-member');
+    })->name('admin-edit-member');
     Route::get('/admin/list-keuangan', function () {
         return view('admin/keuangan');
     })->name('admin-list-keuangan');

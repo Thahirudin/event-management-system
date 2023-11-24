@@ -16,10 +16,16 @@ class Event extends Model
         'kontak',
     ];
 
-    public function organizer()
+    public function user()
     {
-        return $this->belongsTo('App\Organizer','id_organizer');
+        return $this->belongsTo(User::class);
     }
-
-
+    public function harga()
+    {
+        return $this->hasMany(Harga::class);
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
