@@ -1,5 +1,5 @@
 <?php
-
+use App\http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +17,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin-dashboard');
-    Route::get('/admin/list-event', function () {
-        return view('admin/list-event');
-    })->name('admin-list-event');
+    Route::get('/admin/list-event', [EventController::class, 'index'] )->name('admin-list-event');
     Route::get('/admin/event-akan-datang', function () {
         return view('admin/event-akan-datang');
     })->name('admin-event-akan-datang');
