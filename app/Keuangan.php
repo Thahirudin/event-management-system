@@ -13,6 +13,7 @@ class Keuangan extends Model
         'id_organizer',
         'tanggal',
         'catatan',
+        'bukti',
         'jenis',
         'total',
     ];

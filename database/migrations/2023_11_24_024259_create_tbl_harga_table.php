@@ -13,7 +13,7 @@ class CreateTblHargaTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_harga', function (Blueprint $table) {
+        Schema::create('tbl_hargas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_event');
             $table->foreign('id_event')->references('id')->on('tbl_events')->onDelete('cascade');
@@ -30,6 +30,6 @@ class CreateTblHargaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_harga');
+        Schema::dropIfExists('tbl_hargas');
     }
 }

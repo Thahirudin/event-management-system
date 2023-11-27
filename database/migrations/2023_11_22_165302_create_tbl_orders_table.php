@@ -21,6 +21,7 @@ class CreateTblOrdersTable extends Migration
             $table->foreign('event_id')->references('id')->on('tbl_events')->onDelete('cascade');
             $table->text('status');
             $table->text('bukti');
+            $table->string('harga');
             $table->timestamps();
         });
     }
