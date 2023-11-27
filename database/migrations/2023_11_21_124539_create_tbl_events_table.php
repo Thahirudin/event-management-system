@@ -22,10 +22,10 @@ class CreateTblEventsTable extends Migration
             $table->dateTime('lokasi');
             $table->text('detail');
             $table->string('kontak');
+            $table->string('status');
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('id_organizer')->references('id')->on('tbl_users');
+            $table->foreign('id_organizer')->references('id')->on('tbl_organizers')->onDelete('cascade');
             $table->foreign('id_kategori')->references('id')->on('tbl_kategoris')->onDelete('cascade');
         });
 

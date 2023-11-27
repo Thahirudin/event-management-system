@@ -16,10 +16,10 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form>
+            <form action="">
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
-                    <input type="text" class="form-control" id="kategori">
+                    <input type="text" class="form-control" id="kategori" oninput="generateSlug()">
                 </div>
                 <div class="form-group">
                     <label for="slug">Slug URL</label>
@@ -31,5 +31,11 @@
     </div>
 @endsection
 @section('addJs')
-    {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
+    <script>
+        function generateSlug() {
+            var kategoriInput = document.getElementById('kategori').value;
+            var slugInput = kategoriInput.toLowerCase().replace(/\s+/g, '-');
+            document.getElementById('slug').value = slugInput;
+        }
+    </script>
 @endsection

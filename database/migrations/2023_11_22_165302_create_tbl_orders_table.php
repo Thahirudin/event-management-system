@@ -16,9 +16,11 @@ class CreateTblOrdersTable extends Migration
         Schema::create('tbl_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('member_id');
-            $table->foreign('member_id')->references('id')->on('members')->onDelete('set null');
+            $table->foreign('member_id')->references('id')->on('tbl_members')->onDelete('cascade');
             $table->unsignedBigInteger('event_id');
-            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('event_id')->references('id')->on('tbl_events')->onDelete('cascade');
+            $table->text('status');
+            $table->text('bukti');
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ class CreateTblMembers extends Migration
         Schema::create('tbl_members', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('username');
             $table->date('tanggal_lahir');
+            $table->text('profil')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

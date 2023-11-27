@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\User;
 class UsersSeeder extends Seeder
 {
     /**
@@ -11,25 +11,23 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-       DB::table('tbl_users')->truncate();
 
-        // Tambahkan data dummy pengguna
-        DB::table('tbl_users')->insert([
-            [
-                'nama' => 'admin',
-                'jabatan' => 'Admin',
-                'tanggal_lahir' => '2003-02-02',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('12345678'),
-            ],
-            [
-                'nama' => 'Thahirudin',
-                'jabatan' => 'Organizer',
-                'tanggal_lahir' => '2003-02-10',
-                'email' => 'thahirudin@gmail.com',
-                'password' => Hash::make('12345678'),
-            ],
-            // Tambahkan data dummy lainnya sesuai kebutuhan
+        // Tambahkan data dummy menggunakan model
+        User::create([
+            'nama' => 'admin',
+            'jabatan' => 'Admin',
+            'tanggal_lahir' => '2003-02-02',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('12345678'), // Gunakan bcrypt untuk mengenkripsi password
         ]);
+
+        User::create([
+            'nama' => 'Thahirudin',
+            'jabatan' => 'Organizer',
+            'tanggal_lahir' => '2003-02-10',
+            'email' => 'thahirudin@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
     }
 }

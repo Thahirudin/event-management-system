@@ -15,12 +15,15 @@ class CreateTblKeuangansTable extends Migration
     {
         Schema::create('tbl_keuangans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_event');
-            $table->integer('id_organizer');
             $table->date('tanggal');
             $table->text('catatan');
             $table->string('jenis');
             $table->integer('total');
+            $table->text('bukti');
+            $table->unsignedBigInteger('event_id');
+            $table->foreign('event_id')->references('id')->on('tbl_events')->onDelete('cascade');
+            $table->unsignedBigInteger('organizer_id');
+            $table->foreign('organizer_id')->references('id')->on('tbl_organizers')->onDelete('cascade');
             $table->timestamps();
         });
     }

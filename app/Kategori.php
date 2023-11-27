@@ -11,5 +11,8 @@ class Kategori extends Model
         'url',
         'slug',
     ];
-
+     public function event()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
