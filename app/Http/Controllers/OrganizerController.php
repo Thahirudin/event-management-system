@@ -10,4 +10,14 @@ class OrganizerController extends Controller
         
         return view('admin.list-organizer');
     }
+
+    public function create(){
+
+        return view('admin.tambah-organizer');
+    }
+
+    public function edit(){
+
+        return view('admin.edit-organizer');
+    }
 }
