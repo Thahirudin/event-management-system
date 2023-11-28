@@ -10,4 +10,14 @@ class OrderController extends Controller
     {
         return view('admin.list-order');
     }
+
+    public function create()
+    {
+        return view('admin.tambah-order');
+    }
+
+    public function edit()
+    {
+        return view('admin.edit-order');
+    }
 }
