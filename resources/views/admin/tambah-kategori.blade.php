@@ -16,14 +16,16 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form action="">
+            <form action="{{ route('admin-store-kategori') }}" method="post">
+                @csrf
+                @method('POST')
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
-                    <input type="text" class="form-control" id="kategori" oninput="generateSlug()">
+                    <input type="text" class="form-control" id="kategori" oninput="generateSlug()" name="nama">
                 </div>
                 <div class="form-group">
                     <label for="slug">Slug URL</label>
-                    <input type="text" class="form-control" id="slug">
+                    <input type="text" class="form-control" id="slug" name="slug">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

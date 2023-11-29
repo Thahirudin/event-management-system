@@ -8,7 +8,7 @@ class Kategori extends Model
 {
     protected $table = 'tbl_kategoris';
     protected $fillable = [
-        'url',
+        'nama',
         'slug',
     ];
      public function event()

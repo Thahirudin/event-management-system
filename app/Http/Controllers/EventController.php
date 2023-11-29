@@ -10,4 +10,7 @@ class EventController extends Controller
         
         return view('admin.list-event');
     }
+    function create(){
+        return view('admin.tambah-event');
+    }
 }
