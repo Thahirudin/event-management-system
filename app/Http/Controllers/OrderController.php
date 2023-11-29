@@ -20,4 +20,19 @@ class OrderController extends Controller
     {
         return view('admin.edit-order');
     }
+
+    function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'member_id' => 'required',
+            'event_id' => 'required',
+            'status' => 'required',
+            'harga' => 'required',
+            'bukti' => 'required',
+        ]);
+        $order = new Order($validatedData);
+        $order->save();
+
+        return redirect('/admin/list-order')->with('sukses', 'Order berhasil ditambahkan');
+    }
 }
