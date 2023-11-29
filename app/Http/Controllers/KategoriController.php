@@ -10,7 +10,7 @@ class KategoriController extends Controller
         $kategoris = Kategori::all();
         return view('admin.kategori', compact('kategoris'));
     }
-    function create(){
+    function adminCreate(){
         return view('admin.tambah-kategori');
     }
     function store(Request $request){
