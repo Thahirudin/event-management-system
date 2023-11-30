@@ -13,7 +13,7 @@ class EventController extends Controller
 {
     function index()
     {
-
+        
         return view('admin.list-event');
     }
     function adminCreate()
