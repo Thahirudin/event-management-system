@@ -54,7 +54,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-member', function () {
         return view('admin/member');
     })->name('admin-list-member');
-    Route::post('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');
+    Route::get('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');
     Route::post('/admin/store-member', [MemberController::class, 'store'])->name('admin-store-member');
     Route::get('/admin/edit-member', function () {
         return view('admin.edit-member');
