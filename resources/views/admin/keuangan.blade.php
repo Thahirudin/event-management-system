@@ -16,6 +16,7 @@ active active-menu
                 <div class="iq-header-title">
                     <h4 class="card-title">Keuangan</h4>
                 </div>
+                <div><a href="{{route('admin-tambah-keuangan')}}" class="btn btn-primary">Tambah Keuangan</a></div>
             </div>
             <div class="iq-card-body">
                 <div class="table-responsive">
@@ -66,5 +67,13 @@ active active-menu
 </div>
 @endsection
 @section('addJs')
-{{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable();
+    });
+
+</script>
 @endsection
