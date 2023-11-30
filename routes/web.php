@@ -55,7 +55,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-keuangan', function () {
         return view('admin/keuangan');
     })->name('admin-list-keuangan');
-
+    Route::get('/admin/tambah-keuangan', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
+    Route::post('/admin/tambah-keuangan', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
+    Route::get('/admin/edit-keuangan', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
 });
 
 Route::middleware(['auth', 'organizer'])->group(function () {
