@@ -18,30 +18,31 @@
                         </div>
                         <div class="iq-card-body">
                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac venenatis mollis, diam nibh finibus leo</p>
-                           <form>
+                           <form action="{{ route('admin-store-event') }}" method="post" enctype="multipart/form-data">
+                           @csrf
                               <div class="form-group">
                                  <label for="tanggal">tanggal:</label>
-                                 <input type="tanggal" class="form-control" id="tanggal">
+                                 <input type="date" class="form-control" id="tanggal" name="tanggal">
                               </div>
                               <div class="form-group">
                                  <label for="catatan">catatan:</label>
-                                 <input type="catatan" class="form-control" id="catatan">
+                                 <input type="text" class="form-control" id="catatan"name="catatan">
                               </div>
                               <div class="form-group">
                                  <label for="total">total:</label>
-                                 <input type="total" class="form-control" id="total">
+                                 <input type="number" class="form-control" id="total"name="total">
                               </div>
                               <div class="form-group">
                                  <label for="bukti">bukti:</label>
-                                 <input type="bukti" class="form-control" id="bukti">
+                                 <input type="file" class="form-control" id="bukti"name="bukti"accept="image/*">
                               </div>
                               <div class="form-group">
                                  <label for="event_id">event_id:</label>
-                                 <input type="event_id" class="form-control" id="event_id">
+                                 <input type="number" class="form-control" id="event_id"name="event_id">
                               </div>
                               <div class="form-group">
                                  <label for="organizer_id">organizer_id:</label>
-                                 <input type="organizer_id" class="form-control" id="organizer_id">
+                                 <input type="number" class="form-control" id="organizer_id"name="organizer_id">
                               </div>
                               <div class="checkbox mb-3">
                                  <label><input type="checkbox"> Remember me</label>
