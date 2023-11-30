@@ -4,6 +4,7 @@ use App\http\Controllers\KategoriController;
 use App\http\Controllers\OrderController;
 use App\http\Controllers\OrganizerController;
 use App\http\Controllers\MemberController;
+use App\http\Controllers\KeuanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/tambah-event', [EventController::class, 'adminCreate'])->name('admin-tambah-event');
     Route::post('/admin/tambah-event', [EventController::class, 'store'])->name('admin-store-event');
     // order
-    Route::get('/admin/list-order', function () {
-        return view('admin/order');
-    })->name('admin-list-order');
+    Route::get('/admin/list-order', [OrderController::class, 'index'])->name('admin-list-order');
     Route::get('/admin/tambah-order', [OrderController::class, 'adminCreate'])->name('admin-tambah-order');
     Route::post('/admin/tambah-order', [OrderController::class, 'store'])->name('admin-store-order');
     Route::get('/admin/edit-order', [OrderController::class, 'adminEdit'])->name('admin-edit-order');
@@ -49,9 +48,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/tambah-organizer', [OrganizerController::class, 'store'])->name('admin-store-organizer');
     Route::get('/admin/edit-organizer', [OrganizerController::class, 'adminEdit'])->name('admin-edit-organizer');
     // member
-    Route::get('/admin/list-member', function () {
-        return view('admin/member');
-    })->name('admin-list-member');
+    Route::get('/admin/list-member', [MemberController::class, 'index'])->name('admin-list-member');
     Route::get('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');
     Route::post('/admin/tambah-member', [MemberController::class, 'store'])->name('admin-store-member');
     Route::get('/admin/edit-member', [MemberController::class, 'adminEdit'])->name('admin-edit-member');
@@ -59,7 +56,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-keuangan', function () {
         return view('admin/keuangan');
     })->name('admin-list-keuangan');
-
+    Route::get('/admin/tambah-keuangan', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
+    Route::post('/admin/tambah-keuangan', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
+    Route::get('/admin/edit-keuangan', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
 });
 
 Route::middleware(['auth', 'organizer'])->group(function () {
