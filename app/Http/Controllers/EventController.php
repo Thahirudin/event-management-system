@@ -24,24 +24,25 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'id_organizer' => 'required|exists:tbl_organizers,id',
+            'kategori' => 'required|exists:tbl_kategoris,id',
+            'nama_event' => 'required',
+            'waktu' => 'required',
+            'lokasi' => 'required',
+            'detail' => 'required',
+            'kontak' => 'required',
+            'nama_harga.*' => 'required',
+            'harga.*' => 'required',
+            'status' => 'required',
+            'thumbnail' => 'required',
+        ]);
         DB::beginTransaction(); // Mulai transaksi database
 
         try {
-            $request->validate([
-                'id_organizer' => 'required',
-                'kategori' => 'required',
-                'nama_event' => 'required',
-                'waktu' => 'required',
-                'lokasi' => 'required',
-                'detail' => 'required',
-                'kontak' => 'required',
-                'nama_harga.*' => 'required',
-                'harga.*' => 'required',
-                'status' => 'required',
-                'thumbnail' => 'required|image',
-            ]);
+
             $image = $request->file('thumbnail');
-            $imageName = now()->format('YmdHis') . '-'. $request->nama_event . '.' . $image->getClientOriginalExtension();
+            $imageName = now()->format('YmdHis') . '-' . $request->nama_event . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/events'), $imageName);
             // Simpan data event
             $event = Event::create([
@@ -66,11 +67,9 @@ class EventController extends Controller
 
             DB::commit(); // Commit transaksi database
 
-            return redirect()->back()->with('sukses', 'Data berhasil disimpan');
+            return redirect()->back()->withInput()->with('sukses', 'Data berhasil disimpan');
         } catch (\Exception $e) {
-            DB::rollBack(); // Rollback transaksi database jika terjadi kesalahan
-            dd($e->getMessage());
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            DB::rollBack();
         }
     }
 }

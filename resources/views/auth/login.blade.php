@@ -40,6 +40,9 @@
                                         <input type="email" class="form-control mb-0" id="exampleInputEmail2"
                                             placeholder="Enter email" autocomplete="off" required name="email">
                                     </div>
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                     <div class="form-group">
                                         <input type="password" class="form-control mb-0" id="exampleInputPassword2"
                                             placeholder="Password" required name="password">

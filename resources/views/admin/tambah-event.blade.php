@@ -33,14 +33,23 @@
                         @endforeach
                     </select>
                 </div>
+                @error('kategori')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="nama_event">Nama Event</label>
                     <input type="text" class="form-control" id="nama_event" name="nama_event" autocomplete="off"
                         required>
                 </div>
+                @error('nama_event')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
-                    <input type="file" name="thumbnail">
+                    <input type="file" name="thumbnail" accept="image/*">
                 </div>
+                @error('thumbnail')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -48,6 +57,9 @@
                             <input type="text" class="form-control" id="waktu" name="waktu"
                                 placeholder="Pilih Tanggal dan Waktu" autocomplete="off" required>
                         </div>
+                        @error('waktu')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col">
                         <div class="form-group">
@@ -55,17 +67,25 @@
                             <input type="text" class="form-control" id="lokasi" name="lokasi" autocomplete="off"
                                 required>
                         </div>
+                        @error('lokasi')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="detail">Detail</label>
-                    <textarea name="detail" id="detail" autocomplete="off" required ></textarea>
-
+                    <textarea name="detail" id="detail" autocomplete="off" required></textarea>
+                    @error('detail')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="kontak">kontak</label>
                     <input type="text" class="form-control" id="kontak" name="kontak" autocomplete="off" required>
                 </div>
+                @error('kontak')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <button class="btn btn-info" onclick="tambahKolomHarga()">Tambah Kolom Harga</button>
                 <div id="kolomHarga">
                     <!-- Kolom harga pertama -->
@@ -73,14 +93,22 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="nama_harga">Nama Harga</label>
-                                <input type="text" class="form-control" name="nama_harga[]" autocomplete="off" required>
+                                <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
+                                    autocomplete="off" required>
                             </div>
+                            @error('nama_harga[]')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="harga">Harga</label>
-                                <input type="text" class="form-control" name="harga[]" autocomplete="off" required>
+                                <input type="text" class="form-control" id="harga" name="harga[]" autocomplete="off"
+                                    required>
                             </div>
+                            @error('harga[]')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

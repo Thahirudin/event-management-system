@@ -7,7 +7,7 @@
                 </div>
                 <div class="iq-navbar-logo d-flex justify-content-between">
                     <a href="index.html" class="header-logo">
-                        <img src="../assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+                        <img src="{{ asset('stemit') }}/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
                         <div class="logo-title">
                             <span class="text-primary text-uppercase">Streamit</span>
                         </div>
@@ -27,10 +27,6 @@
                         <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
                             <i class="ri-search-line"></i>
                         </a>
-                        <form action="#" class="search-box p-0">
-                            <input type="text" class="text search-input" placeholder="Type here to search...">
-                            <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                        </form>
                     </li>
                     <li class="nav-item nav-icon">
                         <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
@@ -47,7 +43,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="media align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded" src="../assets/images/user/01.jpg"
+                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/01.jpg"
                                                     alt="">
                                             </div>
                                             <div class="media-body ml-3">
@@ -60,7 +56,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="media align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded" src="../assets/images/user/02.jpg"
+                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/02.jpg"
                                                     alt="">
                                             </div>
                                             <div class="media-body ml-3">
@@ -73,7 +69,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="media align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded" src="../assets/images/user/03.jpg"
+                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/03.jpg"
                                                     alt="">
                                             </div>
                                             <div class="media-body ml-3">
@@ -86,7 +82,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="media align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded" src="../assets/images/user/04.jpg"
+                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/04.jpg"
                                                     alt="">
                                             </div>
                                             <div class="media-body ml-3">
@@ -102,7 +98,7 @@
                     </li>
                     <li class="line-height pt-3">
                         <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                            <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
+                            <img src="{{ asset('stemit') }}/assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                             <div class="iq-card shadow-none m-0">

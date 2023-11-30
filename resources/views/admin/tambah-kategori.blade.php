@@ -21,8 +21,11 @@
                 @method('POST')
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
-                    <input type="text" class="form-control" id="kategori" oninput="generateSlug()" name="nama">
+                    <input type="text" class="form-control" id="kategori" oninput="generateSlug()" name="nama" required>
                 </div>
+                @error('nama')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="slug">Slug URL</label>
                     <input type="text" class="form-control" id="slug" name="slug">
