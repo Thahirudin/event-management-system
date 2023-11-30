@@ -53,7 +53,7 @@
                         <input type="password" name="password" id="password" class="form-control" required="required">
 </div>
 <div class="text-right">
-    <a href="{{route('admin.list-member')" class="btn btn-outline-secondary mr-2" role="button">Batal</a>
+    <a href="{{route('admin.list-member')}}" class="btn btn-outline-secondary mr-2" role="button">Batal</a>
     <button type="submit" class="btn btn-primary">Simpan</button>
 </div>
                     </form>
