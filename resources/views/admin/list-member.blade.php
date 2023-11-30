@@ -16,55 +16,37 @@
                     <div class="iq-header-title">
                         <h4 class="card-title">Member</h4>
                     </div>
+                    <div>
+                        <a href="{{ route('admin-tambah-member') }}" class="btn btn-primary">Tambah member</a>
+                    </div>
                 </div>
                 <div class="iq-card-body">
                     <div class="table-responsive">
                         <table id="datatable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Username</th>
                                     <th>Tanggal lahir</th>
+                                    <th>Profil</th>
                                     <th>Email</th>
                                     <th>Password</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>john_doe</td>
-                                    <td>1990-05-15</td>
-                                    <td>john.doe@example.com</td>
-                                    <td>secret123</td>
-                                </tr>
-                                <tr>
-                                    <td>Jane Smith</td>
-                                    <td>jane_smith</td>
-                                    <td>1985-08-22</td>
-                                    <td>jane.smith@example.com</td>
-                                    <td>password123</td>
-                                </tr>
-                                <tr>
-                                    <td>Michael Johnson</td>
-                                    <td>michael_j</td>
-                                    <td>1982-12-10</td>
-                                    <td>michael.j@example.com</td>
-                                    <td>mypass123</td>
-                                </tr>
-                                <tr>
-                                    <td>Emily Davis</td>
-                                    <td>emily_d</td>
-                                    <td>1995-03-28</td>
-                                    <td>emily.d@example.com</td>
-                                    <td>12345678</td>
-                                </tr>
-                                <tr>
-                                    <td>William Brown</td>
-                                    <td>will_brown</td>
-                                    <td>1988-07-05</td>
-                                    <td>william.b@example.com</td>
-                                    <td>pass1234</td>
-                                </tr>
+                                @foreach ($members as $member)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $member->nama }}</td>
+                                        <td>{{ $member->tanggal_lahir }}</td>
+                                        <td>{{ $member->profil }}</td>
+                                        <td>{{ $member->email }}</td>
+                                        <td>{{ $member->password }}</td>
+                                        <td><a href="" class="btn btn-info mr-3">Edit</a> <a href=""
+                                                class="btn btn-primary">Hapus</a></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
