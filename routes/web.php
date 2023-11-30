@@ -4,6 +4,7 @@ use App\http\Controllers\KategoriController;
 use App\http\Controllers\OrderController;
 use App\http\Controllers\OrganizerController;
 use App\http\Controllers\MemberController;
+use App\http\Controllers\KeuanganController;
 
 /*
 |--------------------------------------------------------------------------
