@@ -3,14 +3,74 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kategori;
+use App\Event;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
 
 class EventController extends Controller
 {
-    function index(){
-        
+    function index()
+    {
+
         return view('admin.list-event');
     }
-    function create(){
-        return view('admin.tambah-event');
+    function adminCreate()
+    {
+        $kategoris = Kategori::all();
+        return view('admin.tambah-event', compact('kategoris'));
+    }
+
+    public function store(Request $request)
+    {
+        DB::beginTransaction(); // Mulai transaksi database
+
+        try {
+            $request->validate([
+                'id_organizer' => 'required',
+                'kategori' => 'required',
+                'nama_event' => 'required',
+                'waktu' => 'required',
+                'lokasi' => 'required',
+                'detail' => 'required',
+                'kontak' => 'required',
+                'nama_harga.*' => 'required',
+                'harga.*' => 'required',
+                'status' => 'required',
+                'thumbnail' => 'required|image',
+            ]);
+            $image = $request->file('thumbnail');
+            $imageName = now()->format('YmdHis') . '-'. $request->nama_event . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/events'), $imageName);
+            // Simpan data event
+            $event = Event::create([
+                'id_organizer' => $request->id_organizer,
+                'id_kategori' => $request->kategori,
+                'nama_event' => $request->nama_event,
+                'waktu' => $request->waktu,
+                'lokasi' => $request->lokasi,
+                'detail' => $request->detail,
+                'kontak' => $request->kontak,
+                'status' => $request->status,
+                'thumbnail' => $imageName,
+            ]);
+
+            // Simpan data harga yang terkait dengan event
+            foreach ($request->nama_harga as $key => $namaHarga) {
+                $event->harga()->create([
+                    'nama_harga' => $namaHarga,
+                    'harga' => $request->harga[$key],
+                ]);
+            }
+
+            DB::commit(); // Commit transaksi database
+
+            return redirect()->back()->with('sukses', 'Data berhasil disimpan');
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback transaksi database jika terjadi kesalahan
+            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 }

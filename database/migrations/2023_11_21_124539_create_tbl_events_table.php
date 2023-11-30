@@ -19,9 +19,10 @@ class CreateTblEventsTable extends Migration
             $table->unsignedBigInteger('id_kategori');
             $table->string('nama_event');
             $table->dateTime('waktu');
-            $table->dateTime('lokasi');
+            $table->string('lokasi');
             $table->text('detail');
             $table->string('kontak');
+            $table->string('thumbnail');
             $table->string('status');
             $table->rememberToken();
             $table->timestamps();

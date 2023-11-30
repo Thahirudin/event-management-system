@@ -45,12 +45,12 @@
                                             placeholder="Password" required name="password">
                                     </div>
                                     <div class="form-group">
-                                 <label for="jabatan">Masuk Sebagai</label>
-                                 <select class="form-control" id="jabatan" name="jabatan">
-                                    <option value="Organizer">Organizer</option>
-                                    <option value="Member">Member</option>
-                                 </select>
-                              </div>
+                                        <label for="jabatan">Masuk Sebagai</label>
+                                        <select class="form-control" id="jabatan" name="jabatan">
+                                            <option value="Organizer">Organizer</option>
+                                            <option value="Member">Member</option>
+                                        </select>
+                                    </div>
                                     <div class="sign-info">
                                         <button type="submit" class="btn btn-primary">Sign in</button>
                                         <div class="custom-control custom-checkbox d-inline-block">

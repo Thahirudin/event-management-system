@@ -8,13 +8,15 @@ class Event extends Model
 {
     protected $table = 'tbl_events';
     protected $fillable = [
+        'id_kategori',
         'id_organizer',
         'nama_event',
-        'tanggal',
+        'waktu',
+        'lokasi',
         'detail',
-        'harga',
         'status',
         'kontak',
+        'thumbnail',
     ];
 
     public function user()
@@ -23,7 +25,7 @@ class Event extends Model
     }
     public function harga()
     {
-        return $this->hasMany(Harga::class);
+        return $this->hasMany(Harga::class, 'id_event');
     }
     public function orders()
     {

@@ -28,6 +28,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/event-selesai', function () {
         return view('admin/event-selesai');
     })->name('admin-event-selesai');
+    Route::get('/admin/tambah-event', [EventController::class, 'adminCreate'])->name('admin-tambah-event');
+    Route::post('/admin/tambah-event', [EventController::class, 'store'])->name('admin-store-event');
     Route::get('/admin/list-order', function () {
         return view('admin/order');
     })->name('admin-list-order');
@@ -38,7 +40,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin.edit-order');
     })->name('admin-edit-order');
     Route::get('/admin/list-kategori', [KategoriController::class, 'index'])->name('admin-list-kategori');
-    Route::get('/admin/tambah-kategori', [KategoriController::class, 'adminCreate'])->name('admin-list-kategori');
+    Route::get('/admin/tambah-kategori', [KategoriController::class, 'adminCreate'])->name('admin-tambah-kategori');
     Route::post('/admin/tambah-kategori', [KategoriController::class, 'store'])->name('admin-store-kategori');
     Route::get('/admin/list-organizer', function () {
         return view('admin/organizer');
@@ -52,19 +54,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-member', function () {
         return view('admin/member');
     })->name('admin-list-member');
-    Route::get('/admin/tambah-member', function () {
-        return view('admin.tambah-member');
-    })->name('admin-tambah-member');
-    Route::post('/admin/tambah-member', function () {
-        return view('admin.stor-member');
-    })->name('admin-tambah-member');
+    Route::post('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');
+    Route::post('/admin/store-member', [MemberController::class, 'store'])->name('admin-store-member');
     Route::get('/admin/edit-member', function () {
         return view('admin.edit-member');
     })->name('admin-edit-member');
     Route::get('/admin/list-keuangan', function () {
         return view('admin/keuangan');
     })->name('admin-list-keuangan');
-    Route::get('/admin/tambah-kategori', [KategoriController::class, 'create'])->name('admin-tambah-kategori');
 
 });
 
