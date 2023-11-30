@@ -28,50 +28,38 @@
                         <table id="datatable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th>No</th>
+                                    <th>Organizer</th>
+                                    <th>Kategori</th>
                                     <th>Nama Event</th>
-                                    <th>Tanggal</th>
-                                    <th>Detail</th>
-                                    <th>Harga</th>
+                                    <th>Waktu</th>
+                                    <th>Lokasi</th>
                                     <th>Kontak</th>
+                                    <th>harga</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>JOYLAND JAKARTA 2023</td>
-                                    <td>24 Nov - 26 Nov 2023</td>
-                                    <td> Music and arts festival</td>
-                                    <td>Rp 488.000</td>
-                                    <td>0329373746</td>
-                                </tr>
-                                <tr>
-                                    <td>JOYLAND JAKARTA 2023</td>
-                                    <td>24 Nov - 26 Nov 2023</td>
-                                    <td>Music and arts festival</td>
-                                    <td>6Rp 488.000</td>
-                                    <td>0329373746</td>
-                                </tr>
-                                <tr>
-                                    <td>JOYLAND JAKARTA 2023</td>
-                                    <td>24 Nov - 26 Nov 2023</td>
-                                    <td>Music and arts festival</td>
-                                    <td>Rp 488.000</td>
-                                    <td>0329373746</td>
-                                </tr>
-                                <tr>
-                                    <td>JOYLAND JAKARTA 2023</td>
-                                    <td>24 Nov - 26 Nov 2023</td>
-                                    <td>Music and arts festival</td>
-                                    <td>Rp 488.000</td>
-                                    <td>0329373746</td>
-                                </tr>
-                                <tr>
-                                    <td>JOYLAND JAKARTA 2023</td>
-                                    <td>24 Nov - 26 Nov 2023</td>
-                                    <td>Music and arts festival</td>
-                                    <td>Rp 488.000</td>
-                                    <td>0329373746</td>
-                                </tr>
-
+                                @foreach ($events as $event)
+                                    <tr>
+                                        <td>{{ $loop->index +1 }}</td>
+                                        <td>{{ $event->user->nama }}</td>
+                                        <td>{{ $event->kategori->nama }}</td>
+                                        <td>{{ $event->nama_event }}</td>
+                                        <td>{{ $event->waktu }}</td>
+                                        <td>{{ $event->lokasi }}</td>
+                                        <td>{{ $event->kontak }}</td>
+                                        <td>
+                                            @foreach ($event->harga as $harga)
+                                                <p>{{ $harga->nama_harga }} : {{ $harga->harga }}</p>
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $event->status }}</td>
+                                        <td><a href="" class="btn btn-info mr-3">Edit</a> <a href=""
+                                                class="btn btn-primary">Hapus</a></td>
+                                    </tr>
+                                @endforeach
                         </table>
                     </div>
                 </div>
@@ -91,4 +79,19 @@
             $('#datatable').DataTable();
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('sukses'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
 @endsection

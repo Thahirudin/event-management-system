@@ -21,7 +21,7 @@ class Event extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id');
     }
     public function harga()
     {
@@ -29,10 +29,10 @@ class Event extends Model
     }
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'id_event');
     }
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 }

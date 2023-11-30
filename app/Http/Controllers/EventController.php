@@ -13,8 +13,8 @@ class EventController extends Controller
 {
     function index()
     {
-        
-        return view('admin.list-event');
+        $events = Event::with(['harga', 'kategori', 'user'])->get();
+        return view('admin.list-event', compact('events'));
     }
     function adminCreate()
     {
@@ -67,7 +67,7 @@ class EventController extends Controller
 
             DB::commit(); // Commit transaksi database
 
-            return redirect()->back()->withInput()->with('sukses', 'Data berhasil disimpan');
+            return redirect(route('admin-list-event'))->withInput()->with('sukses', 'Data berhasil disimpan');
         } catch (\Exception $e) {
             DB::rollBack();
         }
