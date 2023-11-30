@@ -3,6 +3,7 @@ use App\http\Controllers\EventController;
 use App\http\Controllers\KategoriController;
 use App\http\Controllers\OrderController;
 use App\http\Controllers\OrganizerController;
+use App\http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,20 +36,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-order', function () {
         return view('admin/order');
     })->name('admin-list-order');
-    Route::get('/admin/tambah-order', function () {
-        return view('admin.tambah-order');
-    })->name('admin-tambah-order');
-    Route::get('/admin/edit-order', function () {
-        return view('admin.edit-order');
-    })->name('admin-edit-order');
+    Route::get('/admin/tambah-order', [OrderController::class, 'adminCreate'])->name('admin-tambah-order');
+    Route::post('/admin/tambah-order', [OrderController::class, 'store'])->name('admin-store-order');
+    Route::get('/admin/edit-order', [OrderController::class, 'adminEdit'])->name('admin-edit-order');
     // kategori
     Route::get('/admin/list-kategori', [KategoriController::class, 'index'])->name('admin-list-kategori');
     Route::get('/admin/tambah-kategori', [KategoriController::class, 'adminCreate'])->name('admin-tambah-kategori');
     Route::post('/admin/tambah-kategori', [KategoriController::class, 'store'])->name('admin-store-kategori');
     // organizer
-    Route::get('/admin/list-organizer', function () {
-        return view('admin/organizer');
-    })->name('admin-list-organizer');
+    Route::get('/admin/list-organizer', [OrganizerController::class, 'index'])->name('admin-list-organizer');
     Route::get('/admin/tambah-organizer', [OrganizerController::class, 'adminCreate'])->name('admin-tambah-organizer');
     Route::post('/admin/tambah-organizer', [OrganizerController::class, 'store'])->name('admin-store-organizer');
     Route::get('/admin/edit-organizer', [OrganizerController::class, 'adminEdit'])->name('admin-edit-organizer');
