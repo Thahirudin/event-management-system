@@ -23,4 +23,23 @@ class KategoriController extends Controller
 
         return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil Ditambah');
     }
+    function adminEdit($id)
+    {
+        $kategori = Kategori::find($id);
+        return view('admin.edit-kategori', compact('kategori'));
+    }
+    function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|max:255',
+            'slug' => 'required',
+        ]);
+        $kategori = Kategori::find($id);
+        $kategori->update([
+            'nama' => $request->nama,
+            'slug' => $request->slug,
+            // Sesuaikan dengan nama kolom yang ingin Anda edit
+        ]);
+        return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil DiEdit');
+    }
 }

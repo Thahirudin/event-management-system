@@ -11,6 +11,7 @@ class Harga extends Model
         'id_event',
         'nama_harga',
         'harga',
+        'jumlah_tiket',
     ];
     public function event()
     {

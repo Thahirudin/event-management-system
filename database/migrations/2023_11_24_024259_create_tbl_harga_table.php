@@ -19,6 +19,7 @@ class CreateTblHargaTable extends Migration
             $table->foreign('id_event')->references('id')->on('tbl_events')->onDelete('cascade');
             $table->string('nama_harga');
             $table->float('harga');
+            $table->integer('jumlah_tiket');
             $table->timestamps();
         });
     }

@@ -37,7 +37,7 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $kategori->nama }}</td>
                                         <td>{{ $kategori->slug }}</td>
-                                        <td><a href="" class="btn btn-info mr-3">Edit</a> <a href=""
+                                        <td><a href="{{ route('admin-edit-kategori', ['id'=>$kategori->id]) }}" class="btn btn-info mr-3">Edit</a> <a href=""
                                                 class="btn btn-primary">Hapus</a></td>
                                     </tr>
                                 @endforeach

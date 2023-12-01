@@ -33,6 +33,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('admin-event-selesai');
     Route::get('/admin/tambah-event', [EventController::class, 'adminCreate'])->name('admin-tambah-event');
     Route::post('/admin/tambah-event', [EventController::class, 'store'])->name('admin-store-event');
+    Route::post('/admin/edit-event/{id}', [EventController::class, 'adminEdit'])->name('admin-edit-event');
     // order
     Route::get('/admin/list-order', [OrderController::class, 'index'])->name('admin-list-order');
     Route::get('/admin/tambah-order', [OrderController::class, 'adminCreate'])->name('admin-tambah-order');
@@ -42,6 +43,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-kategori', [KategoriController::class, 'index'])->name('admin-list-kategori');
     Route::get('/admin/tambah-kategori', [KategoriController::class, 'adminCreate'])->name('admin-tambah-kategori');
     Route::post('/admin/tambah-kategori', [KategoriController::class, 'store'])->name('admin-store-kategori');
+    Route::get('/admin/edit-kategori/{id}', [KategoriController::class, 'adminEdit'])->name('admin-edit-kategori');
+    Route::put('/admin/edit-kategori/{id}', [KategoriController::class, 'update'])->name('admin-update-kategori');
     // organizer
     Route::get('/admin/list-organizer', [OrganizerController::class, 'index'])->name('admin-list-organizer');
     Route::get('/admin/tambah-organizer', [OrganizerController::class, 'adminCreate'])->name('admin-tambah-organizer');

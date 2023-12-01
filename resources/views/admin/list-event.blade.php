@@ -35,7 +35,8 @@
                                     <th>Waktu</th>
                                     <th>Lokasi</th>
                                     <th>Kontak</th>
-                                    <th>harga</th>
+                                    <th>H</th>
+                                    <th>Sisa Tiket</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -55,8 +56,13 @@
                                                 <p>{{ $harga->nama_harga }} : {{ $harga->harga }}</p>
                                             @endforeach
                                         </td>
+                                        <td>
+                                            @foreach ($event->harga as $harga)
+                                                <p>{{ $harga->jumlah_tiket }}</p>
+                                            @endforeach
+                                        </td>
                                         <td>{{ $event->status }}</td>
-                                        <td><a href="" class="btn btn-info mr-3">Edit</a> <a href=""
+                                        <td><a href="" class="btn btn-success mr-3">Order</a><a href="" class="btn btn-info mr-3">Edit</a> <a href=""
                                                 class="btn btn-primary">Hapus</a></td>
                                     </tr>
                                 @endforeach

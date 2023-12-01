@@ -90,7 +90,7 @@
                 <div id="kolomHarga">
                     <!-- Kolom harga pertama -->
                     <div class="row" id="kolomHarga-1">
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="nama_harga">Nama Harga</label>
                                 <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
@@ -100,13 +100,23 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="harga">Harga</label>
-                                <input type="text" class="form-control" id="harga" name="harga[]" autocomplete="off"
+                                <input type="number" class="form-control" id="harga" name="harga[]" autocomplete="off"
                                     required>
                             </div>
                             @error('harga[]')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="jumlah_tiket">Jumlah Tiket</label>
+                                <input type="number" class="form-control" id="jumlah_tiket" name="jumlah_tiket[]" autocomplete="off"
+                                    required>
+                            </div>
+                            @error('jumlah_tiket[]')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -149,7 +159,7 @@
             divRow.id = "kolomHarga-" + indexKolomHarga;
 
             let divCol1 = document.createElement("div");
-            divCol1.className = "col";
+            divCol1.className = "col-md-4";
             let label1 = document.createElement("label");
             label1.textContent = "Nama Harga";
             let inputNamaHarga = document.createElement("input");
@@ -162,11 +172,11 @@
             divCol1.appendChild(inputNamaHarga);
 
             let divCol2 = document.createElement("div");
-            divCol2.className = "col";
+            divCol2.className = "col-md-4";
             let label2 = document.createElement("label");
             label2.textContent = "Harga";
             let inputHarga = document.createElement("input");
-            inputHarga.type = "text";
+            inputHarga.type = "number";
             inputHarga.className = "form-control";
             inputHarga.name = "harga[]";
             inputHarga.autocomplete = "off";
@@ -174,8 +184,22 @@
             divCol2.appendChild(label2);
             divCol2.appendChild(inputHarga);
 
+            let divCol3 = document.createElement("div");
+            divCol3.className = "col-md-4";
+            let label3 = document.createElement("label");
+            label3.textContent = "Jumlah Tiket";
+            let inputJumlahTiket = document.createElement("input");
+            inputJumlahTiket.type = "number";
+            inputJumlahTiket.className = "form-control";
+            inputJumlahTiket.name = "jumlah_tiket[]";
+            inputJumlahTiket.autocomplete = "off";
+            inputJumlahTiket.required = true;
+            divCol3.appendChild(label3);
+            divCol3.appendChild(inputJumlahTiket);
+
             divRow.appendChild(divCol1);
             divRow.appendChild(divCol2);
+            divRow.appendChild(divCol3);
 
             kolomHarga.appendChild(divRow);
         }

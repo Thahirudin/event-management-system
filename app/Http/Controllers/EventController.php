@@ -34,6 +34,7 @@ class EventController extends Controller
             'kontak' => 'required',
             'nama_harga.*' => 'required',
             'harga.*' => 'required',
+            'jumlah_tiket.*' => '|integer',
             'status' => 'required',
             'thumbnail' => 'required',
         ]);
@@ -62,6 +63,7 @@ class EventController extends Controller
                 $event->harga()->create([
                     'nama_harga' => $namaHarga,
                     'harga' => $request->harga[$key],
+                    'jumlah_tiket' => $request->harga[$key],
                 ]);
             }
 
@@ -71,5 +73,10 @@ class EventController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
+    }
+    function adminEdit($id)
+    {
+        $event = Event::with(['harga', 'kategori', 'user'])->find($id);
+        return view('admin.edit-event', compact('event'));
     }
 }
