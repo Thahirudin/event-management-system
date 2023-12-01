@@ -42,4 +42,10 @@ class KategoriController extends Controller
         ]);
         return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil DiEdit');
     }
+    function destroy($id){
+        $kategori = Kategori::find($id);
+        // Hapus data
+        $kategori->delete();
+        return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil Di Hapus');
+    }
 }

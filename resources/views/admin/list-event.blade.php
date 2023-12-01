@@ -35,8 +35,8 @@
                                     <th>Waktu</th>
                                     <th>Lokasi</th>
                                     <th>Kontak</th>
-                                    <th>H</th>
-                                    <th>Sisa Tiket</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah Tiket</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>

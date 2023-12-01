@@ -37,7 +37,9 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $kategori->nama }}</td>
                                         <td>{{ $kategori->slug }}</td>
-                                        <td><a href="{{ route('admin-edit-kategori', ['id'=>$kategori->id]) }}" class="btn btn-info mr-3">Edit</a> <a href=""
+                                        <td><a href="{{ route('admin-edit-kategori', ['id' => $kategori->id]) }}"
+                                                class="btn btn-info mr-3">Edit</a> <a onclick="confirmDelete(this)"
+                                            data-url="{{ route('admin-hapus-kategori', ['id' => $kategori->id]) }}"
                                                 class="btn btn-primary">Hapus</a></td>
                                     </tr>
                                 @endforeach
@@ -59,6 +61,21 @@
         $(document).ready(function() {
             $('#datatable').DataTable();
         });
+        confirmDelete = function(button) {
+            var url = $(button).data('url');
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: 'Data ini akan dihapus!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = url;
+                }
+            })
+        }
     </script>
     @if (session('sukses'))
         <script>
