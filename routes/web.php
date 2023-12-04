@@ -19,7 +19,7 @@ use App\http\Controllers\KeuanganController;
 
 // routes/web.php
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin-dashboard');
@@ -57,13 +57,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/edit-member', [MemberController::class, 'adminEdit'])->name('admin-edit-member');
     Route::put('/admin/edit-member', [MemberController::class, 'update'])->name('admin-update-member');
     // keuangan
-    Route::get('/admin/list-keuangan', function () {
-        return view('admin/keuangan');
-    })->name('admin-list-keuangan');
-    Route::get('/admin/tambah-keuangan', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
-    Route::post('/admin/tambah-keuangan', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
-    Route::get('/admin/edit-keuangan', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
-    Route::put('/admin/edit-keuangan', [KeuanganController::class, 'update'])->name('admin-update-keuangan');
+    Route::get('/admin/keuangan/list-keuangan', [KeuanganController::class, 'index'])->name('admin-list-keuangan');
+    Route::get('/admin//keuangan/pemasukan-event', [KeuanganController::class, 'pemasukan-event'])->name('admin-list-pemasukan-event');
+    Route::get('/admin//keuangan/pengeluaran-event', [KeuanganController::class, 'pengeluaran-event'])->name('admin-list-pengeluaran-event');
+    Route::get('/admin/keuangan/tambah-keuangan', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
+    Route::post('/admin/keuangan/tambah-keuangan', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
+    Route::get('/adminkeuangan/edit-keuangan', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
+    Route::put('/adminkeuangan/edit-keuangan', [KeuanganController::class, 'update'])->name('admin-update-keuangan');
 });
 
 Route::middleware(['auth', 'organizer'])->group(function () {

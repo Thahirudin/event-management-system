@@ -24,8 +24,9 @@ class UsersSeeder extends Seeder
         User::create([
             'nama' => 'Thahirudin',
             'jabatan' => 'Organizer',
+            'profil' => '20231204171942-Thahirudin.jfif	',
             'tanggal_lahir' => '2003-02-10',
-            'email' => 'thahirudin@gmail.com',
+            'email' => 'thohiruzain098@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
 

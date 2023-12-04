@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Keuangan;
 use Illuminate\Http\Request;
 
 class KeuanganController extends Controller

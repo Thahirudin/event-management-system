@@ -3,13 +3,13 @@
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-    List Event
+    Admin - Dashboard
 @endsection
-@section('list-kategori')
-    active active-menu
+@section('kategori')
+active active-menu
 @endsection
 @section('content')
-    <div class="row">
+      <div class="row">
         <div class="col-sm-12">
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
@@ -53,8 +53,7 @@
 @endsection
 @section('addJs')
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script>
