@@ -16,18 +16,29 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form>
-                <div class="form-group">
-                    <label for="order">Id Order</label>
-                    <input type="text" class="form-control" id="order">
-                </div>
+            <form action="{{ route('admin-tambah-order') }}" method="POST">
+                @csrf
+                @method('POST')
                 <div class="form-group">
                     <label for="member">Id Member</label>
-                    <input type="text" class="form-control" id="member">
+                    <input type="text" class="form-control" id="member" name="member_id">
                 </div>
                 <div class="form-group">
                     <label for="event">Id Event</label>
-                    <input type="text" class="form-control" id="event">
+                    <input type="text" class="form-control" id="event" name="event_id">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" id="status" name="status">
+                </div>
+                <div class="form-group">
+                    <label for="Harga">Harga</label>
+                    <input type="text" class="form-control" id="Harga" name="harga">
+                </div>
+                <div class="form-group">
+                    <label for="bukti">Bukti</label>
+                    <input type="file" class="form-control" id="bukti" name="bukti" required="required"
+                        accept="image/*">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

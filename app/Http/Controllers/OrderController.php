@@ -2,26 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     function index()
     {
-        return view('admin.list-order');
+        $orders = order::all();
+        return view('admin.list-order', ['orders' => $orders]);
     }
 
-    public function create()
+    public function admincreate()
     {
         return view('admin.tambah-order');
     }
 
-    public function edit()
+    public function adminedit()
     {
+        $order = Order::all(); 
         return view('admin.edit-order');
     }
 
-    function store(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'member_id' => 'required',

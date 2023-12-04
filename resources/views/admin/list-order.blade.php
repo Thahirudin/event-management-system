@@ -9,7 +9,7 @@
     active active-menu
 @endsection
 @section('content')
-<div class="row">
+    <div class="row">
         <div class="col-sm-12">
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
@@ -22,37 +22,28 @@
                         <table id="datatable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id Order</th>
+                                    <th>No.</th>
                                     <th>Id Member</th>
                                     <th>Id Event</th>
+                                    <th>Status</th>
+                                    <th>Harga</th>
+                                    <th>Bukti</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>141002</td>
-                                    <td>VM2023NVM</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>141002</td>
-                                    <td>VM2023NVM</td>
-                                </tr>
-                                <tr>
-                                    <td>003</td>
-                                    <td>141002</td>
-                                    <td>VM2023NVM</td>
-                                </tr>
-                                <tr>
-                                    <td>004</td>
-                                    <td>141002</td>
-                                    <td>VM2023NVM</td>
-                                </tr>
-                                <tr>
-                                    <td>005</td>
-                                    <td>141002</td>
-                                    <td>VM2023NVM</td>
-                                </tr>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $order->member_id }}</td>
+                                        <td>{{ $order->event_id }}</td>
+                                        <td>{{ $order->status }}</td>
+                                        <td>{{ $order->harga }}</td>
+                                        <td>{{ $order->bukti }}</td>
+                                        <td><a href="" class="btn btn-success mr-3">Lihat</a> 
+                                            <a href="" class="btn btn-primary">Hapus</a></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
