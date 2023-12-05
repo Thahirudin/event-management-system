@@ -50,7 +50,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/tambah-organizer', [OrganizerController::class, 'store'])->name('admin-store-organizer');
     Route::get('/admin/edit-organizer/{id}', [OrganizerController::class, 'adminEdit'])->name('admin-edit-organizer');
     Route::put('/admin/edit-organizer/{id}', [OrganizerController::class, 'update'])->name('admin-update-organizer');
-    Route::get('/admin/hapus-kategori/{id}', [OrganizerController::class, 'destroy'])->name('admin-hapus-organizer');
+    Route::get('/admin/hapus-organizer/{id}', [OrganizerController::class, 'destroy'])->name('admin-hapus-organizer');
     // member
     Route::get('/admin/list-member', [MemberController::class, 'index'])->name('admin-list-member');
     Route::get('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');
