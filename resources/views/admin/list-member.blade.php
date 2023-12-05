@@ -63,4 +63,19 @@
             $('#datatable').DataTable();
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ @if (session('sukses'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
 @endsection
