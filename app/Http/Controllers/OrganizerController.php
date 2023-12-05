@@ -21,9 +21,9 @@ class OrganizerController extends Controller
         return view('admin.tambah-organizer');
     }
 
-    function adminEdit(){
-
-        return view('admin.edit-organizer');
+    function adminEdit($id){
+        $organizer = User::find($id);
+        return view('admin.edit-organizer', compact('organizer'));
     }
 
     function store(Request $request)
@@ -35,7 +35,7 @@ class OrganizerController extends Controller
             'profil' => 'required',
             'tanggal_lahir' => 'required|date',
             'email' => 'required|email|unique:tbl_organizers',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
         ]);
         DB::beginTransaction(); // Mulai transaksi database
         $hashedPassword = Hash::make($request->password);
@@ -64,5 +64,73 @@ class OrganizerController extends Controller
 
         // Create a new Organizer instance and save it to the database
         
+    }
+    function update(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            // Validate the incoming request data
+            $request->validate([
+                'nama' => 'required|string|max:255',
+                'jabatan' => 'required',
+                'tanggal_lahir' => 'required|date',
+                'email' => 'required|email|unique:tbl_organizers,email,' . $id,
+            ]);
+
+            $organizer = User::find($id);
+
+            if (!$organizer) {
+                throw new \Exception('Member tidak ditemukan');
+            }
+
+            // Check if a new profile image is uploaded
+            if ($request->hasFile('profil')) {
+                // Delete the old profile image if it exists
+                if ($organizer->profil) {
+                    $oldImagePath = public_path('uploads/organizers/' . $organizer->profil);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Upload the new profile image
+                $image = $request->file('profil');
+                $imageName = now()->format('YmdHis') . '-' . $request->nama . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/organizers'), $imageName);
+
+                // Update member data including the new profile image
+                $organizer->update([
+                    'nama' => $request->nama,
+                    'jabatan' => $request->jabatan,
+                    'profil' => $imageName,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'email' => $request->email,
+                    'password' => $request->password ? Hash::make($request->password) : $organizer->password,
+                ]);
+            } else {
+                // Use the existing profile image
+                $organizer->update([
+                    'nama' => $request->nama,
+                    'jabatan' => $request->jabatan,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'email' => $request->email,
+                    'password' => $request->password ? Hash::make($request->password) : $organizer->password,
+                ]);
+            }
+
+            DB::commit(); // Commit the transaction
+
+            return redirect('/admin/list-organizer')->with('sukses', 'Organizer Berhasil DiEdit');
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback the transaction in case of an exception
+            return redirect()->back()->with('error', 'Gagal mengedit organizer. ' . $e->getMessage());
+        }
+    }
+    function destroy($id){
+        $organizer = User::find($id);
+        // Hapus data
+        $organizer->delete();
+        return redirect('/admin/list-organizer')->with('sukses', 'Organizer Berhasil Di Hapus');
     }
 }

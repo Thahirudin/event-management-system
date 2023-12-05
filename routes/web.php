@@ -43,13 +43,14 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/tambah-kategori', [KategoriController::class, 'store'])->name('admin-store-kategori');
     Route::get('/admin/edit-kategori/{id}', [KategoriController::class, 'adminEdit'])->name('admin-edit-kategori');
     Route::put('/admin/edit-kategori/{id}', [KategoriController::class, 'update'])->name('admin-update-kategori');
-    Route::get('/admin/delete-kategori/{id}', [KategoriController::class, 'destroy'])->name('admin-hapus-kategori');
+    Route::get('/admin/hapus-kategori/{id}', [KategoriController::class, 'destroy'])->name('admin-hapus-kategori');
     // organizer
     Route::get('/admin/list-organizer', [OrganizerController::class, 'index'])->name('admin-list-organizer');
     Route::get('/admin/tambah-organizer', [OrganizerController::class, 'adminCreate'])->name('admin-tambah-organizer');
     Route::post('/admin/tambah-organizer', [OrganizerController::class, 'store'])->name('admin-store-organizer');
     Route::get('/admin/edit-organizer/{id}', [OrganizerController::class, 'adminEdit'])->name('admin-edit-organizer');
     Route::put('/admin/edit-organizer/{id}', [OrganizerController::class, 'update'])->name('admin-update-organizer');
+    Route::get('/admin/hapus-kategori/{id}', [OrganizerController::class, 'destroy'])->name('admin-hapus-organizer');
     // member
     Route::get('/admin/list-member', [MemberController::class, 'index'])->name('admin-list-member');
     Route::get('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');
