@@ -3,7 +3,7 @@
 {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-List Event
+List Keuangan
 @endsection
 @section('list-keuangan')
 active active-menu
@@ -67,7 +67,6 @@ active active-menu
 </div>
 @endsection
 @section('addJs')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>

@@ -12,12 +12,24 @@ class KategoriSeeder extends Seeder
     public function run()
     {
         Kategori::create([
-            'nama' => 'Musik',
-            'slug' => 'musik'
+            'nama' => 'Umum',
+            'slug' => 'umum'
         ]);
         Kategori::create([
-            'nama' => 'Webinar',
-            'slug' => 'webinar'
+            'nama' => 'Hiburan',
+            'slug' => 'hiburan'
+        ]);
+        Kategori::create([
+            'nama' => 'Pendidikan dan Pengembangan',
+            'slug' => 'pendidikan-dan-pengembangan'
+        ]);
+        Kategori::create([
+            'nama' => 'Kesehatan dan Kebugaran',
+            'slug' => 'kesehatan-dan-kebugaran'
+        ]);
+        Kategori::create([
+            'nama' => 'Sosial dan Amal',
+            'slug' => 'sosial-dan-amal'
         ]);
     }
 }

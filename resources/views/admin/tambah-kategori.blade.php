@@ -21,7 +21,8 @@
                 @method('POST')
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
-                    <input type="text" class="form-control" id="kategori" oninput="generateSlug()" name="nama" required>
+                    <input type="text" class="form-control" id="kategori" oninput="generateSlug()" name="nama"
+                        required>
                 </div>
                 @error('nama')
                     <div class="text-danger">{{ $message }}</div>
@@ -43,4 +44,19 @@
             document.getElementById('slug').value = slugInput;
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('sukses'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
 @endsection
