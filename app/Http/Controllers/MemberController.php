@@ -24,9 +24,11 @@ class MemberController extends Controller
         return view('admin.tambah-member');
     }
 
-    function adminEdit()
+    function adminEdit(Member $member)
     {
-        return view('admin.edit-member');
+        return view('admin.edit-member',[
+            'member'=>$member
+        ]);
     }
     function store(Request $request)
     {
@@ -63,6 +65,26 @@ class MemberController extends Controller
         }
 
         // Create a new Organizer instance and save it to the database
+
+    }
+
+     function update(Request $request, Member $member)
+    {
+        $validatedData = validator ($request->all(),[
+            'nama' => 'required|string|max:255',
+            'profil' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'email' => 'required|email|unique:tbl_members',
+            'password' => 'required',
+        ])->validate();
+        $member->nama =$validatedData['nama'];
+        $member->profil =$validatedData['profil'];
+        $member->tanggal_lahir =$validatedData['tanggal_lahir'];
+        $member->email =$validatedData['email'];
+        $member->password =$validatedData['password'];
+        $member->save();
+
+        return redirect(route('admin-list-member'));
 
     }
 }
