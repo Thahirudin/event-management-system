@@ -5,10 +5,7 @@
 @section('title')
     List Event
 @endsection
-@section('event')
-    active active-menu
-@endsection
-@section('list event')
+@section('list-event')
     active active-menu
 @endsection
 @section('content')
@@ -37,6 +34,7 @@
                                     <th>Kontak</th>
                                     <th>Harga</th>
                                     <th>Jumlah Tiket</th>
+                                    <th>Thumbnail</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -44,7 +42,7 @@
                             <tbody>
                                 @foreach ($events as $event)
                                     <tr>
-                                        <td>{{ $loop->index +1 }}</td>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $event->user->nama }}</td>
                                         <td>{{ $event->kategori->nama }}</td>
                                         <td>{{ $event->nama_event }}</td>
@@ -61,8 +59,11 @@
                                                 <p>{{ $harga->jumlah_tiket }}</p>
                                             @endforeach
                                         </td>
+                                        
+                                        <td><img src="{{ asset('uploads/events').'/'. $event->thumbnail }}" alt="{{ $event->nama_event }}" height="150"></td>
                                         <td>{{ $event->status }}</td>
-                                        <td><a href="" class="btn btn-success mr-3">Order</a><a href="" class="btn btn-info mr-3">Edit</a> <a href=""
+                                        <td><a href="" class="btn btn-success mr-3">Order</a><a href=""
+                                                class="btn btn-info mr-3">Edit</a> <a href=""
                                                 class="btn btn-primary">Hapus</a></td>
                                     </tr>
                                 @endforeach
@@ -72,12 +73,9 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
 @endsection
 @section('addJs')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script>

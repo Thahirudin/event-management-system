@@ -23,16 +23,16 @@
                             class="ri-price-tag-line"></i><span>Order</span></a></li>
                 <li class=" @yield('kategori')"><a href="{{ route('admin-list-kategori') }}" class="iq-waves-effect"><i
                             class="ri-apps-line"></i><span>Kategori</span></a></li>
-                <li class=" @yield('event')">
+                <li class=" @yield('list-event') @yield('event-akan-datang') @yield('event-selesai')">
                     <a href="#event" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i
                             class="lab la-elementor iq-arrow-left"></i><span>Event</span><i
                             class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul id="event" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li class=" @yield('list event')"><a href="{{ route('admin-list-event') }}"><i
+                        <li class=" @yield('list-event')"><a href="{{ route('admin-list-event') }}"><i
                                     class="ri-file-list-3-line"></i>List Event</a></li>
-                        <li class=" @yield('event akan datang')"><a href="{{ route('admin-event-akan-datang') }}"><i
+                        <li class=" @yield('event-akan-datang')"><a href="{{ route('admin-event-akan-datang') }}"><i
                                     class="ri-calendar-event-line"></i>Event Akan Datang</a></li>
-                        <li class=" @yield('event selesai')"><a href="{{ route('admin-event-selesai') }}"><i 
+                        <li class=" @yield('event-selesai')"><a href="{{ route('admin-event-selesai') }}"><i 
                                     class="ri-calendar-check-line"></i>Event Selesai</a></li>
 
                     </ul>
@@ -46,8 +46,16 @@
                         <li class="@yield('list-member')"><a href="{{ route('admin-list-member') }}"><i class="las la-user"></i>Member</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ route('admin-list-keuangan') }}" class="iq-waves-effect"><i
-                            class="las la-file-alt iq-arrow-left"></i><span>Keuangan</span></a></li>
+                <li class="@yield('list-pemasukan-event') @yield('list-keuangan') @yield('list-pengeluaran-event')">
+                    <a href="#keuangan" class="iq-waves-effect collapsed" data-toggle="collapse"
+                        aria-expanded="false"><i class="las la-file"></i><span>Keuangan</span><i
+                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="keuangan" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li class="@yield('list-keuangan')"><a href="{{ route('admin-list-keuangan') }}"><i class="las la-file"></i>List Keuangan</a></li>
+                        <li class="@yield('list-pemasukan-event')"><a href="{{ route('admin-list-pemasukan-event') }}"><i class="las la-file"></i>Pemasukan Event</a></li>
+                        <li class="@yield('list-pengeluaran-event')"><a href="{{ route('admin-list-pengeluaran-event') }}"><i class="las la-file"></i>Pengeluaran Event</a></li>
+                    </ul>
+                </li>
             </ul>
             </li>
             </ul>

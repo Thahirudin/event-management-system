@@ -19,7 +19,7 @@ use App\http\Controllers\KeuanganController;
 
 // routes/web.php
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin-dashboard');
@@ -35,8 +35,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-order', [OrderController::class, 'index'])->name('admin-list-order');
     Route::get('/admin/tambah-order', [OrderController::class, 'adminCreate'])->name('admin-tambah-order');
     Route::post('/admin/tambah-order', [OrderController::class, 'store'])->name('admin-store-order');
-    Route::get('/admin/edit-order', [OrderController::class, 'adminEdit'])->name('admin-edit-order');
-    Route::put('/admin/edit-order', [OrderController::class, 'update'])->name('admin-update-order');
+    Route::get('/admin/edit-order/{id}', [OrderController::class, 'adminEdit'])->name('admin-edit-order');
+    Route::put('/admin/edit-order/{id}', [OrderController::class, 'update'])->name('admin-update-order');
     // kategori
     Route::get('/admin/list-kategori', [KategoriController::class, 'index'])->name('admin-list-kategori');
     Route::get('/admin/tambah-kategori', [KategoriController::class, 'adminCreate'])->name('admin-tambah-kategori');
@@ -48,22 +48,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/list-organizer', [OrganizerController::class, 'index'])->name('admin-list-organizer');
     Route::get('/admin/tambah-organizer', [OrganizerController::class, 'adminCreate'])->name('admin-tambah-organizer');
     Route::post('/admin/tambah-organizer', [OrganizerController::class, 'store'])->name('admin-store-organizer');
-    Route::get('/admin/edit-organizer', [OrganizerController::class, 'adminEdit'])->name('admin-edit-organizer');
-    Route::put('/admin/edit-organizer', [OrganizerController::class, 'update'])->name('admin-update-organizer');
+    Route::get('/admin/edit-organizer/{id}', [OrganizerController::class, 'adminEdit'])->name('admin-edit-organizer');
+    Route::put('/admin/edit-organizer/{id}', [OrganizerController::class, 'update'])->name('admin-update-organizer');
     // member
     Route::get('/admin/list-member', [MemberController::class, 'index'])->name('admin-list-member');
     Route::get('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');
     Route::post('/admin/tambah-member', [MemberController::class, 'store'])->name('admin-store-member');
-    Route::get('/admin/edit-member', [MemberController::class, 'adminEdit'])->name('admin-edit-member');
-    Route::put('/admin/edit-member', [MemberController::class, 'update'])->name('admin-update-member');
+    Route::get('/admin/edit-member/{id}', [MemberController::class, 'adminEdit'])->name('admin-edit-member');
+    Route::put('/admin/edit-member/{id}', [MemberController::class, 'update'])->name('admin-update-member');
     // keuangan
-    Route::get('/admin/list-keuangan', function () {
-        return view('admin/keuangan');
-    })->name('admin-list-keuangan');
-    Route::get('/admin/tambah-keuangan', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
-    Route::post('/admin/tambah-keuangan', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
-    Route::get('/admin/edit-keuangan', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
-    Route::put('/admin/edit-keuangan', [KeuanganController::class, 'update'])->name('admin-update-keuangan');
+    Route::get('/admin/keuangan/list-keuangan', [KeuanganController::class, 'index'])->name('admin-list-keuangan');
+    Route::get('/admin//keuangan/pemasukan-event', [KeuanganController::class, 'pemasukan-event'])->name('admin-list-pemasukan-event');
+    Route::get('/admin//keuangan/pengeluaran-event', [KeuanganController::class, 'pengeluaran-event'])->name('admin-list-pengeluaran-event');
+    Route::get('/admin/keuangan/tambah-keuangan', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
+    Route::post('/admin/keuangan/tambah-keuangan', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
+    Route::get('/adminkeuangan/edit-keuangan/{id}', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
+    Route::put('/adminkeuangan/edit-keuangan/{id}', [KeuanganController::class, 'update'])->name('admin-update-keuangan');
 });
 
 Route::middleware(['auth', 'organizer'])->group(function () {
