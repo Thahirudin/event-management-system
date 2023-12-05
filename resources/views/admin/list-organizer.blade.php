@@ -45,7 +45,10 @@
                                     <td>{{ $organizer->tanggal_lahir }}</td>
                                     <td>{{ $organizer->email }}</td>
                                     <td>{{ $organizer->password }}</td>
-                                    <td><a href="" class="btn btn-info mr-3">Edit</a> <a href="" class="btn btn-primary">Hapus</a></td>
+                                    <td><a href="{{ route('admin-edit-organizer', ['id' => $organizer->id]) }}"
+                                                class="btn btn-info mr-3">Edit</a> <a onclick="confirmDelete(this)"
+                                            data-url="{{ route('admin-hapus-organizer', ['id' => $organizer->id]) }}"
+                                                class="btn btn-primary">Hapus</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -66,6 +69,21 @@
         $(document).ready(function() {
             $('#datatable').DataTable();
         });
+        confirmDelete = function(button) {
+            var url = $(button).data('url');
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: 'Data ini akan dihapus!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = url;
+                }
+            })
+        }
     </script>
     @if (session('sukses'))
         <script>
