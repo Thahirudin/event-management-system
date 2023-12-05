@@ -5,7 +5,7 @@
 @section('title')
     Tambah Order
 @endsection
-@section('kategori')
+@section('order')
     active active-menu
 @endsection
 @section('content')
@@ -16,7 +16,13 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form action="{{ route('admin-tambah-order') }}" method="POST">
+            <div class="text-center">
+                <img src="{{asset('uploads/events').'/'.$event->thumbnail}}" alt="" class="rounded w-100">
+            </div>
+            <div>
+                <h1 class="h3">{{$event->nama_event}}</h1>
+            </div>
+            <form action="{{ route('admin-tambah-order', ['id' => $event->id]) }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="form-group">
@@ -25,16 +31,21 @@
                 </div>
                 <div class="form-group">
                     <label for="event">Id Event</label>
-                    <input type="text" class="form-control" id="event" name="event_id">
+                    <input type="text" class="form-control" id="event" name="event_id" value="{{$event->id}}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status" name="status">
+                    <input type="text" class="form-control" id="status" name="status" value="periksa" readonly>
                 </div>
-                <div class="form-group">
-                    <label for="Harga">Harga</label>
-                    <input type="text" class="form-control" id="Harga" name="harga">
-                </div>
+                 <div class="form-group">
+                                 <label for="harga">Harga</label>
+                                 <select class="form-control" id="harga" name="harga">
+                    @foreach ($event->harga as $harga)
+                                    <option>{{ $harga->nama_harga }} : {{ $harga->harga }}</option>
+                                   
+                                    @endforeach
+                                 </select>
+                              </div>
                 <div class="form-group">
                     <label for="bukti">Bukti</label>
                     <input type="file" class="form-control" id="bukti" name="bukti" required="required"

@@ -20,33 +20,36 @@
             </div>
         </div>
         <div class="iq-card-body">
-           <form action=" " method="POST">
+            <form action="{{ route('admin-edit-order', ['id' => $order->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
                     <label for="member">Id Member</label>
-                    <input type="text" class="form-control" id="member" name="member_id">
+                    <input type="text" class="form-control" id="member" name="member_id"
+                        value="{{ $order->member_id }}">
                 </div>
 
                 <div class="form-group">
                     <label for="event">Id Event</label>
-                    <input type="text" class="form-control" id="event" name="event_id">
+                    <input type="text" class="form-control" id="event" name="event_id"
+                        value="{{ $order->event_id }}">
                 </div>
 
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status" name="status">
+                    <input type="text" class="form-control" id="status" name="status" value="{{ $order->status }}">
                 </div>
 
                 <div class="form-group">
                     <label for="Harga">Harga</label>
-                    <input type="text" class="form-control" id="Harga" name="harga">
+                    <input type="text" class="form-control" id="Harga" name="harga" value="{{ $order->harga }}">
                 </div>
 
                 <div class="form-group">
                     <label for="bukti">Bukti</label>
                     <input type="file" class="form-control" id="bukti" name="bukti" accept="image/*" required>
                 </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

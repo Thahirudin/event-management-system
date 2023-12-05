@@ -1,13 +1,16 @@
 @extends('admin.layout.master')
 @section('addCss')
-    {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
+    {{-- Masukkan dibawah ini jika ingin menambahkan CSS --}}
 @endsection
+
 @section('title')
     List Event
 @endsection
+
 @section('list-order')
     active active-menu
 @endsection
+
 @section('content')
     <div class="row">
         <div class="col-sm-12">
@@ -40,8 +43,11 @@
                                         <td>{{ $order->status }}</td>
                                         <td>{{ $order->harga }}</td>
                                         <td>{{ $order->bukti }}</td>
-                                        <td><a href="" class="btn btn-success mr-3">Lihat</a> 
-                                            <a href="" class="btn btn-primary">Hapus</a></td>
+                                        <td>
+                                            <a href="" class="btn btn-success mr-3">Lihat</a> 
+                                            <a href="{{ route('admin-edit-order', ['id' => $order->id]) }}" class="btn btn-info mr-3">Edit</a>   
+                                            <a href="" class="btn btn-primary">Hapus</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -52,6 +58,7 @@
         </div>
     </div>
 @endsection
+
 @section('addJs')
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
