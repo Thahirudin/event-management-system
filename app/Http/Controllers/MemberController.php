@@ -24,11 +24,10 @@ class MemberController extends Controller
         return view('admin.tambah-member');
     }
 
-    function adminEdit(Member $member)
+    function adminEdit($id)
     {
-        return view('admin.edit-member',[
-            'member'=>$member
-        ]);
+        $member = Member::find($id);
+        return view('admin.edit-member', compact('member'));
     }
     function store(Request $request)
     {
@@ -67,24 +66,41 @@ class MemberController extends Controller
         // Create a new Organizer instance and save it to the database
 
     }
+    function update(Request $request, $id){
+    // Validate the incoming request data
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'profil' => 'required',
+        'tanggal_lahir' => 'required|date',
+        'email' => 'required|email|unique:tbl_members',
+        'password' => 'required',
+    ]);
+    DB::beginTransaction(); // Mulai transaksi database
+    $hashedPassword = Hash::make($request->password);
+    try {
+        $image = $request->file('profil');
+        $imageName = now()->format('YmdHis') . '-' . $request->nama . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads/members'), $imageName);
+        $member = Member::find($id);
+        $member->update([
+            'nama' => $request->nama,
+            'profil' => $imageName,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'email' => $request->email,
+            'password' => $hashedPassword,
+        ]);
 
-     function update(Request $request, Member $member)
-    {
-        $validatedData = validator ($request->all(),[
-            'nama' => 'required|string|max:255',
-            'profil' => 'required',
-            'tanggal_lahir' => 'required|date',
-            'email' => 'required|email|unique:tbl_members',
-            'password' => 'required',
-        ])->validate();
-        $member->nama =$validatedData['nama'];
-        $member->profil =$validatedData['profil'];
-        $member->tanggal_lahir =$validatedData['tanggal_lahir'];
-        $member->email =$validatedData['email'];
-        $member->password =$validatedData['password'];
-        $member->save();
+        DB::commit(); // Commit transaksi database
 
-        return redirect(route('admin-list-member'));
+        // Redirect back or to a success page
+        return redirect(route('admin-list-member'))->with('sukses', 'Member Berhasil Diedit');
 
+    } catch (QueryException $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error', $e->getMessage());
     }
+
+    // Create a new Organizer instance and save it to the database
+
+}
 }
