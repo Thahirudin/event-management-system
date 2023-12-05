@@ -25,16 +25,16 @@ Route::middleware(['auth','admin'])->group(function () {
     })->name('admin-dashboard');
     // Event
     Route::get('/admin/list-event', [EventController::class, 'index'])->name('admin-list-event');
-    Route::get('/admin/event-akan-datang', [EventController::class, 'eventAkanDatang'])->name('admin-event-akan-datang');
-    Route::get('/admin/event-selesai', [EventController::class, 'eventSelesai'])->name('admin-event-selesai');
+    Route::get('/admin/event-akan-datang', [EventController::class, 'adminEventAkanDatang'])->name('admin-event-akan-datang');
+    Route::get('/admin/event-selesai', [EventController::class, 'adminEventSelesai'])->name('admin-event-selesai');
     Route::get('/admin/tambah-event', [EventController::class, 'adminCreate'])->name('admin-tambah-event');
     Route::post('/admin/tambah-event', [EventController::class, 'store'])->name('admin-store-event');
     Route::get('/admin/edit-event/{id}', [EventController::class, 'adminEdit'])->name('admin-edit-event');
     Route::put('/admin/edit-event/{id}', [EventController::class, 'update'])->name('admin-update-event');
     // order
     Route::get('/admin/list-order', [OrderController::class, 'index'])->name('admin-list-order');
-    Route::get('/admin/tambah-order', [OrderController::class, 'adminCreate'])->name('admin-tambah-order');
-    Route::post('/admin/tambah-order', [OrderController::class, 'store'])->name('admin-store-order');
+    Route::get('/admin/tambah-order/{id}', [OrderController::class, 'adminCreate'])->name('admin-tambah-order');
+    Route::post('/admin/tambah-order/{id}', [OrderController::class, 'store'])->name('admin-store-order');
     Route::get('/admin/edit-order/{id}', [OrderController::class, 'adminEdit'])->name('admin-edit-order');
     Route::put('/admin/edit-order/{id}', [OrderController::class, 'update'])->name('admin-update-order');
     // kategori

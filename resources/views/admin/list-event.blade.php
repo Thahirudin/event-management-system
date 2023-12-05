@@ -62,7 +62,7 @@
                                         
                                         <td><img src="{{ asset('uploads/events').'/'. $event->thumbnail }}" alt="{{ $event->nama_event }}" height="150"></td>
                                         <td>{{ $event->status }}</td>
-                                        <td><a href="" class="btn btn-success mr-3">Order</a><a href=""
+                                        <td><a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}" class="btn btn-success mr-3">Order</a><a href=""
                                                 class="btn btn-info mr-3">Edit</a> <a href=""
                                                 class="btn btn-primary">Hapus</a></td>
                                     </tr>
