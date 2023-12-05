@@ -43,8 +43,7 @@
                                         <td>{{ $member->profil }}</td>
                                         <td>{{ $member->email }}</td>
                                         <td>{{ $member->password }}</td>
-                                        <td><a href="{{route('admin-edit-member',['id'=>$member->id])}}" class="btn btn-info mr-3">Edit</a>
-                                         <a href="" class="btn btn-primary">Hapus</a></td>
+                                        <td><a href="" class="btn btn-info mr-3">Edit</a> <a href="" class="btn btn-primary">Hapus</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
