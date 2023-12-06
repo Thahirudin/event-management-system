@@ -63,8 +63,8 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/keuangan/list-keuangan', [KeuanganController::class, 'index'])->name('admin-list-keuangan');
     Route::get('/admin//keuangan/pemasukan-event', [KeuanganController::class, 'pemasukan-event'])->name('admin-list-pemasukan-event');
     Route::get('/admin//keuangan/pengeluaran-event', [KeuanganController::class, 'pengeluaran-event'])->name('admin-list-pengeluaran-event');
-    Route::get('/admin/keuangan/tambah-keuangan', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
-    Route::post('/admin/keuangan/tambah-keuangan', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
+    Route::get('/admin/keuangan/tambah-keuangan/{id}', [KeuanganController::class, 'adminCreate'])->name('admin-tambah-keuangan');
+    Route::post('/admin/keuangan/tambah-keuangan/{id}', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
     Route::get('/adminkeuangan/edit-keuangan/{id}', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
     Route::put('/adminkeuangan/edit-keuangan/{id}', [KeuanganController::class, 'update'])->name('admin-update-keuangan');
 });
