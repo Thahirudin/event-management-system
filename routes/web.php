@@ -58,7 +58,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/tambah-member', [MemberController::class, 'store'])->name('admin-store-member');
     Route::get('/admin/edit-member/{id}', [MemberController::class, 'adminEdit'])->name('admin-edit-member');
     Route::put('/admin/edit-member/{id}', [MemberController::class, 'update'])->name('admin-update-member');
-    Route::put('/admin/hapus-member/{id}', [MemberController::class, 'destroy'])->name('admin-hapus-member');
+    Route::get('/admin/hapus-member/{id}', [MemberController::class, 'destroy'])->name('admin-hapus-member');
     // keuangan
     Route::get('/admin/keuangan/list-keuangan', [KeuanganController::class, 'index'])->name('admin-list-keuangan');
     Route::get('/admin//keuangan/pemasukan-event', [KeuanganController::class, 'pemasukan-event'])->name('admin-list-pemasukan-event');

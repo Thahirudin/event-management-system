@@ -125,4 +125,18 @@ class MemberController extends Controller
             return redirect()->back()->with('error', 'Gagal mengedit member. ' . $e->getMessage());
         }
     }
+    function destroy($id){
+        $member = Member::find($id);
+        // Hapus data
+        $member->delete();
+        return redirect('/admin/list-member')->with('sukses', 'Member Berhasil Di Hapus');
+    }
+
+    function organizerIndex()
+    {
+        $members = Member::all();
+        return view('organizer.list-member', [
+            'member' => $member
+        ]);
+    }
 }
