@@ -84,12 +84,9 @@
 
                                                 </div>
                                                 <div>
-                                                    <form action="{{ route('admin-terima-order', ['id' => $order->id]) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button class="btn btn-primary">Hapus</button>
-                                                    </form>
+                                                    <a onclick="confirmDelete(this)"
+                                                        data-url="{{ route('admin-hapus-order', ['id' => $order->id]) }}"
+                                                        class="btn btn-primary">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -142,6 +139,21 @@
                 dataTable.column(6).search(selectedValue)
                     .draw(); // Ganti 1 dengan indeks kolom yang ingin difilter
             });
+            confirmDelete = function(button) {
+                var url = $(button).data('url');
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: 'Data ini akan dihapus!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = url;
+                    }
+                })
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

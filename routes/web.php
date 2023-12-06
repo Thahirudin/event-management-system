@@ -37,6 +37,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/tambah-order/{id}', [OrderController::class, 'store'])->name('admin-store-order');
     Route::put('/admin/terima-order/{id}', [OrderController::class, 'adminTerimaOrder'])->name('admin-terima-order');
     Route::put('/admin/tolak-order/{id}', [OrderController::class, 'adminTolakOrder'])->name('admin-tolak-order');
+    Route::get('/admin/hapus-order/{id}', [OrderController::class, 'destroy'])->name('admin-hapus-order');
     // kategori
     Route::get('/admin/list-kategori', [KategoriController::class, 'index'])->name('admin-list-kategori');
     Route::get('/admin/tambah-kategori', [KategoriController::class, 'adminCreate'])->name('admin-tambah-kategori');

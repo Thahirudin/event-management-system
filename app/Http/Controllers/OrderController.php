@@ -152,8 +152,17 @@ class OrderController extends Controller
             $order->bukti = $fileName;
             $order->save();
         }
-
         // Redirect or return a response as needed
         return redirect('/admin/list-order')->with('sukses', 'order Berhasil DiEdit');
+    }
+    function destroy($id){
+        try{
+            $order = Order::find($id);
+        // Hapus data
+        $order->delete();
+        return redirect()->back()->with('sukses', 'Order Berhasil Di Hapus');
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }
