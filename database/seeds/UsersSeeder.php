@@ -16,6 +16,7 @@ class UsersSeeder extends Seeder
         User::create([
             'nama' => 'admin',
             'jabatan' => 'Admin',
+            'profil' => '20231206033800-admin.png',
             'tanggal_lahir' => '2003-02-02',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'), // Gunakan bcrypt untuk mengenkripsi password

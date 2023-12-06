@@ -30,10 +30,7 @@
                                     <th>Kategori</th>
                                     <th>Nama Event</th>
                                     <th>Waktu</th>
-                                    <th>Lokasi</th>
-                                    <th>Kontak</th>
-                                    <th>Harga</th>
-                                    <th>Jumlah Tiket</th>
+                                    <th>Tiket Tersedia</th>
                                     <th>Thumbnail</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -47,17 +44,9 @@
                                         <td>{{ $event->kategori->nama }}</td>
                                         <td>{{ $event->nama_event }}</td>
                                         <td>{{ $event->waktu }}</td>
-                                        <td>{{ $event->lokasi }}</td>
-                                        <td>{{ $event->kontak }}</td>
                                         <td>
                                             @foreach ($event->harga as $harga)
-                                                <p>{{ $harga->nama_harga }} :
-                                                    {{ number_format($harga->harga, 0, ',', '.') }}</p>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($event->harga as $harga)
-                                                <p>{{ $harga->jumlah_tiket }}</p>
+                                                {{ $harga->nama_harga . ':' . $harga->jumlah_tiket }}
                                             @endforeach
                                         </td>
 
@@ -65,14 +54,20 @@
                                                 alt="{{ $event->nama_event }}" height="150"></td>
                                         <td>{{ $event->status }}</td>
                                         <td>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="mr-3"><a
-                                                        href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
-                                                        class="btn btn-success">Beli</a></div>
-                                                <div class="mr-3"><a href="" class="btn btn-info">Edit</a></div>
-                                                <div class="mr-3"> <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}" class="btn btn-info">Lihat Order</a></div>
-                                                <div class="mr-3"><a href=""
-                                                        class="btn btn-primary">Hapus</a></div>
+                                            <div class="dropdown">
+                                                <a class="btn btn-primary dropdown-toggle" href="#" role="button"
+                                                    data-toggle="dropdown" aria-expanded="false">
+                                                    Aksi
+                                                </a>
+
+                                                <div class="dropdown-menu">
+                                                    <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
+                                                        class="dropdown-item">Beli</a>
+                                                    <a href="" class="dropdown-item">Edit</a>
+                                                    <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
+                                                        class="dropdown-item">Lihat Order</a>
+                                                    <a href="" class="dropdown-item">Hapus</a>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>

@@ -33,6 +33,42 @@ class OrderController extends Controller
         $order = Order::find($id);
         return view('admin.edit-order', ['order' => $order]);
     }
+    public function adminTerimaOrder($id){
+        $order = Order::find($id);
+        $order->update([
+            'status' => "sukses",
+            'detail'=> "Order Berhasil Diterima",
+            // Sesuaikan dengan nama kolom yang ingin Anda edit
+        ]);
+        return redirect('/admin/list-order')->with('sukses', 'Order Berhasil Diterima');
+    }
+    public function adminTolakOrder(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'detail' => 'required',
+            ]);
+            
+            $order = Order::find($id);
+            $harga = Harga::find($order->id_harga);
+            if ($order) {
+                $order->update([
+                    'detail' => $request->detail,
+                    'status' => 'ditolak',
+                    // Sesuaikan dengan nama kolom yang ingin Anda edit
+                ]);
+                $harga->update([
+                    'jumlah_tiket' => $harga->jumlah_tiket + 1,
+                ]);
+
+                return redirect('/admin/list-order')->with('sukses', 'Order Berhasil Ditolak');
+            } else {
+                return redirect()->back()->with('error', 'Order tidak ditemukan.');
+            }
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
     public function store(Request $request)
     {
@@ -43,28 +79,42 @@ class OrderController extends Controller
             'id_harga' => 'required',
             'bukti' => 'required',
         ]);
+
         DB::beginTransaction(); // Mulai transaksi database
+
         try {
-            $image = $request->file('bukti');
-            $imageName = now()->format('YmdHis') . '-' . $request->nama . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/orders'), $imageName);
-            $order = Order::create([
-                'id_member' => $request->id_member,
-                'id_event' => $request->id_event,
-                'id_harga' => $request->id_harga,
-                'status' => $request->status,
-                'bukti' => $imageName,
-            ]);
             $harga = Harga::find($request->id_harga);
-            $harga->update([
-                'jumlah_tiket' => $harga->jumlah_tiket - 1,
-            ]);
-            DB::commit(); // Commit transaksi database
 
-            // Redirect back or to a success page
-            return redirect(route('admin-list-order'))->with('sukses', 'Order Berhasil Ditambahkan');
+            // Periksa apakah jumlah tiket tersedia lebih besar dari 0
+            if ($harga->jumlah_tiket > 0) {
+                $image = $request->file('bukti');
+                $imageName = now()->format('YmdHis') . '-' . $request->nama . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/orders'), $imageName);
 
+                $order = Order::create([
+                    'id_member' => $request->id_member,
+                    'id_event' => $request->id_event,
+                    'id_harga' => $request->id_harga,
+                    'status' => $request->status,
+                    'bukti' => $imageName,
+                ]);
+
+                // Kurangi jumlah tiket hanya jika tiket tersedia
+                $harga->update([
+                    'jumlah_tiket' => $harga->jumlah_tiket - 1,
+                ]);
+
+                DB::commit(); // Commit transaksi database
+
+                // Redirect back or to a success page
+                return redirect(route('admin-list-order'))->with('sukses', 'Order Berhasil Ditambahkan');
+            } else {
+                // Jumlah tiket tidak mencukupi
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Maaf, tiket telah habis.');
+            }
         } catch (QueryException $e) {
+            // Tangani kesalahan query
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }

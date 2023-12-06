@@ -98,7 +98,7 @@
                     </li>
                     <li class="line-height pt-3">
                         <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                            <img src="{{ asset('stemit') }}/assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
+                            <img src="{{ asset('uploads/organizers'). '/' .  Auth::user()->profil  }}" class="img-fluid rounded-circle mr-3" alt="user">
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                             <div class="iq-card shadow-none m-0">

@@ -3,7 +3,7 @@
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-    Admin - Dashboard
+    Organizer - Dashboard
 @endsection
 @section('dashboard')
 active active-menu

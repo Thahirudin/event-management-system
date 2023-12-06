@@ -15,7 +15,7 @@ class HargaSeeder extends Seeder
             'id_event' => '1',
             'nama_harga' => 'VIP',
             'harga' => '400000',
-            'jumlah_tiket' => '30',
+            'jumlah_tiket' => '1',
         ]);
         Harga::create([
             'id_event' => '1',

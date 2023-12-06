@@ -28,7 +28,7 @@
                                 <option value="">Semua</option>
                                 <option value="periksa">Periksa</option>
                                 <option value="ditolak">Ditolak</option>
-                                <option value="diterima">Diterima</option>
+                                <option value="sukses">Sukses</option>
                             </select>
                         </div>
                         <table id="datatable" class="table table-striped table-bordered">
@@ -37,9 +37,10 @@
                                     <th>No.</th>
                                     <th>Id Member</th>
                                     <th>Id Event</th>
-                                    <th>Status</th>
                                     <th>Bukti</th>
                                     <th>Harga</th>
+                                    <th>Detail</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -49,22 +50,48 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $order->id_member }}</td>
                                         <td>{{ $order->id_event }}</td>
+                                        <td><a href="{{ asset('uploads/orders') . '/' . $order->bukti }}">Klik Disini</a>
+                                        </td>
+                                        <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
+                                        <td>{{ $order->detail }}</td>
                                         <td>
                                             @if ($order->status == 'periksa')
                                                 <div class="bg-warning rounded-pill text-center">{{ $order->status }}</div>
                                             @endif
+                                            @if ($order->status == 'ditolak')
+                                                <div class="bg-primary rounded-pill text-center">{{ $order->status }}</div>
+                                            @endif
+                                            @if ($order->status == 'sukses')
+                                                <div class="bg-success rounded-pill text-center">{{ $order->status }}</div>
+                                            @endif
                                         </td>
-                                        <td><a href="{{ asset('uploads/orders') . '/' . $order->bukti }}">Klik Disini</a>
-                                        </td>
-                                        <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
                                         <td>
+                                            <div class="d-flex align-items-center justify-content-end ">
+                                                <div {{ $order->status != 'periksa' ? 'hidden' : '' }}>
+                                                    <form action="{{ route('admin-terima-order', ['id' => $order->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button class="btn btn-success mr-3">Terima</button>
+                                                    </form>
+                                                </div>
+                                                <div {{ $order->status != 'periksa' ? 'hidden' : '' }}>
+                                                    <button type="button" class="btn btn-warning mr-3 text-white"
+                                                        data-toggle="modal" data-target="#exampleModal"
+                                                        data-id="{{ $order->id }}">
+                                                        Tolak
+                                                    </button>
 
-                                            <a href="" class="btn btn-success mr-3 "
-                                                {{ $order->status != 'periksa' ? 'hidden' : '' }}>Terima</a>
-                                            <a href="{{ route('admin-edit-order', ['id' => $order->id]) }}"
-                                                class="btn btn-info mr-3"
-                                                {{ $order->status != 'periksa' ? 'hidden' : '' }}>Tolak</a>
-                                            <a href="" class="btn btn-primary">Hapus</a>
+                                                </div>
+                                                <div>
+                                                    <form action="{{ route('admin-terima-order', ['id' => $order->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button class="btn btn-primary">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -72,6 +99,33 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alasan Ditolak</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="rejectForm" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="detail">Alasan Ditolak</label>
+                            <textarea name="detail" class="form-control" id="detail" cols="30" rows="10"></textarea>
+                        </div>
+                        <input type="hidden" name="order_id" id="order-id-input" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary mr-3">Tolak</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -85,8 +139,51 @@
             var dataTable = $('#datatable').DataTable();
             $('#mySelect').on('change', function() {
                 var selectedValue = $(this).val();
-                dataTable.column(3).search(selectedValue)
+                dataTable.column(6).search(selectedValue)
                     .draw(); // Ganti 1 dengan indeks kolom yang ingin difilter
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('sukses'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
+    {{-- Form Modal --}}
+    <script>
+        $(document).ready(function() {
+            $('.btn-warning').on('click', function() {
+                var orderId = $(this).data('id');
+
+                // Set data-id value to the form action
+                var formAction = "{{ route('admin-tolak-order', ['id' => ':order_id']) }}";
+                formAction = formAction.replace(':order_id', orderId);
+                $('#rejectForm').attr('action', formAction);
+
+                // Set data-id value to the hidden input
+                $('#order-id-input').val(orderId);
+
+                // Show the modal
+                $('#exampleModal').modal('show');
+            });
+
+            // Handle modal close event
+            $('#exampleModal').on('hidden.bs.modal', function() {
+                // Reset form action and hidden input value
+                $('#rejectForm').attr('action', '');
+                $('#order-id-input').val('');
+                // Optionally reset textarea value
+                $('#detail').val('');
             });
         });
     </script>
