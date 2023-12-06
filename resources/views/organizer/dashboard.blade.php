@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('organizer.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
