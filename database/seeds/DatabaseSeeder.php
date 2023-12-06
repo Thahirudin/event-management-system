@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KategoriSeeder::class);
         $this->call(EventSeeder::class);
         $this->call(HargaSeeder::class);
+        $this->call(MemberSeeder::class);
     }
 }

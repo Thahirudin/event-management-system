@@ -8,11 +8,12 @@ class Order extends Model
 {
     protected $table = 'tbl_orders';
     protected $fillable = [
-        'member_id',
-        'event_id',
+        'id_member',
+        'id_event',
         'status',
-        'harga',
+        'id_harga',
         'bukti',
+        'detail',
     ];
     
     public function member()
@@ -23,6 +24,10 @@ class Order extends Model
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+    public function harga()
+    {
+        return $this->belongsTo(Harga::class,'id_harga');
     }
 
 }

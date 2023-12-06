@@ -17,4 +17,8 @@ class Harga extends Model
     {
         return $this->belongsTo(Event::class, 'id_event');
     }
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

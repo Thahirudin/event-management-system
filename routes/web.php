@@ -5,6 +5,7 @@ use App\http\Controllers\OrderController;
 use App\http\Controllers\OrganizerController;
 use App\http\Controllers\MemberController;
 use App\http\Controllers\KeuanganController;
+use App\http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,7 @@ use App\http\Controllers\KeuanganController;
 // routes/web.php
 
 Route::middleware(['auth','admin'])->group(function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('admin-dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'adminIndex'])->name('admin-dashboard');
     // Event
     Route::get('/admin/list-event', [EventController::class, 'index'])->name('admin-list-event');
     Route::get('/admin/event-akan-datang', [EventController::class, 'adminEventAkanDatang'])->name('admin-event-akan-datang');
@@ -33,6 +32,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::put('/admin/edit-event/{id}', [EventController::class, 'update'])->name('admin-update-event');
     // order
     Route::get('/admin/list-order', [OrderController::class, 'index'])->name('admin-list-order');
+    Route::get('/admin/list-order/{id}', [OrderController::class, 'adminListOrderEvent'])->name('admin-list-order-event');
     Route::get('/admin/tambah-order/{id}', [OrderController::class, 'adminCreate'])->name('admin-tambah-order');
     Route::post('/admin/tambah-order/{id}', [OrderController::class, 'store'])->name('admin-store-order');
     Route::get('/admin/edit-order/{id}', [OrderController::class, 'adminEdit'])->name('admin-edit-order');
@@ -57,6 +57,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/tambah-member', [MemberController::class, 'store'])->name('admin-store-member');
     Route::get('/admin/edit-member/{id}', [MemberController::class, 'adminEdit'])->name('admin-edit-member');
     Route::put('/admin/edit-member/{id}', [MemberController::class, 'update'])->name('admin-update-member');
+    Route::put('/admin/hapus-member/{id}', [MemberController::class, 'destroy'])->name('admin-hapus-member');
     // keuangan
     Route::get('/admin/keuangan/list-keuangan', [KeuanganController::class, 'index'])->name('admin-list-keuangan');
     Route::get('/admin//keuangan/pemasukan-event', [KeuanganController::class, 'pemasukan-event'])->name('admin-list-pemasukan-event');
@@ -68,8 +69,51 @@ Route::middleware(['auth','admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'organizer'])->group(function () {
-    Route::get('/organizer/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('organizer-dashboard');
+    Route::get('/organizer/dashboard', [DashboardController::class, 'organizerIndex'])->name('organizer-dashboard');
+    // Event
+    Route::get('/organizer/list-event', [EventController::class, 'organizerListEvent'])->name('organizer-list-event');
+    Route::get('/organizer/event-akan-datang', [EventController::class, 'organizerEventAkanDatang'])->name('organizer-event-akan-datang');
+    Route::get('/organizer/event-selesai', [EventController::class, 'organizerEventSelesai'])->name('organizer-event-selesai');
+    Route::get('/organizer/tambah-event', [EventController::class, 'organizerCreate'])->name('organizer-tambah-event');
+    Route::post('/organizer/tambah-event', [EventController::class, 'organizerStore'])->name('organizer-store-event');
+    Route::get('/organizer/edit-event/{id}', [EventController::class, 'organizerEdit'])->name('organizer-edit-event');
+    Route::put('/organizer/edit-event/{id}', [EventController::class, 'organizerUpdate'])->name('organizer-update-event');
+    // order
+    Route::get('/organizer/list-order', [OrderController::class, 'organizerIndex'])->name('organizer-list-order');
+    Route::get('/organizer/list-order/{id}', [OrderController::class, 'organizerListOrderEvent'])->name('organizer-list-order-event');
+    Route::get('/organizer/tambah-order/{id}', [OrderController::class, 'organizerCreate'])->name('organizer-tambah-order');
+    Route::post('/organizer/tambah-order/{id}', [OrderController::class, 'organizerStore'])->name('organizer-store-order');
+    Route::get('/organizer/edit-order/{id}', [OrderController::class, 'organizerEdit'])->name('organizer-edit-order');
+    Route::put('/organizer/edit-order/{id}', [OrderController::class, 'organizerUpdate'])->name('organizer-update-order');
+    // kategori
+    Route::get('/organizer/list-kategori', [KategoriController::class, 'organizerIndex'])->name('organizer-list-kategori');
+    Route::get('/organizer/tambah-kategori', [KategoriController::class, 'organizerCreate'])->name('organizer-tambah-kategori');
+    Route::post('/organizer/tambah-kategori', [KategoriController::class, 'organizerStore'])->name('organizer-store-kategori');
+    Route::get('/organizer/edit-kategori/{id}', [KategoriController::class, 'organizerEdit'])->name('organizer-edit-kategori');
+    Route::put('/organizer/edit-kategori/{id}', [KategoriController::class, 'organizerUpdate'])->name('organizer-update-kategori');
+    Route::get('/organizer/hapus-kategori/{id}', [KategoriController::class, 'organizerDestroy'])->name('organizer-hapus-kategori');
+    // organizer
+    Route::get('/organizer/list-organizer', [OrganizerController::class, 'organizerIndex'])->name('organizer-list-organizer');
+    Route::get('/organizer/tambah-organizer', [OrganizerController::class, 'organizerCreate'])->name('organizer-tambah-organizer');
+    Route::post('/organizer/tambah-organizer', [OrganizerController::class, 'store'])->name('organizer-store-organizer');
+    Route::get('/organizer/edit-organizer/{id}', [OrganizerController::class, 'organizerEdit'])->name('organizer-edit-organizer');
+    Route::put('/organizer/edit-organizer/{id}', [OrganizerController::class, 'update'])->name('organizer-update-organizer');
+    Route::get('/organizer/hapus-organizer/{id}', [OrganizerController::class, 'organizerDestroy'])->name('organizer-hapus-organizer');
+    // member
+    Route::get('/organizer/list-member', [MemberController::class, 'organizerIndex'])->name('organizer-list-member');
+    Route::get('/organizer/tambah-member', [MemberController::class, 'organizerCreate'])->name('organizer-tambah-member');
+    Route::post('/organizer/tambah-member', [MemberController::class, 'organizerStore'])->name('organizer-store-member');
+    Route::get('/organizer/edit-member/{id}', [MemberController::class, 'organizerEdit'])->name('organizer-edit-member');
+    Route::put('/organizer/edit-member/{id}', [MemberController::class, 'organizerUpdate'])->name('organizer-update-member');
+    // keuangan
+    Route::get('/organizer/keuangan/list-keuangan', [KeuanganController::class, 'organizerIndex'])->name('organizer-list-keuangan');
+    Route::get('/organizer//keuangan/pemasukan-event', [KeuanganController::class, 'organizerPemasukanEvent'])->name('organizer-list-pemasukan-event');
+    Route::get('/organizer//keuangan/pengeluaran-event', [KeuanganController::class, 'organizerPengeluaranEvent'])->name('organizer-list-pengeluaran-event');
+    Route::get('/organizer/keuangan/tambah-keuangan', [KeuanganController::class, 'organizerCreate'])->name('organizer-tambah-keuangan');
+    Route::post('/organizer/keuangan/tambah-keuangan', [KeuanganController::class, 'organizerStore'])->name('organizer-store-keuangan');
+    Route::get('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerEdit'])->name('organizer-edit-keuangan');
+    Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
 });
+
+Route::get('/', [DashboardController::class, 'memberIndex'])->name('member-dashboard');
 Auth::routes();

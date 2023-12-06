@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Event;
+use App\Harga;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     function index()
     {
-        $orders = order::all();
+        $orders = Order::with(['harga'])->get();
         return view('admin.list-order', ['orders' => $orders]);
+    }
+    function listOrderEvent($id)
+    {
+        $orders = Order::where('id_event', $id)->with(['harga', 'event'])->get();
+        return view('admin.list-order-event', ['orders' => $orders]);
     }
 
     public function admincreate($id)
@@ -21,24 +29,46 @@ class OrderController extends Controller
     }
 
     public function adminedit($id)
-{
-    $order = Order::find($id);
-    return view('admin.edit-order', ['order' => $order]);
-}
+    {
+        $order = Order::find($id);
+        return view('admin.edit-order', ['order' => $order]);
+    }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'member_id' => 'required',
-            'event_id' => 'required',
+        $request->validate([
+            'id_member' => 'required',
+            'id_event' => 'required',
             'status' => 'required',
-            'harga' => 'required',
+            'id_harga' => 'required',
             'bukti' => 'required',
         ]);
-        $order = new Order($validatedData);
-        $order->save();
+        DB::beginTransaction(); // Mulai transaksi database
+        try {
+            $image = $request->file('bukti');
+            $imageName = now()->format('YmdHis') . '-' . $request->nama . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/orders'), $imageName);
+            $order = Order::create([
+                'id_member' => $request->id_member,
+                'id_event' => $request->id_event,
+                'id_harga' => $request->id_harga,
+                'status' => $request->status,
+                'bukti' => $imageName,
+            ]);
+            $harga = Harga::find($request->id_harga);
+            $harga->update([
+                'jumlah_tiket' => $harga->jumlah_tiket - 1,
+            ]);
+            DB::commit(); // Commit transaksi database
 
-        return redirect('/admin/list-order')->with('sukses', 'Order berhasil ditambahkan');
+            // Redirect back or to a success page
+            return redirect(route('admin-list-order'))->with('sukses', 'Order Berhasil Ditambahkan');
+
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
     }
 
     public function update(Request $request, $id)

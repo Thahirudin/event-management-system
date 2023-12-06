@@ -43,7 +43,7 @@ Jakarta Floor Plan&nbsp;</p>
 </ul>',
             'kontak' => '089628437540',
             'thumbnail' => '20231204155718-Lazada Fest Concert.jpg',
-            'status' => 'On Going',
+            'status' => 'Akan Datang',
         ]);
         Event::create([
             'id_organizer' => '1',
@@ -87,7 +87,7 @@ Asuransi</p>
 </ul>',
             'kontak' => '089628437540',
             'thumbnail' => '20231204155537-Bogor Colorrun 2023.png',
-            'status' => 'On Going',
+            'status' => 'Akan Datang',
         ]);
         Event::create([
             'id_organizer' => '1',
@@ -132,7 +132,7 @@ Asuransi</p>
 <p>3. Apabila pemesanan tiket tersebut telah diterima oleh tim detikEevent maka Anda akan menerima email konfirmasi berupa notifikasi pemesanan tiket diterima dan mendapatkan E-Tiket disertai dengan kode tiket dan QR code.</p>',
             'kontak' => '089628437540',
             'thumbnail' => '20231204165300-Bumil Time.jpg',
-            'status' => 'On Going',
+            'status' => 'Akan Datang',
         ]);
         Event::create([
             'id_organizer' => '1',
@@ -165,7 +165,7 @@ Lokasi : Gedung Graha Sanusi UNPAD, Jalan Dipati Ukur No, 35 Bandung</p>
 <p>Daftar sekarang juga karena acara ini 100% GRATIS!</p>',
             'kontak' => '089628437540',
             'thumbnail' => '20231204170019-UMKM Day 2023 - Membangun Masa Depan UMKM Bersama.jpg',
-            'status' => 'On Going',
+            'status' => 'Akan Datang',
         ]);
         Event::create([
             'id_organizer' => '1',
@@ -212,7 +212,7 @@ Lokasi : Gedung Graha Sanusi UNPAD, Jalan Dipati Ukur No, 35 Bandung</p>
 <p>Jangan lupa juga untuk ungkapkan rasa cinta dan kebangsaan terhadap Indonesia sekarang juga di detik.com/demipemudaindonesia</p>',
             'kontak' => '20231204170704-Demi Indonesia.jpg',
             'thumbnail' => '20231204170947-Demi Indonesia.jpg',
-            'status' => 'On Going',
+            'status' => 'Akan Datang',
         ]);
     }
 }

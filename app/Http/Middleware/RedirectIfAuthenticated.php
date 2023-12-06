@@ -18,9 +18,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::check() && Auth::user()->jabatan == 'Admin') {
-            return redirect('/');
-        } if (Auth::check() && Auth::user()->jabatan == 'Organizer') {
-            return redirect('/organizer/dashboard');
+            return redirect()->route('admin-dashboard');
+        } else if (Auth::check() && Auth::user()->jabatan == 'Organizer') {
+            return redirect()->route('organizer-dashboard');
         }
 
         return $next($request);

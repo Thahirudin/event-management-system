@@ -4,10 +4,10 @@
 @endsection
 
 @section('title')
-    Order
+    List Order
 @endsection
 
-@section('list-order')
+@section('order')
     active active-menu
 @endsection
 

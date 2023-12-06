@@ -51,7 +51,8 @@
                                         <td>{{ $event->kontak }}</td>
                                         <td>
                                             @foreach ($event->harga as $harga)
-                                                <p>{{ $harga->nama_harga }} : {{ $harga->harga }}</p>
+                                                <p>{{ $harga->nama_harga }} :
+                                                    {{ number_format($harga->harga, 0, ',', '.') }}</p>
                                             @endforeach
                                         </td>
                                         <td>
@@ -59,12 +60,21 @@
                                                 <p>{{ $harga->jumlah_tiket }}</p>
                                             @endforeach
                                         </td>
-                                        
-                                        <td><img src="{{ asset('uploads/events').'/'. $event->thumbnail }}" alt="{{ $event->nama_event }}" height="150"></td>
+
+                                        <td><img src="{{ asset('uploads/events') . '/' . $event->thumbnail }}"
+                                                alt="{{ $event->nama_event }}" height="150"></td>
                                         <td>{{ $event->status }}</td>
-                                        <td><a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}" class="btn btn-success mr-3">Order</a><a href=""
-                                                class="btn btn-info mr-3">Edit</a> <a href=""
-                                                class="btn btn-primary">Hapus</a></td>
+                                        <td>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="mr-3"><a
+                                                        href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
+                                                        class="btn btn-success">Beli</a></div>
+                                                <div class="mr-3"><a href="" class="btn btn-info">Edit</a></div>
+                                                <div class="mr-3"> <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}" class="btn btn-info">Lihat Order</a></div>
+                                                <div class="mr-3"><a href=""
+                                                        class="btn btn-primary">Hapus</a></div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                         </table>

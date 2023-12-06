@@ -15,13 +15,15 @@ class CreateTblOrdersTable extends Migration
     {
         Schema::create('tbl_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('member_id');
-            $table->foreign('member_id')->references('id')->on('tbl_members')->onDelete('cascade');
-            $table->unsignedBigInteger('event_id');
-            $table->foreign('event_id')->references('id')->on('tbl_events')->onDelete('cascade');
+            $table->unsignedBigInteger('id_member');
+            $table->foreign('id_member')->references('id')->on('tbl_members')->onDelete('cascade');
+            $table->unsignedBigInteger('id_event');
+            $table->foreign('id_event')->references('id')->on('tbl_events')->onDelete('cascade');
             $table->text('status');
             $table->text('bukti');
-            $table->string('harga');
+            $table->text('detail')->nullable();
+            $table->unsignedBigInteger('id_harga');
+            $table->foreign('id_harga')->references('id')->on('tbl_hargas')->onDelete('cascade');
             $table->timestamps();
         });
     }

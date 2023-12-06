@@ -125,7 +125,7 @@
                 <div class="form-group">
                     <label for="status">Status</label>
                     <input type="text" class="form-control" id="status" name="status" readonly autocomplete="off"
-                        required value="On Going">
+                        required value="Akan Datang">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
