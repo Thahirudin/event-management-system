@@ -27,9 +27,9 @@
    <!-- Wrapper Start -->
    <div class="wrapper">
       <!-- Sidebar-->
-      @include('admin/layout.sidebar')
+      @include('member/layout.sidebar')
       <!-- TOP Nav Bar -->
-      @include('admin/layout.navbar')
+      @include('member/layout.navbar')
       <!-- TOP Nav Bar END -->
       <!-- Page Content  -->
       <div id="content-page" class="content-page">

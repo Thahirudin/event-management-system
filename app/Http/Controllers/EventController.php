@@ -18,7 +18,17 @@ class EventController extends Controller
     }
     function adminEventAkanDatang()
     {
-        $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'On Going')->get();
+        $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'Akan Datang')->get();
+        return view('admin.event-akan-datang', compact('events'));
+    }
+    function adminEventSelesai()
+    {
+        $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'Selesai')->get();
+        return view('admin.event-akan-datang', compact('events'));
+    }
+    function adminEventBatal()
+    {
+        $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'Batal')->get();
         return view('admin.event-akan-datang', compact('events'));
     }
     function adminCreate()

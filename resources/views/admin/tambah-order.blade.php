@@ -75,7 +75,9 @@
                             <label for="harga">Harga</label>
                             <select class="form-control" id="harga" name="id_harga">
                                 @foreach ($event->harga as $harga)
-                                    <option value="{{ $harga->id }}">{{ $harga->nama_harga }}: {{ number_format($harga->harga, 0, ',', '.') }} Tiket Tersedia: {{ $harga->jumlah_tiket }}
+                                    <option value="{{ $harga->id }}">{{ $harga->nama_harga }}:
+                                        {{ number_format($harga->harga, 0, ',', '.') }} Tiket Tersedia:
+                                        {{ $harga->jumlah_tiket }}
                                     </option>
                                 @endforeach
                             </select>
@@ -85,9 +87,15 @@
                             <input type="file" class="form-control" id="bukti" name="bukti" required="required"
                                 accept="image/*">
                         </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Bayar</button>
-                        </div>
+                        @if ($event->status == 'Akan Datang')
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Bayar</button>
+                            </div>
+                        @else
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <span>Event Telah <strong>{{ $event->status }}</strong></span>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>
