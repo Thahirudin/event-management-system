@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Keuangan;
+use App\Event;
 use Illuminate\Http\Request;
 
 class KeuanganController extends Controller
@@ -10,10 +11,11 @@ class KeuanganController extends Controller
         $keuangans = Keuangan::all();
         return view('admin.keuangan', compact('keuangans'));
     }
-    function adminCreate(){
-        return view('admin.tambah-keuangan');
+    function adminCreate($id){
+        $event = Event::find($id);
+        return view('admin.tambah-keuangan', compact('event'));
     }
-    function store(Request $request){
+    function store(Request $request, $id){
         $request->validate([
             'tanggal' => 'required|date',
             'catatan' => 'required|string',
@@ -44,6 +46,7 @@ class KeuanganController extends Controller
             return redirect(route('admin-list-keuangan'))->withInput()->with('sukses', 'Data berhasil disimpan');
         }catch (\Exception $e) {
             DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
     }
