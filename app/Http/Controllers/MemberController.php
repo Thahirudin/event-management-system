@@ -136,7 +136,7 @@ class MemberController extends Controller
     {
         $members = Member::all();
         return view('organizer.list-member', [
-            'member' => $member
+            'members' => $members
         ]);
     }
 }

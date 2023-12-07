@@ -34,6 +34,17 @@
                                     class="ri-calendar-check-line"></i>Event Selesai</a></li>
                     </ul>
                 </li>
+                <li class="@yield('list-organizer') @yield('list-member')">
+                    <a href="#pengguna" class="iq-waves-effect collapsed" data-toggle="collapse"
+                        aria-expanded="false"><i class="las la-user-friends"></i><span>Pengguna</span><i
+                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="pengguna" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li class="@yield('list-organizer')"><a href="{{ route('organizer-list-organizer') }}"><i
+                                    class="las la-user"></i>Organizer</a></li>
+                        <li class="@yield('list-member')"><a href="{{ route('organizer-list-member') }}"><i
+                                    class="las la-user"></i>Member</a></li>
+                    </ul>
+                </li>
                 <li class="@yield('list-pemasukan-event') @yield('list-keuangan') @yield('list-pengeluaran-event')">
                     <a href="#keuangan" class="iq-waves-effect collapsed" data-toggle="collapse"
                         aria-expanded="false"><i class="las la-file"></i><span>Keuangan</span><i
