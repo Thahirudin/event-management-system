@@ -21,8 +21,6 @@
                             class="las la-home iq-arrow-left"></i><span>Dashboard</span></a></li>
                 <li class=" @yield('order')"><a href="{{ route('organizer-list-order') }}" class="iq-waves-effect"><i
                             class="ri-price-tag-line"></i><span>Order</span></a></li>
-                <li class=" @yield('kategori')"><a href="{{ route('organizer-list-kategori') }}" class="iq-waves-effect"><i
-                            class="ri-apps-line"></i><span>Kategori</span></a></li>
                 <li class=" @yield('list-event') @yield('event-akan-datang') @yield('event-selesai')">
                     <a href="#event" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i
                             class="lab la-elementor iq-arrow-left"></i><span>Event</span><i
@@ -34,18 +32,6 @@
                                     class="ri-calendar-event-line"></i>Event Akan Datang</a></li>
                         <li class=" @yield('event-selesai')"><a href="{{ route('organizer-event-selesai') }}"><i
                                     class="ri-calendar-check-line"></i>Event Selesai</a></li>
-
-                    </ul>
-                </li>
-                <li class="@yield('list-organizer') @yield('list-member')">
-                    <a href="#pengguna" class="iq-waves-effect collapsed" data-toggle="collapse"
-                        aria-expanded="false"><i class="las la-user-friends"></i><span>Pengguna</span><i
-                            class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                    <ul id="pengguna" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li class="@yield('list-organizer')"><a href="{{ route('organizer-list-organizer') }}"><i
-                                    class="las la-user"></i>Organizer</a></li>
-                        <li class="@yield('list-member')"><a href="{{ route('organizer-list-member') }}"><i
-                                    class="las la-user"></i>Member</a></li>
                     </ul>
                 </li>
                 <li class="@yield('list-pemasukan-event') @yield('list-keuangan') @yield('list-pengeluaran-event')">
