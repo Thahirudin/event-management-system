@@ -2,7 +2,7 @@
 @section('addCss')
 @endsection
 @section('title')
-    Tambah Event
+    Edit Event
 @endsection
 @section('event')
     active active-menu
@@ -15,8 +15,9 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form action="{{ route('admin-store-event') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin-update-event', ['id' => $event->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="id_organizer">Id Organizer</label>
                     <input type="text" class="form-control" id="id_organizer" name="id_organizer"
@@ -29,7 +30,8 @@
                     <label for="kategori">Kategori</label>
                     <select class="form-control" id="kategori" name="kategori" autocomplete="off" required>
                         @foreach ($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                            <option value="{{ $kategori->id }}" @if ($event->id_kategori == $kategori->id) selected @endif>
+                                {{ $kategori->nama }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -38,8 +40,8 @@
                 @enderror
                 <div class="form-group">
                     <label for="nama_event">Nama Event</label>
-                    <input type="text" class="form-control" id="nama_event" name="nama_event" autocomplete="off"
-                        required>
+                    <input type="text" class="form-control" id="nama_event" name="nama_event" autocomplete="off" required
+                        value="{{ $event->nama_event }}">
                 </div>
                 @error('nama_event')
                     <div class="text-danger">{{ $message }}</div>
@@ -55,7 +57,8 @@
                         <div class="form-group">
                             <label for="waktu">Waktu</label>
                             <input type="text" class="form-control" id="waktu" name="waktu"
-                                placeholder="Pilih Tanggal dan Waktu" autocomplete="off" required>
+                                placeholder="Pilih Tanggal dan Waktu" autocomplete="off" required
+                                value="{{ $event->waktu }}">
                         </div>
                         @error('waktu')
                             <div class="text-danger">{{ $message }}</div>
@@ -65,7 +68,7 @@
                         <div class="form-group">
                             <label for="lokasi">Lokasi</label>
                             <input type="text" class="form-control" id="lokasi" name="lokasi" autocomplete="off"
-                                required>
+                                required value="{{ $event->lokasi }}">
                         </div>
                         @error('lokasi')
                             <div class="text-danger">{{ $message }}</div>
@@ -74,59 +77,66 @@
                 </div>
                 <div class="form-group">
                     <label for="detail">Detail</label>
-                    <textarea name="detail" id="detail" autocomplete="off" required></textarea>
+                    <textarea name="detail" id="detail" autocomplete="off" required>{{ $event->detail }}</textarea>
                     @error('detail')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="kontak">kontak</label>
-                    <input type="text" class="form-control" id="kontak" name="kontak" autocomplete="off" required>
+                    <input type="text" class="form-control" id="kontak" name="kontak" autocomplete="off" required
+                        value="{{ $event->kontak }}">
                 </div>
                 @error('kontak')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
                 <button class="btn btn-info" onclick="tambahKolomHarga()">Tambah Kolom Harga</button>
-                <div id="kolomHarga">
-                    <!-- Kolom harga pertama -->
-                    <div class="row" id="kolomHarga-1">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="nama_harga">Nama Harga</label>
-                                <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
-                                    autocomplete="off" required>
+                @foreach ($event->harga as $harga)
+                    <div id="kolomHarga">
+                        <!-- Kolom harga pertama -->
+                        <div class="row" id="kolomHarga-1">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nama_harga">Jenis Tiket</label>
+                                    <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
+                                        autocomplete="off" required value="{{ $harga->nama_harga }}">
+                                </div>
+                                @error('nama_harga[]')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('nama_harga[]')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="harga">Harga</label>
-                                <input type="number" class="form-control" id="harga" name="harga[]" autocomplete="off"
-                                    required>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="harga">Harga</label>
+                                    <input type="number" class="form-control" id="harga" name="harga[]"
+                                        autocomplete="off" required value="{{ $harga->harga }}">
+                                </div>
+                                @error('harga[]')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('harga[]')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="jumlah_tiket">Jumlah Tiket</label>
-                                <input type="number" class="form-control" id="jumlah_tiket" name="jumlah_tiket[]" autocomplete="off"
-                                    required>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="jumlah_tiket">Jumlah Tiket</label>
+                                    <input type="number" class="form-control" id="jumlah_tiket" name="jumlah_tiket[]"
+                                        autocomplete="off" required value="{{ $harga->jumlah_tiket }}">
+                                </div>
+                                @error('jumlah_tiket[]')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('jumlah_tiket[]')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
                         </div>
                     </div>
+                @endforeach
+                <div class="form-group mb-3 ">
+                    <label for="status">status</label>
+                    <select class="form-control" id="status" name="status" autocomplete="off" required>
+                        <option value="Akan Datang" @if ($event->status == 'Akan Datang') selected @endif> Akan datang</option>
+                        <option value="Selesai" @if ($event->status == 'Selesai') selected @endif> Selesai</option>
+                        <option value="Batal" @if ($event->status == 'Batal') selected @endif> Batal</option>
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status" name="status" readonly autocomplete="off"
-                        required value="Akan Datang">
-                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

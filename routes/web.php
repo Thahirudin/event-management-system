@@ -30,6 +30,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/tambah-event', [EventController::class, 'store'])->name('admin-store-event');
     Route::get('/admin/edit-event/{id}', [EventController::class, 'adminEdit'])->name('admin-edit-event');
     Route::put('/admin/edit-event/{id}', [EventController::class, 'update'])->name('admin-update-event');
+    Route::get('/admin/hapus-event/{id}', [EventController::class, 'destroy'])->name('admin-hapus-event');
     // order
     Route::get('/admin/list-order', [OrderController::class, 'index'])->name('admin-list-order');
     Route::get('/admin/list-order/{id}', [OrderController::class, 'adminListOrderEvent'])->name('admin-list-order-event');

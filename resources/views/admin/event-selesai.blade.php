@@ -5,7 +5,7 @@
 @section('title')
     List Event Selesai
 @endsection
-@section('event-selesai')
+@section('list-event')
     active active-menu
 @endsection
 @section('content')
@@ -46,7 +46,7 @@
                                         <td>{{ $event->waktu }}</td>
                                         <td>
                                             @foreach ($event->harga as $harga)
-                                                {{ $harga->nama_harga . ':' . $harga->jumlah_tiket }}
+                                               <div><span> {{ $harga->nama_harga . ':' . $harga->jumlah_tiket }}</span></div>
                                             @endforeach
                                         </td>
 
@@ -66,7 +66,11 @@
                                                     <a href="{{ route('admin-edit-event', ['id' => $event->id] ) }}" class="dropdown-item">Edit</a>
                                                     <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
                                                         class="dropdown-item">Lihat Order</a>
-                                                    <a href="" class="dropdown-item">Hapus</a>
+                                                        <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
+                                                        class="dropdown-item">Lihat Keuangan</a>
+                                                    <a onclick="confirmDelete(this)"
+                                            data-url="{{ route('admin-hapus-event', ['id' => $event->id]) }}"
+                                                class="dropdown-item">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -87,6 +91,21 @@
         $(document).ready(function() {
             $('#datatable').DataTable();
         });
+        confirmDelete = function(button) {
+            var url = $(button).data('url');
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: 'Data ini akan dihapus!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = url;
+                }
+            })
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('sukses'))

@@ -23,7 +23,7 @@ class CreateTblOrdersTable extends Migration
             $table->text('bukti');
             $table->text('detail')->nullable();
             $table->unsignedBigInteger('id_harga');
-            $table->foreign('id_harga')->references('id')->on('tbl_hargas')->onDelete('cascade');
+            $table->foreign('id_harga')->references('id')->on('tbl_hargas');
             $table->timestamps();
         });
     }
