@@ -165,4 +165,8 @@ class OrderController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+    function adminTiket($id) {
+        $order = Order::find($id);
+        return view('admin.tiket', ['order' => $order]);
+    }
 }

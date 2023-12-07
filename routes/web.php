@@ -38,6 +38,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::put('/admin/terima-order/{id}', [OrderController::class, 'adminTerimaOrder'])->name('admin-terima-order');
     Route::put('/admin/tolak-order/{id}', [OrderController::class, 'adminTolakOrder'])->name('admin-tolak-order');
     Route::get('/admin/hapus-order/{id}', [OrderController::class, 'destroy'])->name('admin-hapus-order');
+    Route::get('/admin/tiket/{id}', [OrderController::class, 'adminTiket'])->name('admin-tiket');
     // kategori
     Route::get('/admin/list-kategori', [KategoriController::class, 'index'])->name('admin-list-kategori');
     Route::get('/admin/tambah-kategori', [KategoriController::class, 'adminCreate'])->name('admin-tambah-kategori');
@@ -52,6 +53,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/edit-organizer/{id}', [OrganizerController::class, 'adminEdit'])->name('admin-edit-organizer');
     Route::put('/admin/edit-organizer/{id}', [OrganizerController::class, 'update'])->name('admin-update-organizer');
     Route::get('/admin/hapus-organizer/{id}', [OrganizerController::class, 'destroy'])->name('admin-hapus-organizer');
+    Route::get('/admin/profil-organizer/{id}', [OrganizerController::class, 'profil'])->name('admin-profil-organizer');
     // member
     Route::get('/admin/list-member', [MemberController::class, 'index'])->name('admin-list-member');
     Route::get('/admin/tambah-member', [MemberController::class, 'adminCreate'])->name('admin-tambah-member');

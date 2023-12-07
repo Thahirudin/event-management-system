@@ -83,6 +83,12 @@
                                                     </button>
 
                                                 </div>
+                                                @if ($order->status == 'sukses')
+                                                    <div class="mr-3">
+                                                        <a href="{{ route('admin-tiket', ['id' => $order->id]) }}"
+                                                            class="btn btn-info">Lihat Tiket</a>
+                                                    </div>
+                                                @endif
                                                 <div>
                                                     <a onclick="confirmDelete(this)"
                                                         data-url="{{ route('admin-hapus-order', ['id' => $order->id]) }}"
