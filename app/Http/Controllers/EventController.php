@@ -24,7 +24,7 @@ class EventController extends Controller
     function adminEventSelesai()
     {
         $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'Selesai')->get();
-        return view('admin.event-akan-datang', compact('events'));
+        return view('admin.event-selesai', compact('events'));
     }
     function adminEventBatal()
     {

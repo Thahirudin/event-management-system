@@ -63,7 +63,7 @@
                                                 <div class="dropdown-menu">
                                                     <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
                                                         class="dropdown-item">Beli</a>
-                                                    <a href="" class="dropdown-item">Edit</a>
+                                                    <a href="{{ route('admin-edit-event', ['id' => $event->id] ) }}" class="dropdown-item">Edit</a>
                                                     <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
                                                         class="dropdown-item">Lihat Order</a>
                                                     <a href="" class="dropdown-item">Hapus</a>
