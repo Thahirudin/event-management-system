@@ -18,7 +18,7 @@ class OrderController extends Controller
     }
     function adminListOrderEvent($id)
     {
-        $orders = Order::where('id_event', $id)->with(['harga', 'event'])->get();
+        $orders = Order::where('id_event', $id)->get();
         return view('admin.list-order-event', ['orders' => $orders]);
     }
 

@@ -7,7 +7,7 @@
     Order
 @endsection
 
-@section('list-order')
+@section('order')
     active active-menu
 @endsection
 
@@ -35,8 +35,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Id Member</th>
-                                    <th>Id Event</th>
+                                    <th>Nama Member</th>
+                                    <th>Nama Event</th>
                                     <th>Bukti</th>
                                     <th>Harga</th>
                                     <th>Detail</th>
@@ -48,8 +48,8 @@
                                 @foreach ($orders as $order)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $order->id_member }}</td>
-                                        <td>{{ $order->id_event }}</td>
+                                        <td>{{ $order->member->nama }}</td>
+                                        <td>{{ $order->event->nama_event }}</td>
                                         <td><a href="{{ asset('uploads/orders') . '/' . $order->bukti }}">Klik Disini</a>
                                         </td>
                                         <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>

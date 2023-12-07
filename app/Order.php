@@ -18,12 +18,12 @@ class Order extends Model
     
     public function member()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Member::class, 'id_member');
     }
 
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class, 'id_event');
     }
     public function harga()
     {

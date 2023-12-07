@@ -3,9 +3,9 @@
 {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-List Keuangan
+List Pengeluaran
 @endsection
-@section('list-keuangan')
+@section('list-pengeluaran')
 active active-menu
 @endsection
 @section('content')
@@ -14,7 +14,7 @@ active active-menu
         <div class="iq-card">
             <div class="iq-card-header d-flex justify-content-between">
                 <div class="iq-header-title">
-                    <h4 class="card-title">Keuangan</h4>
+                    <h4 class="card-title">List Pengeluaran</h4>
                 </div>
             </div>
             <div class="iq-card-body">

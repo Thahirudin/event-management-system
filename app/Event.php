@@ -31,6 +31,10 @@ class Event extends Model
     {
         return $this->hasMany(Order::class, 'id_event');
     }
+    public function keuangan()
+    {
+        return $this->hasMany(Keuangan::class, 'event_id');
+    }
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');

@@ -55,10 +55,10 @@
                     <ul id="keuangan" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class="@yield('list-keuangan')"><a href="{{ route('admin-list-keuangan') }}"><i
                                     class="las la-file"></i>List Keuangan</a></li>
-                        <li class="@yield('list-pemasukan-event')"><a href="{{ route('admin-list-pemasukan-event') }}"><i
-                                    class="las la-file"></i>Pemasukan Event</a></li>
-                        <li class="@yield('list-pengeluaran-event')"><a href="{{ route('admin-list-pengeluaran-event') }}"><i
-                                    class="las la-file"></i>Pengeluaran Event</a></li>
+                        <li class="@yield('list-pemasukan')"><a href="{{ route('admin-list-pemasukan') }}"><i
+                                    class="las la-file"></i>Pemasukan</a></li>
+                        <li class="@yield('list-pengeluaran')"><a href="{{ route('admin-list-pengeluaran') }}"><i
+                                    class="las la-file"></i>Pengeluaran</a></li>
                     </ul>
                 </li>
             </ul>

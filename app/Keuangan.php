@@ -9,12 +9,18 @@ class Keuangan extends Model
 
     protected $table = 'tbl_keuangans';
     protected $fillable = [
-        'id_event',
-        'id_organizer',
+        'event_id',
+        'organizer_id',
         'tanggal',
         'catatan',
         'bukti',
         'jenis',
         'total',
     ];
+    public function user() {
+        return $this->belongsTo(User::class, 'organizer_id');
+    }
+    public function event() {
+        return $this->belongsTo(Event::class);
+    }
 }

@@ -66,8 +66,8 @@
                                                     <a href="{{ route('admin-edit-event', ['id' => $event->id] ) }}" class="dropdown-item">Edit</a>
                                                     <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
                                                         class="dropdown-item">Lihat Order</a>
-                                                    <a href="{{ route('admin-tambah-keuangan', ['id' => $event->id]) }}"
-                                                        class="dropdown-item">Tambah Keuangan</a>
+                                                        <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
+                                                        class="dropdown-item">Lihat Keuangan</a>
                                                     <a href="" class="dropdown-item">Hapus</a>
                                                 </div>
                                             </div>
