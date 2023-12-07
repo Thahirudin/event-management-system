@@ -27,9 +27,9 @@
    <!-- Wrapper Start -->
    <div class="wrapper">
       <!-- Sidebar-->
-      @include('admin/layout.sidebar')
+      @include('organizer/layout.sidebar')
       <!-- TOP Nav Bar -->
-      @include('admin/layout.navbar')
+      @include('organizer/layout.navbar')
       <!-- TOP Nav Bar END -->
       <!-- Page Content  -->
       <div id="content-page" class="content-page">
@@ -41,7 +41,7 @@
    <!-- Wrapper END -->
     
    <!-- Footer -->
-   @include('admin.layout.footer')
+   @include('organizer.layout.footer')
    <!-- Footer END -->
    <!-- Optional JavaScript -->
    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
