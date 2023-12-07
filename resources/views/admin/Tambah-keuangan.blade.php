@@ -4,8 +4,9 @@
 @endsection
 @section('title')
 {{-- Masukkan Title --}}
+Tambah Keuangan
 @endsection
-@section('list-member')
+@section('keuangan')
     active active-menu
 @endsection
 @section('content')
@@ -13,12 +14,11 @@
 <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
-                              <h4 class="card-title">Basic Form</h4>
+                              <h4 class="card-title">Tambah Keuangan</h4>
                            </div>
                         </div>
                         <div class="iq-card-body">
-                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac venenatis mollis, diam nibh finibus leo</p>
-                           <form action="{{ route('admin-store-event') }}" method="post" enctype="multipart/form-data">
+                           <form action="{{ route('admin-store-keuangan' , ['id'=>$event->id]) }}" method="post" enctype="multipart/form-data">
                            @csrf
                               <div class="form-group">
                                  <label for="tanggal">tanggal:</label>
@@ -38,11 +38,11 @@
                               </div>
                               <div class="form-group">
                                  <label for="event_id">event_id:</label>
-                                 <input type="number" class="form-control" id="event_id"name="event_id">
+                                 <input type="number" class="form-control" id="event_id"name="event_id" value="{{$event->id}}" readonly>
                               </div>
                               <div class="form-group">
                                  <label for="organizer_id">organizer_id:</label>
-                                 <input type="number" class="form-control" id="organizer_id"name="organizer_id">
+                                 <input type="number" class="form-control" id="organizer_id"name="organizer_id" value="{{Auth::user()->id}}" readonly>
                               </div>
                               <div class="checkbox mb-3">
                                  <label><input type="checkbox"> Remember me</label>
@@ -55,4 +55,19 @@
 @endsection
 @section('addJs')
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
 @endsection

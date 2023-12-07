@@ -133,4 +133,9 @@ class OrganizerController extends Controller
         $organizer->delete();
         return redirect('/admin/list-organizer')->with('sukses', 'Organizer Berhasil Di Hapus');
     }
+
+    function organizerIndex(){
+        $organizers = User::all();
+        return view('organizer.list-organizer', compact('organizers'));
+    }
 }

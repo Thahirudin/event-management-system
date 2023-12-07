@@ -16,7 +16,6 @@ active active-menu
                 <div class="iq-header-title">
                     <h4 class="card-title">Keuangan</h4>
                 </div>
-                <div><a href="{{route('admin-tambah-keuangan')}}" class="btn btn-primary">Tambah Keuangan</a></div>
             </div>
             <div class="iq-card-body">
                 <div class="table-responsive">
@@ -35,15 +34,16 @@ active active-menu
                         </thead>
                         <tbody>
                             <tr>
-                                <td>01</td>
-                                <td>12-12-2023</td>
-                                <td>Beli Mie</td>
-                                <td>Uang Keluar</td>
-                                <td>3500</td>
-                                <td>$-</td>
-                                <td>03</td>
-                                <td>1234</td>
-
+                                @foreach($keuangans as $keuangan)
+                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ $keuangan->tanggal }}</td>
+                                    <td>{{ $keuangan->catatan }}</td>
+                                    <td>{{ $keuangan->jenis }}</td>
+                                    <td>{{ $keuangan->total }}</td>
+                                    <td>{{ $keuangan->bukti }}</td>
+                                    <td>{{ $keuangan->event_id }}</td>
+                                    <td>{{ $keuangan->orgaizer_id }}</td>
+                                @endforeach
                             </tr>
 
                         </tbody>
