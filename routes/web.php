@@ -116,5 +116,6 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
 });
 
-Route::get('/', [DashboardController::class, 'memberIndex'])->name('member-dashboard');
+Route::get('/', [DashboardController::class, 'memberHome'])->name('home');
+Route::get('/dashboard', [DashboardController::class, 'memberDashboard'])->name('member-dashboard');
 Auth::routes();

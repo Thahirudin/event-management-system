@@ -7,7 +7,8 @@
                 </div>
                 <div class="iq-navbar-logo d-flex justify-content-between">
                     <a href="index.html" class="header-logo">
-                        <img src="{{ asset('stemit') }}/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+                        <img src="{{ asset('stemit') }}/assets/images/logo.png" class="img-fluid rounded-normal"
+                            alt="">
                         <div class="logo-title">
                             <span class="text-primary text-uppercase">Streamit</span>
                         </div>
@@ -28,123 +29,22 @@
                             <i class="ri-search-line"></i>
                         </a>
                     </li>
-                    <li class="nav-item nav-icon">
-                        <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
-                            <i class="ri-notification-2-line"></i>
-                            <span class="bg-primary dots"></span>
-                        </a>
-                        <div class="iq-sub-dropdown">
-                            <div class="iq-card shadow-none m-0">
-                                <div class="iq-card-body p-0">
-                                    <div class="bg-primary p-3">
-                                        <h5 class="mb-0 text-white">Semua Notifications<small
-                                                class="badge  badge-light float-right pt-1">4</small></h5>
-                                    </div>
-                                    <a href="#" class="iq-sub-card">
-                                        <div class="media align-items-center">
-                                            <div class="">
-                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/01.jpg"
-                                                    alt="">
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Emma Watson Barry</h6>
-                                                <small class="float-right font-size-12">Just Now</small>
-                                                <p class="mb-0">95 MB</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card">
-                                        <div class="media align-items-center">
-                                            <div class="">
-                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/02.jpg"
-                                                    alt="">
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">New customer is join</h6>
-                                                <small class="float-right font-size-12">5 days ago</small>
-                                                <p class="mb-0">Cyst Barry</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card">
-                                        <div class="media align-items-center">
-                                            <div class="">
-                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/03.jpg"
-                                                    alt="">
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Two customer is left</h6>
-                                                <small class="float-right font-size-12">2 days ago</small>
-                                                <p class="mb-0">Cyst Barry</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card">
-                                        <div class="media align-items-center">
-                                            <div class="">
-                                                <img class="avatar-40 rounded" src="{{ asset('stemit') }}/assets/images/user/04.jpg"
-                                                    alt="">
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                                <small class="float-right font-size-12">3 days ago</small>
-                                                <p class="mb-0">Cyst Barry</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="line-height pt-3">
-                        <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                            <img src="{{ asset('stemit') }}/assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
-                        </a>
-                        <div class="iq-sub-dropdown iq-user-dropdown">
-                            <div class="iq-card shadow-none m-0">
-                                <div class="iq-card-body p-0 ">
-                                    <div class="bg-primary p-3">
-                                        <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
-                                        <span class="text-white font-size-12">Available</span>
-                                    </div>
-                                    <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
-                                        <div class="media align-items-center">
-                                            <div class="rounded iq-card-icon iq-bg-primary">
-                                                <i class="ri-file-user-line"></i>
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Profile Saya</h6>
-                                                <p class="mb-0 font-size-12">View personal profile details.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
-                                        <div class="media align-items-center">
-                                            <div class="rounded iq-card-icon iq-bg-primary">
-                                                <i class="ri-profile-line"></i>
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Edit Profile</h6>
-                                                <p class="mb-0 font-size-12">Modify your personal details.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="d-inline-block w-100 text-center p-3">
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                        </form>
-
-                                        <a class="bg-primary iq-sign-btn" href="#"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                            role="button">
-                                            Keluar <i class="ri-login-box-line ml-2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    @if (Auth::user())
+                        @if (Auth::user()->jabatan == 'Admin')
+                            <li class="nav-item pt-3">
+                                <a href="{{ route('admin-dashboard') }}" class="btn btn-primary text-white px-3 py-1">Dashboard</a>
+                            </li>
+                        @endif
+                        @if (Auth::user()->jabatan == 'Organizer')
+                            <li class="nav-item pt-3">
+                                <a href="{{ route('organizer-dashboard') }}" class="btn btn-primary text-white px-3 py-1">Dashboard</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item pt-3">
+                            <a href="{{ route('login') }}" class="btn btn-primary text-white px-3 py-1">Login</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </nav>

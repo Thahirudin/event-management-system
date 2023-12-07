@@ -14,7 +14,11 @@ class DashboardController extends Controller
     {
         return view('organizer.dashboard');
     }
-    function memberIndex()
+    function memberHome()
+    {
+        return view('member.home');
+    }
+    function memberDashboard()
     {
         return view('member.dashboard');
     }
