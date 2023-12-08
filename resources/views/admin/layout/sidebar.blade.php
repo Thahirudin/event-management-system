@@ -33,7 +33,7 @@
                         <li class=" @yield('event-akan-datang')"><a href="{{ route('admin-event-akan-datang') }}"><i
                                     class="ri-calendar-event-line"></i>Event Akan Datang</a></li>
                         <li class=" @yield('event-selesai')"><a href="{{ route('admin-event-selesai') }}"><i
-                                    class="ri-calendar-check-line"></i>Event Selesai</a></li>
+                                    class="ri-calendar-event-line"></i>Event Selesai</a></li>
 
                     </ul>
                 </li>
