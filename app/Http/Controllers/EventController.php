@@ -173,8 +173,4 @@ class EventController extends Controller
         $event->delete();
         return redirect('/admin/list-event')->with('sukses', 'event Berhasil Di Hapus');
     }
-    function organizerListEvent(){
-        $events = Event::where('id_organizer', Auth::user()->id)->get();
-        return view('admin.list-event', compact('events'));
-    }
 }

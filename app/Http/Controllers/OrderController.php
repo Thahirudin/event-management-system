@@ -174,4 +174,19 @@ class OrderController extends Controller
         $orders = Order::with(['harga'])->get();
         return view('organizer.list-order', ['orders' => $orders]);
     }
+
+    function organizerTerimaOrder($id){
+        $order = Order::find($id);
+
+        if (!$order) {
+            return redirect()->back()->with('error', 'Order tidak ditemukan.');
+        }
+
+        $order->update([
+            'status' => 'sukses',
+            'detail' => 'Order Berhasil Diterima oleh Organizer',
+        ]);
+
+        return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Diterima oleh Organizer');
+    }
 }
