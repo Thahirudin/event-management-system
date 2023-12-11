@@ -134,6 +134,11 @@ class OrganizerController extends Controller
         return redirect('/admin/list-organizer')->with('sukses', 'Organizer Berhasil Di Hapus');
     }
 
+    function profil($id){
+        $organizer = User::find($id);
+        return view('admin.profil-organizer', compact('organizer'));
+    }
+
     function organizerIndex(){
         $organizers = User::all();
         return view('organizer.list-organizer', compact('organizers'));
