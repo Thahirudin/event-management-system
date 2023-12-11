@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('organizer.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin menambahkan CSS --}}
 @endsection
@@ -7,7 +7,7 @@
     Order
 @endsection
 
-@section('list-order')
+@section('order')
     active active-menu
 @endsection
 
@@ -35,8 +35,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Id Member</th>
-                                    <th>Id Event</th>
+                                    <th>Nama Member</th>
+                                    <th>Nama Event</th>
                                     <th>Bukti</th>
                                     <th>Harga</th>
                                     <th>Detail</th>
@@ -48,8 +48,8 @@
                                 @foreach ($orders as $order)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $order->id_member }}</td>
-                                        <td>{{ $order->id_event }}</td>
+                                        <td>{{ $order->member->nama }}</td>
+                                        <td>{{ $order->event->nama_event }}</td>
                                         <td><a href="{{ asset('uploads/orders') . '/' . $order->bukti }}">Klik Disini</a>
                                         </td>
                                         <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
@@ -82,6 +82,17 @@
                                                         Tolak
                                                     </button>
 
+                                                </div>
+                                                @if ($order->status == 'sukses')
+                                                    <div class="mr-3">
+                                                        <a href="{{ route('admin-tiket', ['id' => $order->id]) }}"
+                                                            class="btn btn-info">Lihat Tiket</a>
+                                                    </div>
+                                                @endif
+                                                <div>
+                                                    <a onclick="confirmDelete(this)"
+                                                        data-url="{{ route('admin-hapus-order', ['id' => $order->id]) }}"
+                                                        class="btn btn-primary">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -134,6 +145,20 @@
                 dataTable.column(6).search(selectedValue)
                     .draw(); // Ganti 1 dengan indeks kolom yang ingin difilter
             });
+            confirmDelete = function(button) {
+                var url = $(button).data('url');
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: 'Data ini akan dihapus!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = url;
+                    }
+                })
             }
         });
     </script>
