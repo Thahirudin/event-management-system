@@ -169,4 +169,9 @@ class OrderController extends Controller
         $order = Order::find($id);
         return view('admin.tiket', ['order' => $order]);
     }
+
+    function organizerIndex(){
+        $orders = Order::with(['harga'])->get();
+        return view('organizer.list-order', ['orders' => $orders]);
+    }
 }
