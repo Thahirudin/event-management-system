@@ -80,7 +80,7 @@ class EventController extends Controller
                 $event->harga()->create([
                     'nama_harga' => $namaHarga,
                     'harga' => $request->harga[$key],
-                    'jumlah_tiket' => $request->harga[$key],
+                    'jumlah_tiket' => $request->jumlah_tiket[$key],
                 ]);
             }
 
@@ -172,5 +172,161 @@ class EventController extends Controller
         // Setelah itu, baru hapus acara
         $event->delete();
         return redirect('/admin/list-event')->with('sukses', 'event Berhasil Di Hapus');
+    }
+
+    // Function Halaman Organizer
+    function organizerListEvent()
+    {
+        $events = Event::where('id_organizer' , Auth::user()->id)->get();
+        return view('organizer.list-event', compact('events'));
+    }
+    function organizerEventAkanDatang()
+    {
+        $events = Event::where('id_organizer' , Auth::user()->id)->where('status', 'Akan Datang')->get();
+        return view('organizer.event-akan-datang', compact('events'));
+    }
+    function organizerEventSelesai()
+    {
+        $events = Event::where('id_organizer', Auth::user()->id)->where('status', 'Selesai')->get();
+        return view('organizer.event-selesai', compact('events'));
+    }
+    function organizerCreate()
+    {
+        $kategoris = Kategori::all();
+        return view('organizer.tambah-event', compact('kategoris'));
+    }
+    public function organizerStore(Request $request)
+    {
+        $request->validate([
+            'id_organizer' => 'required|exists:tbl_organizers,id',
+            'kategori' => 'required|exists:tbl_kategoris,id',
+            'nama_event' => 'required',
+            'waktu' => 'required',
+            'lokasi' => 'required',
+            'detail' => 'required',
+            'kontak' => 'required',
+            'nama_harga.*' => 'required',
+            'harga.*' => 'required',
+            'jumlah_tiket.*' => '|integer',
+            'status' => 'required',
+            'thumbnail' => 'required',
+        ]);
+        DB::beginTransaction(); // Mulai transaksi database
+
+        try {
+
+            $image = $request->file('thumbnail');
+            $imageName = now()->format('YmdHis') . '-' . $request->nama_event . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/events'), $imageName);
+            // Simpan data event
+            $event = Event::create([
+                'id_organizer' => $request->id_organizer,
+                'id_kategori' => $request->kategori,
+                'nama_event' => $request->nama_event,
+                'waktu' => $request->waktu,
+                'lokasi' => $request->lokasi,
+                'detail' => $request->detail,
+                'kontak' => $request->kontak,
+                'status' => $request->status,
+                'thumbnail' => $imageName,
+            ]);
+
+            // Simpan data harga yang terkait dengan event
+            foreach ($request->nama_harga as $key => $namaHarga) {
+                $event->harga()->create([
+                    'nama_harga' => $namaHarga,
+                    'harga' => $request->harga[$key],
+                    'jumlah_tiket' => $request->jumlah_tiket[$key],
+                ]);
+            }
+
+            DB::commit(); // Commit transaksi database
+
+            return redirect(route('organizer-list-event'))->withInput()->with('sukses', 'Data berhasil disimpan');
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+    }
+    function organizerEdit($id)
+    {
+        $event = Event::with(['harga', 'kategori', 'user'])->find($id);
+        $kategoris = Kategori::all();
+        return view('organizer.edit-event', compact('event', 'kategoris'));
+    }
+    public function organizerUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'id_organizer' => 'required|exists:tbl_organizers,id',
+            'kategori' => 'required|exists:tbl_kategoris,id',
+            'nama_event' => 'required',
+            'waktu' => 'required',
+            'lokasi' => 'required',
+            'detail' => 'required',
+            'kontak' => 'required',
+            'nama_harga.*' => 'required',
+            'harga.*' => 'required',
+            'jumlah_tiket.*' => '|integer',
+            'status' => 'required',
+        ]);
+        DB::beginTransaction();
+
+        try {
+            // Find the event by ID
+            $event = Event::findOrFail($id);
+
+            // Delete existing thumbnail if a new one is provided
+            if ($request->hasFile('thumbnail')) {
+                $oldThumbnailPath = public_path('uploads/events') . '/' . $event->thumbnail;
+                if (file_exists($oldThumbnailPath)) {
+                    unlink($oldThumbnailPath);
+                }
+
+                $image = $request->file('thumbnail');
+                $imageName = now()->format('YmdHis') . '-' . $request->nama_event . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/events'), $imageName);
+                $event->thumbnail = $imageName;
+            }
+
+            // Update event data
+            $event->id_organizer = $request->id_organizer;
+            $event->id_kategori = $request->kategori;
+            $event->nama_event = $request->nama_event;
+            $event->waktu = $request->waktu;
+            $event->lokasi = $request->lokasi;
+            $event->detail = $request->detail;
+            $event->kontak = $request->kontak;
+            $event->status = $request->status;
+            $event->save();
+
+            // Delete existing prices and re-add the updated ones
+            $event->harga()->delete();
+
+            // Add updated prices
+            foreach ($request->nama_harga as $key => $namaHarga) {
+                $event->harga()->create([
+                    'nama_harga' => $namaHarga,
+                    'harga' => $request->harga[$key],
+                    'jumlah_tiket' => $request->jumlah_tiket[$key],
+                ]);
+            }
+
+            DB::commit();
+
+            return redirect(route('organizer-list-event'))->withInput()->with('sukses', 'Data berhasil diupdate');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // Handle exception, you can log or return an error response
+        }
+    }
+    function organizerDestroy($id)
+    {
+        $event = Event::find($id);
+
+        // Hapus terlebih dahulu catatan terkait di tbl_orders
+        $event->orders()->delete();
+
+        // Setelah itu, baru hapus acara
+        $event->delete();
+        return redirect('/organizer/list-event')->with('sukses', 'event Berhasil Di Hapus');
     }
 }

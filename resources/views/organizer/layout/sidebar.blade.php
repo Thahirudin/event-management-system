@@ -21,6 +21,8 @@
                             class="las la-home iq-arrow-left"></i><span>Dashboard</span></a></li>
                 <li class=" @yield('order')"><a href="{{ route('organizer-list-order') }}" class="iq-waves-effect"><i
                             class="ri-price-tag-line"></i><span>Order</span></a></li>
+                <li class=" @yield('kategori')"><a href="{{ route('organizer-list-kategori') }}" class="iq-waves-effect"><i
+                            class="ri-apps-line"></i><span>Kategori</span></a></li>
                 <li class=" @yield('list-event') @yield('event-akan-datang') @yield('event-selesai')">
                     <a href="#event" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i
                             class="lab la-elementor iq-arrow-left"></i><span>Event</span><i

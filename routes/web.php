@@ -83,6 +83,7 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::post('/organizer/tambah-event', [EventController::class, 'organizerStore'])->name('organizer-store-event');
     Route::get('/organizer/edit-event/{id}', [EventController::class, 'organizerEdit'])->name('organizer-edit-event');
     Route::put('/organizer/edit-event/{id}', [EventController::class, 'organizerUpdate'])->name('organizer-update-event');
+    Route::get('/organizer/hapus-event/{id}', [EventController::class, 'organizerDestroy'])->name('organizer-hapus-event');
     // order
     Route::get('/organizer/list-order', [OrderController::class, 'organizerIndex'])->name('organizer-list-order');
     Route::get('/organizer/list-order/{id}', [OrderController::class, 'organizerListOrderEvent'])->name('organizer-list-order-event');

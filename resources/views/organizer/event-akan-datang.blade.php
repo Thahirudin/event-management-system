@@ -10,22 +10,28 @@
             display: block !important;
         }
 
+        .event img {
+            object-fit: cover;
+            max-height: 400px;
+        }
+
+        /* Menghilangkan seluruh ikon pada tombol dropdown */
         .btn.dropdown-toggle::after {
             content: none;
         }
     </style>
 @endsection
 @section('title')
-    List Event
+    List Event Akan Datang
 @endsection
-@section('list-event')
+@section('event-akan-datang')
     active active-menu
 @endsection
 @section('content')
     <div class="iq-card p-3">
         <div class="d-md-flex align-items-center justify-content-between  ">
             <div class="text-center text-md-left ">
-                <h4 class="card-title">List Event</h4>
+                <h4 class="card-title">List Event Akan Datang</h4>
             </div>
             <div class="d-flex justify-content-center ">
                 <div class="mr-3">
@@ -40,7 +46,7 @@
                         <i class="la la-border-all"> Grid</i>
                     </button>
                 </div>
-                <div><a href="{{ route('organizer-tambah-event') }}" class="btn btn-info">Tambah Event</a></div>
+                <div><a href="{{ route('admin-store-event') }}" class="btn btn-info">Tambah Event</a></div>
             </div>
         </div>
     </div>
@@ -56,6 +62,7 @@
                             <th>Nama Event</th>
                             <th>Waktu</th>
                             <th>Tiket Tersedia</th>
+                            <th>Thumbnail</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -74,6 +81,9 @@
                                         </div>
                                     @endforeach
                                 </td>
+
+                                <td><img src="{{ asset('uploads/events') . '/' . $event->thumbnail }}"
+                                        alt="{{ $event->nama_event }}" height="150"></td>
                                 <td>{{ $event->status }}</td>
                                 <td>
                                     <div class="dropdown">
@@ -83,14 +93,16 @@
                                         </a>
 
                                         <div class="dropdown-menu">
-                                            <a href="{{ route('organizer-edit-event', ['id' => $event->id]) }}"
+                                            <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
+                                                class="dropdown-item">Beli</a>
+                                            <a href="{{ route('admin-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
-                                            <a href="{{ route('organizer-list-order-event', ['id' => $event->id]) }}"
+                                            <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Order</a>
                                             <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
                                             <a onclick="confirmDelete(this)"
-                                                data-url="{{ route('organizer-hapus-event', ['id' => $event->id]) }}"
+                                                data-url="{{ route('admin-hapus-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Hapus</a>
                                         </div>
                                     </div>
@@ -106,18 +118,10 @@
             @foreach ($events as $event)
                 <div class="col mb-4">
                     <div class="card h-100 event">
-                        <div class="event-img card-img-top "
-                            style="
-                                background: url('{{ asset('uploads/events') . '/' . $event->thumbnail }}');
-                                background-size: cover;
-                                background-position: center;
-                                height: 400px;
-                            ">
-                            <div class="mt-1"><span
-                                    class="overlay-text @if ($event->status == 'Akan Datang') bg-success @endif @if ($event->status == 'Selesai') bg-secondary @endif @if ($event->status == 'Batal') bg-primary @endif p-2">{{ $event->status }}</span>
-                            </div>
-                        </div>
+                        <img src="{{ asset('uploads/events') . '/' . $event->thumbnail }}" class="card-img-top"
+                            alt="...">
                         <div class="card-body">
+
                             <div class="row mb-md-2">
                                 <div class="col-md-8 ">
                                     <div class="mb-2">
@@ -146,14 +150,16 @@
                                             Aksi
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a href="{{ route('organizer-edit-event', ['id' => $event->id]) }}"
+                                            <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
+                                                class="dropdown-item">Beli</a>
+                                            <a href="{{ route('admin-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Order</a>
                                             <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
                                             <a onclick="confirmDelete(this)"
-                                                data-url="{{ route('organizer-hapus-event', ['id' => $event->id]) }}"
+                                                data-url="{{ route('admin-hapus-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Hapus</a>
                                         </div>
                                     </div>
