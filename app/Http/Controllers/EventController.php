@@ -171,4 +171,9 @@ class EventController extends Controller
         $event->delete();
         return redirect('/admin/list-event')->with('sukses', 'event Berhasil Di Hapus');
     }
+
+    function organizerListEvent(){
+        $events = Event::with(['harga', 'kategori', 'user'])->get();
+        return view('organizer.list-event', compact('events'));
+    }
 }

@@ -4,7 +4,7 @@
 @endsection
 
 @section('title')
-    Order
+    Terima Order
 @endsection
 
 @section('order')
@@ -17,7 +17,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Order</h4>
+                        <h4 class="card-title">Terima Order</h4>
                     </div>
                 </div>
                 <div class="iq-card-body">
@@ -57,11 +57,9 @@
                                         <td>
                                             @if ($order->status == 'periksa')
                                                 <div class="bg-warning rounded-pill text-center">{{ $order->status }}</div>
-                                            @endif
-                                            @if ($order->status == 'ditolak')
+                                            @elseif ($order->status == 'ditolak')
                                                 <div class="bg-primary rounded-pill text-center">{{ $order->status }}</div>
-                                            @endif
-                                            @if ($order->status == 'sukses')
+                                            @elseif ($order->status == 'sukses')
                                                 <div class="bg-success rounded-pill text-center">{{ $order->status }}</div>
                                             @endif
                                         </td>
@@ -81,17 +79,16 @@
                                                         data-id="{{ $order->id }}">
                                                         Tolak
                                                     </button>
-
                                                 </div>
                                                 @if ($order->status == 'sukses')
                                                     <div class="mr-3">
-                                                        <a href="{{ route('organizer-tiket', ['id' => $order->id]) }}"
+                                                        <a href="{{ route('admin-tiket', ['id' => $order->id]) }}"
                                                             class="btn btn-info">Lihat Tiket</a>
                                                     </div>
                                                 @endif
                                                 <div>
                                                     <a onclick="confirmDelete(this)"
-                                                        data-url="{{ route('organizer-hapus-order', ['id' => $order->id]) }}"
+                                                        data-url="{{ route('admin-hapus-order', ['id' => $order->id]) }}"
                                                         class="btn btn-primary">Hapus</a>
                                                 </div>
                                             </div>
@@ -184,7 +181,7 @@
                 var orderId = $(this).data('id');
 
                 // Set data-id value to the form action
-                var formAction = "{{ route('organizer-tolak-order', ['id' => ':order_id']) }}";
+                var formAction = "{{ route('admin-tolak-order', ['id' => ':order_id']) }}";
                 formAction = formAction.replace(':order_id', orderId);
                 $('#rejectForm').attr('action', formAction);
 
