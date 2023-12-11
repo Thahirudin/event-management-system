@@ -10,11 +10,6 @@
             display: block !important;
         }
 
-        .event img {
-            object-fit: cover;
-            max-height: 400px;
-        }
-
         /* Menghilangkan seluruh ikon pada tombol dropdown */
         .btn.dropdown-toggle::after {
             content: none;
@@ -118,8 +113,17 @@
             @foreach ($events as $event)
                 <div class="col mb-4">
                     <div class="card h-100 event">
-                        <img src="{{ asset('uploads/events') . '/' . $event->thumbnail }}" class="card-img-top"
-                            alt="...">
+                        <div class="event-img card-img-top "
+                            style="
+                                background: url('{{ asset('uploads/events') . '/' . $event->thumbnail }}');
+                                background-size: cover;
+                                background-position: center;
+                                height: 400px;
+                            ">
+                            <div class="mt-1"><span
+                                    class="overlay-text @if ($event->status == 'Akan Datang') bg-success @endif @if ($event->status == 'Selesai') bg-secondary @endif @if ($event->status == 'Batal') bg-primary @endif p-2">{{ $event->status }}</span>
+                            </div>
+                        </div>
                         <div class="card-body">
 
                             <div class="row mb-md-2">

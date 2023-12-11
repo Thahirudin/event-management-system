@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 use App\Kategori;
 use App\Event;
@@ -170,5 +172,9 @@ class EventController extends Controller
         // Setelah itu, baru hapus acara
         $event->delete();
         return redirect('/admin/list-event')->with('sukses', 'event Berhasil Di Hapus');
+    }
+    function organizerListEvent(){
+        $events = Event::where('id_organizer', Auth::user()->id)->get();
+        return view('admin.list-event', compact('events'));
     }
 }

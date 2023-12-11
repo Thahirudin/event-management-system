@@ -57,9 +57,9 @@ class UsersSeeder extends Seeder
         User::create([
             'nama' => 'Maulana Habib Firmansyah',
             'jabatan' => 'Organizer',
-            'profil' => '20231204171942-Maulana Habib Firmansyah.jfif	',
+            'profil' => '20231204171942-Maulana Habib Firmansyah.JPG',
             'tanggal_lahir' => '2003-02-10',
-            'email' => 'habib098@gmail.com',
+            'email' => 'maulanahabibfirmansyah@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
 

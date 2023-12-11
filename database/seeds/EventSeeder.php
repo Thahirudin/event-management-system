@@ -46,7 +46,7 @@ Jakarta Floor Plan&nbsp;</p>
             'status' => 'Akan Datang',
         ]);
         Event::create([
-            'id_organizer' => '1',
+            'id_organizer' => '2',
             'id_kategori' => '2',
             'nama_event' => 'Bogor Colorrun 2023',
             'waktu' => '2023-12-14 12:00:00',
