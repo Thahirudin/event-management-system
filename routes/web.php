@@ -86,10 +86,10 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     // order
     Route::get('/organizer/list-order', [OrderController::class, 'organizerIndex'])->name('organizer-list-order');
     Route::get('/organizer/list-order/{id}', [OrderController::class, 'organizerListOrderEvent'])->name('organizer-list-order-event');
-    Route::get('/organizer/tambah-order/{id}', [OrderController::class, 'organizerCreate'])->name('organizer-tambah-order');
-    Route::post('/organizer/tambah-order/{id}', [OrderController::class, 'organizerStore'])->name('organizer-store-order');
-    Route::get('/organizer/edit-order/{id}', [OrderController::class, 'organizerEdit'])->name('organizer-edit-order');
-    Route::put('/organizer/edit-order/{id}', [OrderController::class, 'organizerUpdate'])->name('organizer-update-order');
+    Route::put('/organizer/terima-order/{id}', [OrderController::class, 'organizerTerimaOrder'])->name('organizer-terima-order');
+    Route::put('/organizer/tolak-order/{id}', [OrderController::class, 'organizerTolakOrder'])->name('organizer-tolak-order');
+    Route::get('/organizer/hapus-order/{id}', [OrderController::class, 'organizerDestroy'])->name('organizer-hapus-order');
+    Route::get('/organizer/tiket/{id}', [OrderController::class, 'organizerTiket'])->name('organizer-tiket');
     // kategori
     Route::get('/organizer/list-kategori', [KategoriController::class, 'organizerIndex'])->name('organizer-list-kategori');
     Route::get('/organizer/tambah-kategori', [KategoriController::class, 'organizerCreate'])->name('organizer-tambah-kategori');

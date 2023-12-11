@@ -33,7 +33,7 @@ class UsersSeeder extends Seeder
         User::create([
             'nama' => 'Iqbal Prilyan',
             'jabatan' => 'Organizer',
-            'profil' => '20231204171942-Iqbal Prilyan.jfif	',
+            'profil' => '20231204171942-Iqbal Prilyan.jfif',
             'tanggal_lahir' => '2003-02-10',
             'email' => 'iqbalpriliyan@gmail.com',
             'password' => bcrypt('12345678'),
