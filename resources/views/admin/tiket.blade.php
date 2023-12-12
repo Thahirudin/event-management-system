@@ -23,7 +23,7 @@ html {
 	font-family: "Staatliches", cursive;
 	background: white;
 	color: black;
-	font-size: 14px;
+	font-size: 12px;
 	letter-spacing: 0.1em;
 }
 
@@ -34,21 +34,13 @@ html {
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
-.left {
+.center {
 	display: flex;
+	text-align:center;
 }
-
-.image {
-	height: 250px;
-	width: 250px;
-	background-image: url("https://i.pinimg.com/564x/4f/49/67/4f4967a7a7c65d77f02be76f0070815c.jpg");
-	background-size: contain;
-	opacity: 0.85;
-}
-
 .the-show {
 	position: absolute;
-	color: pink;
+	color: black;
 	height: 250px;
 	padding: 0 10px;
 	letter-spacing: 0.15em;
@@ -57,14 +49,15 @@ html {
 	justify-content: space-around;
 	writing-mode: vertical-rl;
 	transform: rotate(-180deg);
+	margin-right:20px;
 }
 
-.the-show span:nth-child(2) {
-	color: black;
+.the-show span:nth-child(2) {	color: blue;
 	font-weight: 700;
+
 }
 
-.left .ticket-number {
+.center .ticket-number {
 	height: 250px;
 	width: 250px;
 	display: flex;
@@ -83,7 +76,7 @@ html {
 	align-items: center;
 }
 
-.date {
+.kategori {
 	border-top: 1px solid gray;
 	border-bottom: 1px solid gray;
 	padding: 5px 0;
@@ -93,19 +86,19 @@ html {
 	justify-content: space-around;
 }
 
-.date span {
-	width: 100px;
+.kategori span {
+	width: 200px;
 }
 
-.date span:first-child {
+.kategori span:first-child {
 	text-align: left;
 }
 
-.date span:last-child {
+.kategori span:last-child {
 	text-align: right;
 }
 
-.date .march-11 {
+.tanggal {
 	color: #d83565;
 	font-size: 20px;
 }
@@ -117,33 +110,30 @@ html {
 }
 
 .show-name h1 {
-	font-size: 48px;
+	font-size: 45px;
 	font-weight: 700;
 	letter-spacing: 0.1em;
-	color: #4a437e;
+	color:  #809bce;
 }
 
-.time {
+.waktu {
 	padding: 10px 0;
-	color: #4a437e;
+	color: #95b8d1;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	font-weight: 700;
+	font-size:25px;
 }
 
-.time span {
+.waktu span {
 	font-weight: 400;
-	color: gray;
+	color:grey ;
+	font-size:25px;
 }
 
-.left .time {
-	font-size: 16px;
-}
-
-
-.location {
+.lokasi {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -152,12 +142,12 @@ html {
 	border-top: 1px solid gray;
 }
 
-.location .separator {
+.lokasi .separator {
 	font-size: 20px;
 }
 
 .right {
-	width: 180px;
+	width: 300px;
 	border-left: 1px dashed #404040;
 }
 
@@ -166,59 +156,63 @@ html {
 }
 
 .right .the-show span:nth-child(2) {
-	color: pink;
+	color: blue;
 }
 
 .right .right-info-container {
-	height: 250px;
+	height: 300px;
 	padding: 10px 10px 10px 35px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
+	font-size:25px;
+	text-align:center;
 }
 
 .right .show-name h1 {
-	font-size: 18px;
+	font-size: 30px;
 }
 .right .ticket-number {
 	color: gray;
 }
+.center-image{
+	margin-left:10px;
+};
+
 </style>
 <body>
 <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
 <div class="ticket created-by-anniedotexe">
-	<div class="left">
-		<div class="image">
+	<div class="center">
+		<div class="center-image">
 			<p class="the-show">
 				<span>THE SHOW</span>
 				<span>THE SHOW</span>
 				<span>THE SHOW</span>
 			</p>
+			<img src="{{ asset('stemit') }}/assets/images/logo-full.png" height="50px">
 			<div class="ticket-number">
-				<p>
-                #20030220
-				</p>
 			</div>
 		</div>
 		<div class="ticket-info">
-			<p class="date">
-				<span>SATURDAY</span>
-				<span class="march-11">MARCH 11TH</span>
-				<span>2023</span>
+			<p class="kategori">
+				<span>{{ $order->event->kategori->nama }}</span>
+				<span >{{ $order->event->kategori->nama }}</span>
+				<span>{{ $order->event->kategori->nama }}</span>
 			</p>
 			<div class="show-name">
-				<h1>BORN PINK</h1>
-				<h2>BlackPink</h2>
+				<h1>{{ $order->event->nama_event }}</h1>
+				<p>{{ $order->member->nama}}</p>
+				
 			</div>
-			<div class="time">
-				<p>8:00 PM <span>TO</span> 11:00 PM</p>
-				<p>OUTDOOR <span>@</span> 7:00 PM</p>
+			<div class="waktu">
+				<p>{{ $order->event->waktu }}<span>
 			</div>
-			<p class="location"><span>Gelora bung karno main stadium</span>
-				<span class="separator"><i class="far fa-smile"></i></span><span>Jakarta</span>
+			<p class="lokasi">
+				<span class="separator"><i class="far fa-smile"></i></span><span>{{ $order->event->lokasi }}</span>
 			</p>
 		</div>
 	</div>
@@ -230,17 +224,14 @@ html {
 		</p>
 		<div class="right-info-container">
 			<div class="show-name">
-				<h1>BORN PINK</h1>
-			</div>
-			<div class="time">
-				<p>8:00 PM <span>TO</span> 11:00 PM</p>
-				<p>DOUTDOOR <span>@</span> 7:00 PM</p>
+				<h1>{{ $order->event->nama_event }}</h1>
 			</div>
 			<p class="ticket-number">
-				#20030220
+			#{{ $order->id }}
 			</p>
 		</div>
 	</div>
 </div>
 </body>
 </html>
+

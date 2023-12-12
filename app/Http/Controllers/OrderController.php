@@ -165,9 +165,13 @@ class OrderController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-    function adminTiket($id) {
-        $order = Order::find($id);
-        return view('admin.tiket', ['order' => $order]);
+
+public function adminTiket($orderid) {
+    $order = Order::find($orderid);
+
+    return view('admin.tiket', ['order' => $order]);
+}
+
     }
 
     function organizerIndex(){
@@ -189,4 +193,3 @@ class OrderController extends Controller
 
         return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Diterima oleh Organizer');
     }
-}
