@@ -193,13 +193,3 @@ public function adminTiket($orderid) {
 
         return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Diterima oleh Organizer');
     }
-<<<<<<< HEAD
-=======
-    
-    function organizerListOrderEvent($id)
-    {
-        $orders = Order::where('id_event', $id)->get();
-        return view('organizer.list-order-event', ['orders' => $orders]);
-    }
-}
->>>>>>> 54dabdafb346121544906139f3b55295d936ccab
