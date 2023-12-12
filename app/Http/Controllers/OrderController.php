@@ -189,4 +189,10 @@ class OrderController extends Controller
 
         return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Diterima oleh Organizer');
     }
+    
+    function organizerListOrderEvent($id)
+    {
+        $orders = Order::where('id_event', $id)->get();
+        return view('organizer.list-order-event', ['orders' => $orders]);
+    }
 }

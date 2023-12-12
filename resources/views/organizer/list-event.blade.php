@@ -148,7 +148,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a href="{{ route('organizer-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
-                                            <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
+                                            <a href="{{ route('organizer-list-order-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Order</a>
                                             <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
@@ -215,8 +215,6 @@
                 text: "{{ session('sukses') }}",
                 icon: "success"
             });
-
-            // Clear the session after displaying the success message
             @php
                 session()->forget('sukses');
             @endphp
