@@ -105,6 +105,7 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::get('/organizer/edit-organizer/{id}', [OrganizerController::class, 'organizerEdit'])->name('organizer-edit-organizer');
     Route::put('/organizer/edit-organizer/{id}', [OrganizerController::class, 'update'])->name('organizer-update-organizer');
     Route::get('/organizer/hapus-organizer/{id}', [OrganizerController::class, 'organizerDestroy'])->name('organizer-hapus-organizer');
+    Route::get('/organizer/profil-organizer/{id}', [OrganizerController::class, 'organizerProfil'])->name('organizer-profil-organizer');
     // member
     Route::get('/organizer/list-member', [MemberController::class, 'organizerIndex'])->name('organizer-list-member');
     Route::get('/organizer/tambah-member', [MemberController::class, 'organizerCreate'])->name('organizer-tambah-member');

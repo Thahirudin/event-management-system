@@ -107,7 +107,7 @@
                                         <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
                                         <span class="text-white font-size-12">Available</span>
                                     </div>
-                                    <a href="{{ route('admin-profil-organizer', ['id' => Auth::user()->id]) }}" class="iq-sub-card iq-bg-primary-hover">
+                                    <a href="{{ route('organizer-profil-organizer', ['id' => Auth::user()->id]) }}" class="iq-sub-card iq-bg-primary-hover">
                                         <div class="media align-items-center">
                                             <div class="rounded iq-card-icon iq-bg-primary">
                                                 <i class="ri-file-user-line"></i>

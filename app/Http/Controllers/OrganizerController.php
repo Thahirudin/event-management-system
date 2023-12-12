@@ -139,6 +139,11 @@ class OrganizerController extends Controller
         return view('admin.profil-organizer', compact('organizer'));
     }
 
+    function organizerProfil($id){
+        $organizer = User::find($id);
+        return view('organizer.profil-organizer', compact('organizer'));
+    }
+
     function organizerIndex(){
         $organizers = User::all();
         return view('organizer.list-organizer', compact('organizers'));
