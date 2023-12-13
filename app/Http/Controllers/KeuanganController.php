@@ -71,5 +71,69 @@ class KeuanganController extends Controller
         $keuangan = Keuangan::find($id);
         return view('admin.edit-keuangan', compact('keuangan'));
     }
+    function update(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
 
+            // Validate the incoming request data
+            $request->validate([
+                'tanggal' => 'required|date',
+                'catatan' => 'required|string',
+                'jenis' => 'required|string',
+                'total' => 'required|string',
+                'organizer_id' => 'required|string',
+            ]);
+
+            $keuangan = Keuangan::find($id);
+            if (!$keuangan) {
+                throw new \Exception('keuangan tidak ditemukan');
+            }
+
+            // Check if a new profile image is uploaded
+            if ($request->hasFile('bukti')) {
+                // Delete the old profile image if it exists
+                if ($keuangan->bukti) {
+                    $oldImagePath = public_path('uploads/keuangans/' . $keuangan->bukti);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Upload the new profile image
+                $image = $request->file('bukti');
+                
+                $imageName = now()->format('YmdHis') . '-' . $keuangan->event->nama_event . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/keuangans'), $imageName);
+
+                // Update member data including the new profile image
+                $keuangan->update([
+                    'tanggal' => $request->tanggal,
+                    'catatan' => $request->catatan,
+                    'jenis' => $request->jenis,
+                    'total' => $request->total,
+                    'bukti' => $imageName,
+                    'event_id' => $request->event_id,
+                    'organizer_id' => $request->organizer_id,
+                ]);
+            } else {
+                // Use the existing profile image
+                $keuangan->update([
+                    'tanggal' => $request->tanggal,
+                    'catatan' => $request->catatan,
+                    'jenis' => $request->jenis,
+                    'total' => $request->total,
+                    'event_id' => $request->event_id,
+                    'organizer_id' => $request->organizer_id,
+                ]);
+            }
+
+            DB::commit(); // Commit the transaction
+
+            return redirect('/admin/keuangan/list-keuangan')->with('sukses', 'Keuangan Berhasil DiEdit');
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback the transaction in case of an exception
+            return redirect()->back()->with('error', 'Gagal mengedit organizer. ' . $e->getMessage());
+        }
+    }
 }

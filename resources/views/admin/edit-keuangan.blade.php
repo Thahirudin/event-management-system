@@ -21,6 +21,7 @@
             <form action="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="tanggal">tanggal:</label>
                     <input type="date" class="form-control" id="tanggal" name="tanggal" required value="{{ $keuangan->tanggal }}">
@@ -54,7 +55,7 @@
                 @enderror
                 <div class="form-group">
                     <label for="bukti">bukti:</label>
-                    <input type="file" class="form-control" id="bukti"name="bukti" accept="image/*" required>
+                    <input type="file" class="form-control" id="bukti"name="bukti" accept="image/*" >
                 </div>
                 @error('bukti')
                     <div class="text-danger">{{ $message }}</div>

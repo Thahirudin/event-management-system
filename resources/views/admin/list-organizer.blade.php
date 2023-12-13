@@ -111,6 +111,8 @@
                             <div class="text-center">
                                 <a href="{{ route('admin-edit-organizer', ['id' => $organizer->id]) }}"
                                     class="btn btn-info mr-3 ">Edit</a>
+                                <a href="{{ route('admin-profil-organizer', ['id' => $organizer->id]) }}"
+                                    class="btn btn-success mr-3 ">Lihat Profil</a>
                                 <a onclick="confirmDelete(this)"
                                     data-url="{{ route('admin-hapus-organizer', ['id' => $organizer->id]) }}"
                                     class="btn btn-primary ">Hapus</a>
