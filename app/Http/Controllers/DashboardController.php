@@ -22,4 +22,12 @@ class DashboardController extends Controller
     {
         return view('member.dashboard');
     }
+    function tentangKami()
+    {
+        return view('member.tentang-kami');
+    }
+    function event()
+    {
+        return view('member.detai-levent');
+    }
 }

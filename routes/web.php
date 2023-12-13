@@ -122,7 +122,8 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
 });
 
+// 
 Route::get('/', [DashboardController::class, 'memberHome'])->name('home');
-Route::get('/tentang-kami', [DashboardController::class, 'tentang-kami'])->name('tentang-kami');
+Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('tentang-kami');
 Route::get('/event/{id}', [DashboardController::class, 'event'])->name('event');
 Auth::routes();
