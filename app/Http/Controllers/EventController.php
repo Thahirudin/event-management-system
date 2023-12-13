@@ -254,7 +254,9 @@ class EventController extends Controller
             $kategoris = Kategori::all();
             return view('organizer.edit-event', compact('event', 'kategoris'));
         } catch (ModelNotFoundException $e) {
-            abort(404, 'Data not found.');
+            // abort(404, 'Data not found.');
+           
+            return redirect()->route('organizer-list-event');
         }
     }
     public function organizerUpdate(Request $request, $id)

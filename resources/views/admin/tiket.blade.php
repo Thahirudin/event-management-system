@@ -41,7 +41,7 @@
             position: absolute;
             top: 80px;
             left: 40px;
-			right: 40px;
+            right: 40px;
         }
 
         .text4 {
@@ -60,11 +60,12 @@
             right: 40px;
             /* Adjust the left value as needed */
         }
-		.text6 {
+
+        .text6 {
             position: absolute;
             bottom: 80px;
-			left: 40px;
-			right: 40px;
+            left: 40px;
+            right: 40px;
         }
     </style>
 </head>
@@ -115,6 +116,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const element = document.querySelector(".tiket");
+
+            html2pdf(element, {
+                margin: 10,
+                filename: 'tiket.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    width: 1000,
+                    height: 543.77
+                } // Tentukan lebar dan tinggi
+            });
+        });
+    </script>
+
+
+
+
 </body>
 
 </html>

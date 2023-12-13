@@ -116,7 +116,7 @@
                                 background-position: center;
                                 height: 400px;
                             ">
-                            <div class="mt-1"><span
+                            <div class="mt-3 ml-3"><span
                                     class="overlay-text @if ($event->status == 'Akan Datang') bg-success @endif @if ($event->status == 'Selesai') bg-secondary @endif @if ($event->status == 'Batal') bg-primary @endif p-2">{{ $event->status }}</span>
                             </div>
                         </div>
