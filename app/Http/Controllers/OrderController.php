@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;    
 use App\Order;
 use App\Event;
 use App\Harga;
@@ -33,11 +34,12 @@ class OrderController extends Controller
         $order = Order::find($id);
         return view('admin.edit-order', ['order' => $order]);
     }
-    public function adminTerimaOrder($id){
+    public function adminTerimaOrder($id)
+    {
         $order = Order::find($id);
         $order->update([
             'status' => "sukses",
-            'detail'=> "Order Berhasil Diterima",
+            'detail' => "Order Berhasil Diterima",
             // Sesuaikan dengan nama kolom yang ingin Anda edit
         ]);
         return redirect('/admin/list-order')->with('sukses', 'Order Berhasil Diterima');
@@ -48,7 +50,7 @@ class OrderController extends Controller
             $request->validate([
                 'detail' => 'required',
             ]);
-            
+
             $order = Order::find($id);
             $harga = Harga::find($order->id_harga);
             if ($order) {
@@ -155,31 +157,40 @@ class OrderController extends Controller
         // Redirect or return a response as needed
         return redirect('/admin/list-order')->with('sukses', 'order Berhasil DiEdit');
     }
-    function destroy($id){
-        try{
+    function destroy($id)
+    {
+        try {
             $order = Order::find($id);
-        // Hapus data
-        $order->delete();
-        return redirect()->back()->with('sukses', 'Order Berhasil Di Hapus');
+            // Hapus data
+            $order->delete();
+            return redirect()->back()->with('sukses', 'Order Berhasil Di Hapus');
         } catch (QueryException $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-public function adminTiket($orderid) {
-    $order = Order::find($orderid);
+    public function adminTiket($orderid)
+    {
+        $order = Order::find($orderid);
 
-    return view('admin.tiket', ['order' => $order]);
-}
-
+        return view('admin.tiket', ['order' => $order]);
     }
+    function organizerIndex()
+    {
+        $events = Event::where('id_organizer', Auth::user()->id)->get();
+        $orders = [];
 
-    function organizerIndex(){
-        $orders = Order::with(['harga'])->get();
+        foreach ($events as $event) {
+            // Menggunakan pluck untuk mengambil nilai kolom 'id' dari hasil relasi
+            $eventOrders = $event->orders->pluck('id')->toArray();
+            $orders = array_merge($orders, $eventOrders);
+        }
+
         return view('organizer.list-order', ['orders' => $orders]);
     }
 
-    function organizerTerimaOrder($id){
+    function organizerTerimaOrder($id)
+    {
         $order = Order::find($id);
 
         if (!$order) {
@@ -193,3 +204,18 @@ public function adminTiket($orderid) {
 
         return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Diterima oleh Organizer');
     }
+    function organizerListOrderEvent($id)
+    {
+        try {
+            $orders = Order::join('events', 'orders.id_event', '=', 'events.id')
+                ->where('orders.id_organizer', Auth::user()->id)
+                ->where('events.id', $id)
+                ->get(['orders.*']);
+            return view('organizer.list-order-event', ['orders' => $orders]);
+        } catch (QueryException $e) {
+            // Tangani eksepsi di sini, bisa di-log atau memberikan respons yang sesuai
+            // Contoh respons:
+            abort(404, 'Data not found.');
+        }
+    }
+}

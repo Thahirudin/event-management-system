@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Kategori;
 use App\Event;
@@ -15,22 +15,22 @@ class EventController extends Controller
 {
     function index()
     {
-        $events = Event::with(['harga', 'kategori', 'user'])->get();
+        $events = Event::orderBy('waktu', 'desc')->get();
         return view('admin.list-event', compact('events'));
     }
     function adminEventAkanDatang()
     {
-        $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'Akan Datang')->get();
+        $events = Event::orderBy('waktu', 'desc')->where('status', 'Akan Datang')->get();
         return view('admin.event-akan-datang', compact('events'));
     }
     function adminEventSelesai()
     {
-        $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'Selesai')->get();
+        $events = Event::orderBy('waktu', 'desc')->where('status', 'Selesai')->get();
         return view('admin.event-selesai', compact('events'));
     }
     function adminEventBatal()
     {
-        $events = Event::with(['harga', 'kategori', 'user'])->where('status', 'Batal')->get();
+        $events = Event::orderBy('waktu', 'desc')->where('status', 'Batal')->get();
         return view('admin.event-akan-datang', compact('events'));
     }
     function adminCreate()
@@ -177,17 +177,17 @@ class EventController extends Controller
     // Function Halaman Organizer
     function organizerListEvent()
     {
-        $events = Event::where('id_organizer' , Auth::user()->id)->get();
+        $events = Event::orderBy('waktu', 'desc')->where('id_organizer', Auth::user()->id)->get();
         return view('organizer.list-event', compact('events'));
     }
     function organizerEventAkanDatang()
     {
-        $events = Event::where('id_organizer' , Auth::user()->id)->where('status', 'Akan Datang')->get();
+        $events = Event::orderBy('waktu', 'desc')->where('id_organizer', Auth::user()->id)->where('status', 'Akan Datang')->get();
         return view('organizer.event-akan-datang', compact('events'));
     }
     function organizerEventSelesai()
     {
-        $events = Event::where('id_organizer', Auth::user()->id)->where('status', 'Selesai')->get();
+        $events = Event::orderBy('waktu', 'desc')->where('id_organizer', Auth::user()->id)->where('status', 'Selesai')->get();
         return view('organizer.event-selesai', compact('events'));
     }
     function organizerCreate()
@@ -249,9 +249,13 @@ class EventController extends Controller
     }
     function organizerEdit($id)
     {
-        $event = Event::with(['harga', 'kategori', 'user'])->find($id);
-        $kategoris = Kategori::all();
-        return view('organizer.edit-event', compact('event', 'kategoris'));
+        try {
+            $event = Event::where('id_organizer', Auth::user()->id)->findOrFail($id);
+            $kategoris = Kategori::all();
+            return view('organizer.edit-event', compact('event', 'kategoris'));
+        } catch (ModelNotFoundException $e) {
+            abort(404, 'Data not found.');
+        }
     }
     public function organizerUpdate(Request $request, $id)
     {

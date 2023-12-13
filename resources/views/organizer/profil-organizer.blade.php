@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('organizer.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
@@ -13,7 +13,7 @@
                   <div class="iq-card-body profile-page">
                      <div class="profile-header">
                         <div class="cover-container text-center">
-                           <img src="{{ asset('uploads/organizers'). '/' .  Auth::user()->profil  }}" alt="user" class="rounded-circle img-fluid img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                           <img src="{{ asset('uploads/organizers'). '/' .  $organizer->profil  }}" alt="user" class="rounded-circle img-fluid img-thumbnail" style="max-width: 200px; max-height: 200px;">
                            <div class="profile-detail mt-3">
                               <h3>{{ $organizer->nama }}</h3>
                               {{ $organizer->jabatan }}

@@ -10,11 +10,6 @@
             display: block !important;
         }
 
-        .event img {
-            object-fit: cover;
-            max-height: 400px;
-        }
-
         /* Menghilangkan seluruh ikon pada tombol dropdown */
         .btn.dropdown-toggle::after {
             content: none;
@@ -22,7 +17,7 @@
     </style>
 @endsection
 @section('title')
-    List Event Akan Datang
+    List Event
 @endsection
 @section('event-akan-datang')
     active active-menu
@@ -31,7 +26,7 @@
     <div class="iq-card p-3">
         <div class="d-md-flex align-items-center justify-content-between  ">
             <div class="text-center text-md-left ">
-                <h4 class="card-title">List Event Akan Datang</h4>
+                <h4 class="card-title">List Event Akan datang</h4>
             </div>
             <div class="d-flex justify-content-center ">
                 <div class="mr-3">
@@ -62,7 +57,6 @@
                             <th>Nama Event</th>
                             <th>Waktu</th>
                             <th>Tiket Tersedia</th>
-                            <th>Thumbnail</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -81,9 +75,6 @@
                                         </div>
                                     @endforeach
                                 </td>
-
-                                <td><img src="{{ asset('uploads/events') . '/' . $event->thumbnail }}"
-                                        alt="{{ $event->nama_event }}" height="150"></td>
                                 <td>{{ $event->status }}</td>
                                 <td>
                                     <div class="dropdown">
@@ -118,8 +109,17 @@
             @foreach ($events as $event)
                 <div class="col mb-4">
                     <div class="card h-100 event">
-                        <img src="{{ asset('uploads/events') . '/' . $event->thumbnail }}" class="card-img-top"
-                            alt="...">
+                        <div class="event-img card-img-top "
+                            style="
+                                background: url('{{ asset('uploads/events') . '/' . $event->thumbnail }}');
+                                background-size: cover;
+                                background-position: center;
+                                height: 400px;
+                            ">
+                            <div class="mt-1"><span
+                                    class="overlay-text @if ($event->status == 'Akan Datang') bg-success @endif @if ($event->status == 'Selesai') bg-secondary @endif @if ($event->status == 'Batal') bg-primary @endif p-2">{{ $event->status }}</span>
+                            </div>
+                        </div>
                         <div class="card-body">
 
                             <div class="row mb-md-2">

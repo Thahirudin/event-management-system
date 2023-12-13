@@ -45,7 +45,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($orders as $order)
+                                @foreach ($orders as $orderId)
+                                @php
+                                    $order = \App\Order::find($orderId);
+                                @endphp
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $order->member->nama }}</td>

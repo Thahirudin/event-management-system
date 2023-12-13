@@ -73,7 +73,7 @@
                                 <td>{{ $organizer->tanggal_lahir }}</td>
                                 <td>{{ $organizer->email }}</td>
                                 <td>
-                                    <a href="{{ route('admin-profil-organizer', ['id' => $organizer->id]) }}"
+                                    <a href="{{ route('organizer-profil-organizer', ['id' => $organizer->id]) }}"
                                         class="btn btn-info">Lihat Profil</a>
                                 </td>
                             </tr>
@@ -96,7 +96,7 @@
                                     style="color: #FFCCCC">{{ $organizer->nama }}</span></div>
                             <div class="text-center mb-3"><span class="">{{ $organizer->email }}</span></div>
                             <div class="text-center">
-                                <a href="{{ route('admin-profil-organizer', ['id' => $organizer->id]) }}"
+                                <a href="{{ route('organizer-profil-organizer', ['id' => $organizer->id]) }}"
                                     class="btn btn-info">Lihat Profil</a>
                             </div>
                         </div>

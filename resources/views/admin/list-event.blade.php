@@ -57,7 +57,6 @@
                             <th>Nama Event</th>
                             <th>Waktu</th>
                             <th>Tiket Tersedia</th>
-                            <th>Thumbnail</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -76,9 +75,6 @@
                                         </div>
                                     @endforeach
                                 </td>
-
-                                <td><img src="{{ asset('uploads/events') . '/' . $event->thumbnail }}"
-                                        alt="{{ $event->nama_event }}" height="150"></td>
                                 <td>{{ $event->status }}</td>
                                 <td>
                                     <div class="dropdown">
