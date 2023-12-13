@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Kategori;
+use App\Event;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -26,8 +28,9 @@ class DashboardController extends Controller
     {
         return view('member.tentang-kami');
     }
-    function event()
+    function event($id)
     {
+        $event = Event::findOrFail($id);
         return view('member.detail-event');
     }
 }
