@@ -61,7 +61,7 @@
                             <label for="member">Id Member</label>
                             <input type="text" class="form-control" id="member" name="id_member">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-none">
                             <label for="event">Id Event</label>
                             <input type="text" class="form-control" id="event" name="id_event"
                                 value="{{ $event->id }}" readonly>
@@ -75,15 +75,21 @@
                             <label for="harga">Harga</label>
                             <select class="form-control" id="harga" name="id_harga">
                                 @foreach ($event->harga as $harga)
-                                    <option value="{{ $harga->id }}">{{ $harga->nama_harga }}:
-                                        {{ number_format($harga->harga, 0, ',', '.') }} Tiket Tersedia:
+                                    <option value="{{ $harga->id }}">Harga {{ $harga->nama_harga }}:
+                                        {{ number_format($harga->harga, 0, ',', '.') }} ,Tiket Tersedia:
                                         {{ $harga->jumlah_tiket }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
+                         <div class="form-group">
+                            <label for="event">Transfer Ke</label>
+                            <div>
+                                <span>{{ $event->user->nama_bank }} : {{ $event->user->nomor_rekening }}</span>
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <label for="bukti">Bukti</label>
+                            <label for="bukti">Bukti Pembayaran</label>
                             <input type="file" class="form-control" id="bukti" name="bukti" required="required"
                                 accept="image/*">
                         </div>

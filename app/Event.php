@@ -39,7 +39,4 @@ class Event extends Model
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
-    public function tiket(){
-        return $this->hasMany(tiket::class,'id_order');
-    }
 }

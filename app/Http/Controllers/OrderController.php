@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;    
+use Illuminate\Support\Facades\Auth;
 use App\Order;
 use App\Event;
 use App\Harga;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -25,7 +26,7 @@ class OrderController extends Controller
 
     public function admincreate($id)
     {
-        $event = Event::with(['harga', 'kategori', 'user'])->find($id);
+        $event = Event::find($id);
         return view('admin.tambah-order', compact('event'));
     }
 
@@ -171,9 +172,12 @@ class OrderController extends Controller
 
     public function adminTiket($orderid)
     {
-        $order = Order::find($orderid);
-
-        return view('admin.tiket', ['order' => $order]);
+        try {
+            $order = Order::where('status', 'Sukses')->findOrFail($orderid);
+            return view('admin.tiket', ['order' => $order]);
+        } catch (ModelNotFoundException $e) {
+            abort(404, 'Data not found.');
+        }
     }
     function organizerIndex()
     {
@@ -199,7 +203,7 @@ class OrderController extends Controller
 
         $order->update([
             'status' => 'sukses',
-            'detail' => 'Order Berhasil Diterima oleh Organizer',
+            'detail' => 'Order Berhasil Diterima',
         ]);
 
         return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Diterima oleh Organizer');

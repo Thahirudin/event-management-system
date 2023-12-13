@@ -6,11 +6,8 @@
                       <div class="main-circle"><i class="las la-bars"></i></div>
                   </div>
                   <div class="iq-navbar-logo d-flex justify-content-between">
-                      <a href="{{ route('home') }}" class="header-logo">
-                          <img src="../assets/images/logo.png" class="img-fluid rounded-normal" alt="">
-                          <div class="logo-title">
-                              <span class="text-primary text-uppercase">Gamevent</span>
-                          </div>
+                      <a href="{{ route('admin-dashboard') }}" class="header-logo">
+                          <img src="{{ asset('img/Logo 2.png') }}" class="img-fluid rounded-normal" alt="">
                       </a>
                   </div>
               </div>
