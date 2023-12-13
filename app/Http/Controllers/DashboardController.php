@@ -28,6 +28,6 @@ class DashboardController extends Controller
     }
     function event()
     {
-        return view('member.detai-levent');
+        return view('member.detail-event');
     }
 }
