@@ -66,5 +66,10 @@ class KeuanganController extends Controller
             // Tangani exception, log, atau kembalikan respons error
         }
     }
+    function adminEdit($id)
+    {
+        $keuangan = Keuangan::find($id);
+        return view('admin.edit-keuangan', compact('keuangan'));
+    }
 
 }

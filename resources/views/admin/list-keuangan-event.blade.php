@@ -34,6 +34,7 @@
                                     <th>Bukti</th>
                                     <th>Event_Id</th>
                                     <th>Orgaizer_Id</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,9 +49,13 @@
                                         <td>{{ $keuangan->bukti }}</td>
                                         <td>{{ $keuangan->event->nama_event }}</td>
                                         <td>{{ $keuangan->user->nama }}</td>
+                                        <td><div class="mr-3">
+                                                        <a href="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}"
+                                                            class="btn btn-info">Edit</a>
+                                                    </div></td>
                                     </tr>
                                 @endforeach
-
+                            
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -62,6 +67,7 @@
                                     <th>Bukti</th>
                                     <th>Event_Id</th>
                                     <th>Organizer_Id</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                         </table>
