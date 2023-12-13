@@ -23,7 +23,7 @@
                             class="ri-price-tag-line"></i><span>Order</span></a></li>
                 <li class=" @yield('kategori')"><a href="{{ route('admin-list-kategori') }}" class="iq-waves-effect"><i
                             class="ri-apps-line"></i><span>Kategori</span></a></li>
-                <li class=" @yield('list-event') @yield('event-akan-datang') @yield('event-selesai')">
+                <li class=" @yield('list-event') @yield('event-akan-datang') @yield('event-selesai') @yield('event')">
                     <a href="#event" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i
                             class="lab la-elementor iq-arrow-left"></i><span>Event</span><i
                             class="ri-arrow-right-s-line iq-arrow-right"></i></a>
@@ -37,7 +37,7 @@
 
                     </ul>
                 </li>
-                <li class="@yield('list-organizer') @yield('list-member')">
+                <li class="@yield('list-organizer') @yield('list-member') @yield('organizer')">
                     <a href="#pengguna" class="iq-waves-effect collapsed" data-toggle="collapse"
                         aria-expanded="false"><i class="las la-user-friends"></i><span>Pengguna</span><i
                             class="ri-arrow-right-s-line iq-arrow-right"></i></a>

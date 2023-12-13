@@ -151,7 +151,7 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
-                                                class="dropdown-item">Beli</a>
+                                                class="dropdown-item">Beli Tiket</a>
                                             <a href="{{ route('admin-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"

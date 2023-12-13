@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
@@ -11,17 +12,20 @@ use Illuminate\Support\Facades\Hash;
 
 class OrganizerController extends Controller
 {
-    function index(){
+    function index()
+    {
         $organizers = User::all();
         return view('admin.list-organizer', compact('organizers'));
     }
 
-    function adminCreate(){
+    function adminCreate()
+    {
 
         return view('admin.tambah-organizer');
     }
 
-    function adminEdit($id){
+    function adminEdit($id)
+    {
         $organizer = User::find($id);
         return view('admin.edit-organizer', compact('organizer'));
     }
@@ -29,13 +33,22 @@ class OrganizerController extends Controller
     function store(Request $request)
     {
         // Validate the incoming request data
-       $request->validate([
+        $request->validate([
             'nama' => 'required|string|max:255',
-            'jabatan' => 'required',
+            'jabatan' => 'required|string|max:255',
             'profil' => 'required',
+            'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
-            'email' => 'required|email|unique:tbl_organizers',
-            'password' => 'required|string',
+            'alamat' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:20',
+            'nama_bank' => 'required|string|',
+            'nomor_rekening' => 'required|string|max:20',
+            'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+            'instagram' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:tbl_organizers,email',
+            'password' => 'required|string|min:8',
         ]);
         DB::beginTransaction(); // Mulai transaksi database
         $hashedPassword = Hash::make($request->password);
@@ -47,23 +60,32 @@ class OrganizerController extends Controller
                 'nama' => $request->nama,
                 'jabatan' => $request->jabatan,
                 'profil' => $imageName,
+                'tempat_lahir' => $request->tempat_lahir,
                 'tanggal_lahir' => $request->tanggal_lahir,
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp,
+                'nama_bank' => $request->nama_bank,
+                'nomor_rekening' => $request->nomor_rekening,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'instagram' => $request->instagram,
+                'facebook' => $request->facebook,
+                'twitter' => $request->twitter,
                 'email' => $request->email,
                 'password' => $hashedPassword,
             ]);
 
             DB::commit(); // Commit transaksi database
 
-        // Redirect back or to a success page
-        return redirect(route('admin-list-organizer'))->with('sukses', 'Organizer Berhasil Ditambahkan');
+            // Redirect back or to a success page
+            return redirect(route('admin-list-organizer'))->with('sukses', 'Organizer Berhasil Ditambahkan');
 
-        } catch (QueryException $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }
 
         // Create a new Organizer instance and save it to the database
-        
+
     }
     function update(Request $request, $id)
     {
@@ -73,9 +95,19 @@ class OrganizerController extends Controller
             // Validate the incoming request data
             $request->validate([
                 'nama' => 'required|string|max:255',
-                'jabatan' => 'required',
+                'jabatan' => 'required|string|max:255',
+                'tempat_lahir' => 'required|string|max:255',
                 'tanggal_lahir' => 'required|date',
-                'email' => 'required|email|unique:tbl_organizers,email,' . $id,
+                'alamat' => 'required|string|max:255',
+                'no_hp' => 'required|string|max:20',
+                'nama_bank' => 'required|string|',
+                'nomor_rekening' => 'required|string|max:20',
+                'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+                'instagram' => 'nullable|string|max:255',
+                'facebook' => 'nullable|string|max:255',
+                'twitter' => 'nullable|string|max:255',
+                'email' => ['required', 'email', Rule::unique('tbl_organizers')->ignore($id)],
+                'password' => $request->filled('password') ? 'min:8' : '',
             ]);
 
             $organizer = User::find($id);
@@ -104,7 +136,16 @@ class OrganizerController extends Controller
                     'nama' => $request->nama,
                     'jabatan' => $request->jabatan,
                     'profil' => $imageName,
+                    'tempat_lahir' => $request->tempat_lahir,
                     'tanggal_lahir' => $request->tanggal_lahir,
+                    'alamat' => $request->alamat,
+                    'no_hp' => $request->no_hp,
+                    'nama_bank' => $request->nama_bank,
+                    'nomor_rekening' => $request->nomor_rekening,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'instagram' => $request->instagram,
+                    'facebook' => $request->facebook,
+                    'twitter' => $request->twitter,
                     'email' => $request->email,
                     'password' => $request->password ? Hash::make($request->password) : $organizer->password,
                 ]);
@@ -113,7 +154,16 @@ class OrganizerController extends Controller
                 $organizer->update([
                     'nama' => $request->nama,
                     'jabatan' => $request->jabatan,
+                    'tempat_lahir' => $request->tempat_lahir,
                     'tanggal_lahir' => $request->tanggal_lahir,
+                    'alamat' => $request->alamat,
+                    'no_hp' => $request->no_hp,
+                    'nama_bank' => $request->nama_bank,
+                    'nomor_rekening' => $request->nomor_rekening,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'instagram' => $request->instagram,
+                    'facebook' => $request->facebook,
+                    'twitter' => $request->twitter,
                     'email' => $request->email,
                     'password' => $request->password ? Hash::make($request->password) : $organizer->password,
                 ]);
@@ -127,24 +177,28 @@ class OrganizerController extends Controller
             return redirect()->back()->with('error', 'Gagal mengedit organizer. ' . $e->getMessage());
         }
     }
-    function destroy($id){
+    function destroy($id)
+    {
         $organizer = User::find($id);
         // Hapus data
         $organizer->delete();
         return redirect('/admin/list-organizer')->with('sukses', 'Organizer Berhasil Di Hapus');
     }
 
-    function profil($id){
+    function profil($id)
+    {
         $organizer = User::find($id);
         return view('admin.profil-organizer', compact('organizer'));
     }
 
-    function organizerProfil($id){
+    function organizerProfil($id)
+    {
         $organizer = User::find($id);
         return view('organizer.profil-organizer', compact('organizer'));
     }
 
-    function organizerIndex(){
+    function organizerIndex()
+    {
         $organizers = User::all();
         return view('organizer.list-organizer', compact('organizers'));
     }

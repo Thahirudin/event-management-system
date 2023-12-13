@@ -9,10 +9,18 @@ class Member extends Model
     protected $table = 'tbl_members';
     protected $fillable = [
         'nama',
-        'tanggal_lahir',
-        'email',
-        'password',
         'profil',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'alamat',
+        'no_hp',
+        'jenis_kelamin',
+        'instagram',
+        'facebook',
+        'twitter',
+        'email',
+        'email_verified_at',
+        'password',
     ];
 
     /**
