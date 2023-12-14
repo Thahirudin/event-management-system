@@ -224,7 +224,7 @@ class OrderController extends Controller
     }
     function memberIndex()
     {
-        $orders = Order::where('id_member', Auth::guard('member')->id)->get();
+        $orders = Order::where('id_member', Auth::guard('member')->user()->id)->get();
         return view('member.list-order', ['orders' => $orders]);
     }
 }

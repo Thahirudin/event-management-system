@@ -6,6 +6,8 @@ use App\http\Controllers\OrganizerController;
 use App\http\Controllers\MemberController;
 use App\http\Controllers\KeuanganController;
 use App\http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\MemberLoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -122,14 +124,17 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::get('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerEdit'])->name('organizer-edit-keuangan');
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
 });
-Route::middleware(['auth', 'member'])->group(function () {
+Route::middleware([ 'member'])->group(function () {
     // order
     Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
 });
-
+// Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
 // 
 Route::get('/', [DashboardController::class, 'memberHome'])->name('home');
 Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('tentang-kami');
 Route::get('/event/{id}', [DashboardController::class, 'event'])->name('event');
 Route::get('/member/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member-tiket');
+
+Route::get('/loginmember', [MemberLoginController::class, 'showLoginForm'])->name('loginmember');
+Route::post('/loginmember', [MemberLoginController::class, 'loginmember']);
 Auth::routes();
