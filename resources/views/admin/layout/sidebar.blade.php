@@ -48,7 +48,7 @@
                                     class="las la-user"></i>Member</a></li>
                     </ul>
                 </li>
-                <li class="@yield('list-pemasukan-event') @yield('list-keuangan') @yield('list-pengeluaran-event') @yield('keuangan')">
+                <li class="@yield('list-pemasukan') @yield('list-keuangan') @yield('list-pengeluaran') @yield('keuangan')">
                     <a href="#keuangan" class="iq-waves-effect collapsed" data-toggle="collapse"
                         aria-expanded="false"><i class="las la-file"></i><span>Keuangan</span><i
                             class="ri-arrow-right-s-line iq-arrow-right"></i></a>

@@ -62,6 +62,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/edit-member/{id}', [MemberController::class, 'adminEdit'])->name('admin-edit-member');
     Route::put('/admin/edit-member/{id}', [MemberController::class, 'update'])->name('admin-update-member');
     Route::get('/admin/hapus-member/{id}', [MemberController::class, 'destroy'])->name('admin-hapus-member');
+    Route::get('/admin/profil-member/{id}', [MemberController::class, 'profil'])->name('admin-profil-member');
     // keuangan
     Route::get('/admin/keuangan/list-keuangan', [KeuanganController::class, 'index'])->name('admin-list-keuangan');
     Route::get('/admin/keuangan/list-keuangan/{id}', [KeuanganController::class, 'listKeuanganEvent'])->name('admin-list-keuangan-event');
@@ -121,9 +122,14 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::get('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerEdit'])->name('organizer-edit-keuangan');
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
 });
+Route::middleware(['auth', 'member'])->group(function () {
+    // order
+    Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
+});
 
 // 
 Route::get('/', [DashboardController::class, 'memberHome'])->name('home');
 Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('tentang-kami');
 Route::get('/event/{id}', [DashboardController::class, 'event'])->name('event');
+Route::get('/member/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member-tiket');
 Auth::routes();

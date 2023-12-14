@@ -36,12 +36,12 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         // Tambahkan logika pengalihan berdasarkan jabatan
-        if ($user->jabatan == 'Admin') {
+        if ($request->jabatan == 'Organizer' && $user->jabatan == 'Admin') {
             return redirect()->route('admin-dashboard'); // Sesuaikan dengan rute dashboard admin Anda
-        } elseif ($user->jabatan == 'Organizer') {
+        } elseif ($request->jabatan == 'Organizer' && $user->jabatan == 'Organizer') {
             return redirect()->route('organizer-dashboard'); // Sesuaikan dengan rute dashboard organizer Anda
-        } else {
-            return redirect()->route('member-dashboard'); // Redirect default untuk jabatan lainnya
+        } elseif($request->jabatan == 'Member') {
+            return redirect()->route('member-list-order'); // Redirect default untuk jabatan lainnya
         }
     }
     public function __construct()
