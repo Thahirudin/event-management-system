@@ -31,6 +31,6 @@ class DashboardController extends Controller
     function event($id)
     {
         $event = Event::findOrFail($id);
-        return view('member.detail-event');
+        return view('member.event');
     }
 }
