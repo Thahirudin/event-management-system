@@ -45,14 +45,16 @@
                                         <td>{{ $keuangan->bukti }}</td>
                                         <td>{{ $keuangan->event->nama_event }}</td>
                                         <td>{{ $keuangan->user->nama }}</td>
-                                        <td><div class="mr-3">
+                                        <td><div class="d-flex align-items-center ">
+                                        <div class="mr-3">
                                                         <a href="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}"
                                                             class="btn btn-info">Edit</a>
                                                     </div>
                                                     <div class="mr-3">
                                                         <a href="{{ route('admin-hapus-keuangan', ['id' => $keuangan->id]) }}"
-                                                            class="btn btn-info">Hapus</a>
-                                                    </div></td>
+                                                            class="btn btn-primary">Hapus</a>
+                                                    </div>
+                                        </div></td>
                                     </tr>
                                 @endforeach
 

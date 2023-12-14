@@ -136,4 +136,10 @@ class KeuanganController extends Controller
             return redirect()->back()->with('error', 'Gagal mengedit organizer. ' . $e->getMessage());
         }
     }
+    function destroy($id){
+        $keuangan = Keuangan::find($id);
+        // Hapus data
+        $keuangan->delete();
+        return redirect('/admin/keuangan/list-keuangan')->with('sukses', 'Keuangan Berhasil Di Hapus');
+    }
 }
