@@ -21,8 +21,9 @@ class RedirectIfAuthenticated
             return redirect()->route('admin-dashboard');
         } else if (Auth::check() && Auth::user()->jabatan == 'Organizer') {
             return redirect()->route('organizer-dashboard');
+        } else if (Auth::guard('member')->check()) {
+            return redirect()->route('member-list-order');
         }
-
         return $next($request);
     }
 }

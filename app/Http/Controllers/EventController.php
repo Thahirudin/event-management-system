@@ -54,6 +54,7 @@ class EventController extends Controller
             'jumlah_tiket.*' => '|integer',
             'status' => 'required',
             'thumbnail' => 'required',
+            'slug' => 'required|unique:tbl_events,slug'
         ]);
         DB::beginTransaction(); // Mulai transaksi database
 
@@ -73,6 +74,7 @@ class EventController extends Controller
                 'kontak' => $request->kontak,
                 'status' => $request->status,
                 'thumbnail' => $imageName,
+                'slug' => $request->slug,
             ]);
 
             // Simpan data harga yang terkait dengan event
@@ -111,6 +113,7 @@ class EventController extends Controller
             'harga.*' => 'required',
             'jumlah_tiket.*' => '|integer',
             'status' => 'required',
+            'slug' => 'required|unique:tbl_events,slug,' . $id
         ]);
         DB::beginTransaction();
 
@@ -140,6 +143,7 @@ class EventController extends Controller
             $event->detail = $request->detail;
             $event->kontak = $request->kontak;
             $event->status = $request->status;
+            $event->slug = $request->slug;
             $event->save();
 
             // Delete existing prices and re-add the updated ones
@@ -334,5 +338,14 @@ class EventController extends Controller
         // Setelah itu, baru hapus acara
         $event->delete();
         return redirect('/organizer/list-event')->with('sukses', 'event Berhasil Di Hapus');
+    }
+
+    // Member
+    function detailEvent($slug)
+    {
+        $events = Event::latest('waktu')->take(5)->get();
+        $event = Event::where('slug', $slug)->first();
+        $kategoris = Kategori::all();
+        return view('member.detail-event', compact('event', 'events', 'kategoris'));
     }
 }

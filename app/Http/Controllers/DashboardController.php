@@ -28,9 +28,5 @@ class DashboardController extends Controller
     {
         return view('member.tentang-kami');
     }
-    function event($id)
-    {
-        $event = Event::findOrFail($id);
-        return view('member.event');
-    }
+    
 }

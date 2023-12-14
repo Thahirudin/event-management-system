@@ -16,6 +16,7 @@ class EventSeeder extends Seeder
             'id_organizer' => '1',
             'id_kategori' => '2',
             'nama_event' => 'Lazada Fest Concert',
+            'slug' => 'lazada-fest-concert',
             'waktu' => '2023-12-13 16:00:00',
             'lokasi' => 'Jakarta',
             'detail' => '<h2><strong>Highlight</strong></h2>
@@ -49,6 +50,7 @@ Jakarta Floor Plan&nbsp;</p>
             'id_organizer' => '2',
             'id_kategori' => '2',
             'nama_event' => 'Bogor Colorrun 2023',
+            'slug' => 'bogor-colorrun-2023',
             'waktu' => '2023-12-14 12:00:00',
             'lokasi' => 'Bogor',
             'detail' => '<h2><strong>Highlight</strong></h2>
@@ -93,6 +95,7 @@ Asuransi</p>
             'id_organizer' => '1',
             'id_kategori' => '4',
             'nama_event' => 'Bumil Time',
+            'slug' => 'bumil-time',
             'waktu' => '2023-12-14 09:00:00',
             'lokasi' => 'Mayapada Hospital Surabaya (MHSB), Jalan Mayjen Sungkono, Pakis, Surabaya, East Java, Indonesia',
             'detail' => '<h2><strong>Highlight</strong></h2>
@@ -138,6 +141,7 @@ Asuransi</p>
             'id_organizer' => '1',
             'id_kategori' => '3',
             'nama_event' => 'UMKM Day 2023 - Membangun Masa Depan UMKM Bersama',
+            'slug' => 'umkm-day-2023-membangun-masa-depan-umkm-bersama',
             'waktu' => '2023-12-07 12:00:00',
             'lokasi' => 'Graha Sanusi Hardjadinata, Jalan Dipati Ukur, Lebak Gede, Bandung City, West Java, Indonesia',
             'detail' => '<h2><strong>Highlight</strong></h2>
@@ -171,6 +175,7 @@ Lokasi : Gedung Graha Sanusi UNPAD, Jalan Dipati Ukur No, 35 Bandung</p>
             'id_organizer' => '1',
             'id_kategori' => '1',
             'nama_event' => 'Demi Indonesia',
+            'slug' => 'demi-indonesia',
             'waktu' => '2023-10-27 12:00:00',
             'lokasi' => 'THE HALL BALLROOM - SENAYAN CITY, Jalan Asia Afrika No, RT.1/RW.3, Gelora, Central Jakarta City, Jakarta, Indonesia',
             'detail' => '<h2><strong>Highlight</strong></h2>

@@ -6,8 +6,6 @@ use App\http\Controllers\OrganizerController;
 use App\http\Controllers\MemberController;
 use App\http\Controllers\KeuanganController;
 use App\http\Controllers\DashboardController;
-use App\Http\Controllers\Auth\MemberLoginController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +72,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/keuangan/tambah-keuangan/{id}', [KeuanganController::class, 'store'])->name('admin-store-keuangan');
     Route::get('/admin/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
     Route::put('/admin/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'update'])->name('admin-update-keuangan');
+    Route::get('/admin/hapus-keuangan/{id}', [KeuanganController::class, 'destroy'])->name('admin-hapus-keuangan');
 });
 
 Route::middleware(['auth', 'organizer'])->group(function () {
@@ -124,7 +123,7 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::get('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerEdit'])->name('organizer-edit-keuangan');
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
 });
-Route::middleware([ 'member'])->group(function () {
+Route::middleware(['auth', 'member'])->group(function () {
     // order
     Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
 });
@@ -132,9 +131,7 @@ Route::middleware([ 'member'])->group(function () {
 // 
 Route::get('/', [DashboardController::class, 'memberHome'])->name('home');
 Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('tentang-kami');
-Route::get('/event/{id}', [DashboardController::class, 'event'])->name('event');
+Route::get('/event/{id}', [EventController::class, 'detailEvent'])->name('detail-event');
 Route::get('/member/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member-tiket');
-
-Route::get('/loginmember', [MemberLoginController::class, 'showLoginForm'])->name('loginmember');
-Route::post('/loginmember', [MemberLoginController::class, 'loginmember']);
+Route::get('/profil-organizer/{id}', [OrganizerController::class, 'memberProfil'])->name('member-profil-organizer');
 Auth::routes();
