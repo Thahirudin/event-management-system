@@ -1785,35 +1785,37 @@ $(document).ready(function() {
 // top chart 1
  if(jQuery('#view-chart-01').length){
        var options = {
-          series: [44, 10],
-          chart: {
-        width: 250,
-          type: 'donut',
-        },
-        colors:['#e20e02', '#f68a04', ],
-        labels: ["Event Terbaru", "Event Selesai"],
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-            show: false,
-            width: 0
-        },
-        legend: {
-            show: false,
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-        };
+           series: eventAkanDatang,
+           chart: {
+               width: 250,
+               type: "donut",
+           },
+           colors: ["#e20e02", "#f68a04"],
+           labels: ["Event Akan Datang", "Event Selesai"],
+           dataLabels: {
+               enabled: false,
+           },
+           stroke: {
+               show: false,
+               width: 0,
+           },
+           legend: {
+               show: false,
+           },
+           responsive: [
+               {
+                   breakpoint: 480,
+                   options: {
+                       chart: {
+                           width: 200,
+                       },
+                       legend: {
+                           position: "bottom",
+                       },
+                   },
+               },
+           ],
+       };
 
         var chart = new ApexCharts(document.querySelector("#view-chart-01"), options);
         chart.render();

@@ -72,7 +72,7 @@
    <!-- apex Custom JavaScript -->
    <script src="{{ asset('js') }}/apexcharts.js"></script>
    <!-- Chart Custom JavaScript -->
-   <script src="{{ asset('js') }}/chart-custom.js"></script>
+
    <!-- Custom JavaScript -->
    <script src="{{ asset('js') }}/custom.js"></script>
  @yield('addJs')
