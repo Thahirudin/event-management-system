@@ -35,6 +35,7 @@
                                     <th>Event_Id</th>
                                     <th>Orgaizer_Id</th>
                                     <th>Aksi</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>

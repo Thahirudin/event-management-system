@@ -4,7 +4,7 @@
 @endsection
 @section('title')
     {{-- Masukkan Title --}}
-    Tambah Keuangan
+    Edit Keuangan
 @endsection
 @section('keuangan')
     active active-menu
@@ -14,7 +14,7 @@
     <div class="iq-card">
         <div class="iq-card-header d-flex justify-content-between">
             <div class="iq-header-title">
-                <h4 class="card-title">Tambah Keuangan</h4>
+                <h4 class="card-title">Edit Keuangan</h4>
             </div>
         </div>
         <div class="iq-card-body">
