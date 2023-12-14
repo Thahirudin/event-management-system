@@ -17,7 +17,8 @@ class CreateTblEventsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_organizer');
             $table->unsignedBigInteger('id_kategori');
-            $table->string('nama_event');
+            $table->text('nama_event');
+            $table->text('slug');
             $table->dateTime('waktu');
             $table->string('lokasi');
             $table->text('detail');

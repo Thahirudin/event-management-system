@@ -202,4 +202,9 @@ class OrganizerController extends Controller
         $organizers = User::all();
         return view('organizer.list-organizer', compact('organizers'));
     }
+    function memberProfil($id)
+    {
+        $organizer = User::find($id);
+        return view('member.profil-organizer', compact('organizer'));
+    }
 }

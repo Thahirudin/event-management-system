@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('member.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
@@ -19,19 +19,25 @@
                         <h3>{{ $organizer->nama }}</h3>
                         {{ $organizer->jabatan }}
                     </div>
-                     <div class="iq-social d-inline-block align-items-center">
-                              <ul class="list-inline d-flex p-0 mb-0 align-items-center">
-                                 <li>
-                                    <a href="{{ $organizer->facebook }}" class="avatar-40 rounded-circle bg-primary mr-2 facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                 </li>
-                                 <li>
-                                    <a href="{{ $organizer->twitter }}" class="avatar-40 rounded-circle bg-primary mr-2 twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                 </li>
-                                 <li>
-                                    <a href="{!! $organizer->instagram !!}" class="avatar-40 rounded-circle bg-primary mr-2 instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                 </li>
-                              </ul>
-                           </div>
+                    <div class="iq-social d-inline-block align-items-center">
+                        <ul class="list-inline d-flex p-0 mb-0 align-items-center">
+                            <li>
+                                <a href="{{ $organizer->facebook }}"
+                                    class="avatar-40 rounded-circle bg-primary mr-2 facebook"><i class="fa fa-facebook"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ $organizer->twitter }}"
+                                    class="avatar-40 rounded-circle bg-primary mr-2 twitter"><i class="fa fa-twitter"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ $organizer->instagram }}"
+                                    class="avatar-40 rounded-circle bg-primary mr-2 instagram"><i class="fa fa-instagram"
+                                        aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,9 +121,6 @@
                     </div>
                 </li>
             </ul>
-            <div>
-               <a href="{{ route('admin-edit-organizer' , ['id' => $organizer->id]) }}" class="btn btn-primary ">Edit Profil</a>
-            </div>
         </div>
     </div>
 @endsection

@@ -5,65 +5,144 @@
 @section('title')
     Tambah Member
 @endsection
-@section('kategori')
+@section('list-member')
     active active-menu
 @endsection
 @section('content')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Tambah Member</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin-dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Tambah Member</li>
-                    </ol>
-                </div>
+    <div class="iq-card">
+        <div class="iq-card-header d-flex justify-content-between text-white">
+            <div class="iq-header-title">
+                <h4 class="card-title">Tambah Member</h4>
             </div>
+        </div>
+        <div class="iq-card-body">
+            <form action="{{ route('admin-store-member') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="nama">Nama <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="nama" name="nama" required value="{{ old('nama') }}">
+                </div>
+                @error('nama')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="profil">Profil <span style="color: red;">*</span></label>
+                    <input type="file" class="form-control" id="profil" name="profil" required="required"
+                        accept="image/*" value="{{ old('profil ') }}">
+                </div>
+                @error('profil')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="alamat">Alamat <span style="color: red;">*</span></label>
+                    <textarea type="text" class="form-control" id="alamat" name="alamat" required="required" rows="7" >{{ old('alamat') }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="jenis_kelamin">Jenis Kelamin <span style="color: red;">*</span></label>
+                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required="required">
+                        <option value="Laki-Laki" {{ old('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                        <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                    </select>
+                </div>
+                @error('jenis_kelamin')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="no_hp">Nomor HP <span style="color: red;">*</span></label>
+                    <input type="string" class="form-control" id="no_hp" name="no_hp" required="required" value="{{ old('no_hp') }}">
+                </div>
+                @error('nomor_hp')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="tempat_lahir">Tempat Lahir <span style="color: red;">*</span></label>
+                            <input type="string" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                required="required" value="{{ old('tempat_lahir') }}">
+                        </div>
+                        @error('tempat_lahir')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal lahir <span style="color: red;">*</span></label>
+                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                                required="required" value="{{ old('tanggal_lahir') }}">
+                        </div>
+                        @error('tanggal_lahir')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="email">Email <span style="color: red;">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                required="required" value="{{ old('email') }}">
+                        </div>
+                        @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="facebook">Link Facebook</label>
+                            <input type="string" class="form-control" id="facebook" name="facebook" value="{{ old('facebook') }}">
+                        </div>
+                        @error('facebook')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="instagram">Link instagram</label>
+                            <input type="string" class="form-control" id="instagram" name="instagram" value="{{ old('instagram') }}">
+                        </div>
+                        @error('instagram')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="twitter">Link Twitter atau X</label>
+                            <input type="string" class="form-control" id="twitter" name="twitter" value="{{ old('twitter') }}">
+                        </div>
+                        @error('twitter')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password <span style="color: red;">*</span></label>
+                    <input type="password" class="form-control" id="password" name="password" required="required" value="{{ old('password') }}">
+                </div>
+                @error('password')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
-    <div class="content">
-        <div class="container-fluid">
+@endsection
 
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ route('admin-store-member') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+@section('addJs')
+    {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "gagal",
+                text: "{{ session('error') }}",
+                icon: "warning"
+            });
 
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" required="required">
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
-                                required="required">
-                        </div>
-                        <div class="form-group">
-                            <label for="profil">Profil</label>
-                            <input type="file" class="form-control" id="profil" name="profil" required="required"
-                                accept="image/*">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" required="required">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" required="required">
-                        </div>
-                        <div class="text-right">
-                            <a href="{{ route('admin-list-member') }}" class="btn btn-outline-secondary mr-2"
-                                role="button">Batal</a>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endsection
-    @section('addJs')
-        {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
-    @endsection
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('error');
+            @endphp
+        </script>
+    @endif
+@endsection

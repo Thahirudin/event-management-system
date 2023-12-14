@@ -222,4 +222,9 @@ class OrderController extends Controller
             abort(404, 'Data not found.');
         }
     }
+    function memberIndex()
+    {
+        $orders = Order::where('id_member', Auth::guard('member')->user()->id)->get();
+        return view('member.list-order', ['orders' => $orders]);
+    }
 }

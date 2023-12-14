@@ -15,7 +15,8 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form action="{{ route('admin-update-event', ['id' => $event->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin-update-event', ['id' => $event->id]) }}" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -40,8 +41,13 @@
                 @enderror
                 <div class="form-group">
                     <label for="nama_event">Nama Event</label>
-                    <input type="text" class="form-control" id="nama_event" name="nama_event" autocomplete="off" required
+                    <input type="text" class="form-control" id="nama_event" name="nama_event" oninput="generateSlug()" autocomplete="off" required
                         value="{{ $event->nama_event }}">
+                </div>
+                <div class="form-group">
+                    <label for="slug">slug</label>
+                    <input type="text" class="form-control" id="slug" name="slug" autocomplete="off" required
+                        value="{{ $event->slug }}">
                 </div>
                 @error('nama_event')
                     <div class="text-danger">{{ $message }}</div>
@@ -145,8 +151,8 @@
 @section('addJs')
     <script>
         function generateSlug() {
-            var kategoriInput = document.getElementById('kategori').value;
-            var slugInput = kategoriInput.toLowerCase().replace(/\s+/g, '-');
+            var eventInput = document.getElementById('nama_event').value;
+            var slugInput = eventInput.toLowerCase().replace(/\s+/g, '-');
             document.getElementById('slug').value = slugInput;
         }
     </script>

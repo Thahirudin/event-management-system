@@ -3,9 +3,9 @@
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-    Profil Organizer
+    Profil Member
 @endsection
-@section('kategori')
+@section('list-member')
     active active-menu
 @endsection
 @section('content')
@@ -13,22 +13,22 @@
         <div class="iq-card-body profile-page">
             <div class="profile-header">
                 <div class="cover-container text-center">
-                    <img src="{{ asset('uploads/organizers') . '/' . $organizer->profil }}" alt="user"
+                    <img src="{{ asset('uploads/members') . '/' . $member->profil }}" alt="user"
                         class="rounded-circle img-fluid img-thumbnail" style="max-width: 200px; max-height: 200px;">
                     <div class="profile-detail mt-3">
-                        <h3>{{ $organizer->nama }}</h3>
-                        {{ $organizer->jabatan }}
+                        <h3>{{ $member->nama }}</h3>
+                        Member
                     </div>
                      <div class="iq-social d-inline-block align-items-center">
                               <ul class="list-inline d-flex p-0 mb-0 align-items-center">
                                  <li>
-                                    <a href="{{ $organizer->facebook }}" class="avatar-40 rounded-circle bg-primary mr-2 facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="{{ $member->facebook }}" class="avatar-40 rounded-circle bg-primary mr-2 facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                  </li>
                                  <li>
-                                    <a href="{{ $organizer->twitter }}" class="avatar-40 rounded-circle bg-primary mr-2 twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="{{ $member->twitter }}" class="avatar-40 rounded-circle bg-primary mr-2 twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                  </li>
                                  <li>
-                                    <a href="{!! $organizer->instagram !!}" class="avatar-40 rounded-circle bg-primary mr-2 instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="{{  $member->instagram  }}" class="avatar-40 rounded-circle bg-primary mr-2 instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                                  </li>
                               </ul>
                            </div>
@@ -50,7 +50,7 @@
                             <h6>Nama</h6>
                         </div>
                         <div class="col-sm-6">
-                            {{ $organizer->nama }}
+                            {{ $member->nama }}
                         </div>
                     </div>
                 </li>
@@ -60,7 +60,7 @@
                             <h6>Tempat/Tanggal Lahir</h6>
                         </div>
                         <div class="col-sm-6">
-                            {{ $organizer->tempat_lahir }}/{{ $organizer->tanggal_lahir }}
+                            {{ $member->tempat_lahir }}/{{ $member->tanggal_lahir }}
                         </div>
                     </div>
                 </li>
@@ -70,7 +70,7 @@
                             <h6>Jenis Kelamin</h6>
                         </div>
                         <div class="col-sm-6">
-                            {{ $organizer->jenis_kelamin }}
+                            {{ $member->jenis_kelamin }}
                         </div>
                     </div>
                 </li>
@@ -80,7 +80,7 @@
                             <h6>Email</h6>
                         </div>
                         <div class="col-sm-6">
-                            {{ $organizer->email }}
+                            {{ $member->email }}
                         </div>
                     </div>
                 </li>
@@ -90,7 +90,7 @@
                             <h6>Alamat</h6>
                         </div>
                         <div class="col-sm-6">
-                            {{ $organizer->alamat }}
+                            {{ $member->alamat }}
                         </div>
                     </div>
                 </li>
@@ -100,23 +100,13 @@
                             <h6>No hp</h6>
                         </div>
                         <div class="col-sm-6">
-                            {{ $organizer->no_hp }}
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="row align-items-center justify-content-between mb-3">
-                        <div class="col-sm-6">
-                            <h6>Rekening</h6>
-                        </div>
-                        <div class="col-sm-6">
-                            {{ $organizer->nama_bank }} : {{ $organizer->nomor_rekening }}
+                            {{ $member->no_hp }}
                         </div>
                     </div>
                 </li>
             </ul>
             <div>
-               <a href="{{ route('admin-edit-organizer' , ['id' => $organizer->id]) }}" class="btn btn-primary ">Edit Profil</a>
+               <a href="{{ route('admin-edit-member' , ['id' => $member->id]) }}" class="btn btn-primary ">Edit Profil</a>
             </div>
         </div>
     </div>

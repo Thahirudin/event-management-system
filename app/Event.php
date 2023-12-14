@@ -11,6 +11,7 @@ class Event extends Model
         'id_kategori',
         'id_organizer',
         'nama_event',
+        'slug',
         'waktu',
         'lokasi',
         'detail',

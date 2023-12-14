@@ -17,7 +17,7 @@
     </style>
 @endsection
 @section('title')
-    List Event
+    List Event Akan Datang
 @endsection
 @section('event-akan-datang')
     active active-menu
@@ -26,7 +26,7 @@
     <div class="iq-card p-3">
         <div class="d-md-flex align-items-center justify-content-between  ">
             <div class="text-center text-md-left ">
-                <h4 class="card-title">List Event Akan datang</h4>
+                <h4 class="card-title">List Event Akan Datang</h4>
             </div>
             <div class="d-flex justify-content-center ">
                 <div class="mr-3">
@@ -92,6 +92,8 @@
                                                 class="dropdown-item">Lihat Order</a>
                                             <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
+                                            <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
+                                                class="dropdown-item">Lihat Detail Event</a>
                                             <a onclick="confirmDelete(this)"
                                                 data-url="{{ route('admin-hapus-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Hapus</a>
@@ -116,7 +118,7 @@
                                 background-position: center;
                                 height: 400px;
                             ">
-                            <div class="mt-1"><span
+                            <div class="mt-3 ml-3"><span
                                     class="overlay-text @if ($event->status == 'Akan Datang') bg-success @endif @if ($event->status == 'Selesai') bg-secondary @endif @if ($event->status == 'Batal') bg-primary @endif p-2">{{ $event->status }}</span>
                             </div>
                         </div>
@@ -151,13 +153,15 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
-                                                class="dropdown-item">Beli</a>
+                                                class="dropdown-item">Beli Tiket</a>
                                             <a href="{{ route('admin-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Order</a>
                                             <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
+                                            <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
+                                                class="dropdown-item">Lihat Detail Event</a>
                                             <a onclick="confirmDelete(this)"
                                                 data-url="{{ route('admin-hapus-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Hapus</a>

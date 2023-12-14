@@ -1,27 +1,9 @@
 @extends('admin.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
-    <style>
-        .popup-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-
-        #popup-img {
-            max-width: 80%;
-            max-height: 80%;
-        }
-    </style>
 @endsection
 @section('title')
-    List Pemasukan
+    List Pemasukan Keuangan
 @endsection
 @section('list-pemasukan')
     active active-menu
@@ -32,7 +14,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">List Pemasukan</h4>
+                        <h4 class="card-title">List Pemasukan Keuangan</h4>
                     </div>
                 </div>
                 <div class="iq-card-body">
@@ -47,7 +29,8 @@
                                     <th>Total</th>
                                     <th>Bukti</th>
                                     <th>Event_Id</th>
-                                    <th>Orgaizer_Id</th>
+                                    <th>Organizer_Id</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,12 +42,21 @@
                                         <td>{{ $keuangan->catatan }}</td>
                                         <td>{{ $keuangan->jenis }}</td>
                                         <td class="text-right">{{ number_format($keuangan->total, 0, ',', '.') }}</td>
-                                        <td>
-                                            <button class="btn btn-primary " onclick="openPopup('{{ asset('uploads/keuangans') . '/' . $keuangan->bukti }}')">
-                                                Klik  Disini</button>
-                                        </td>
+                                        <td><a href="{{ asset('uploads/keuangans') . '/'. $keuangan->bukti }}" class="btn btn-primary"><i class="fa fa-file"></i></a></td>
                                         <td>{{ $keuangan->event->nama_event }}</td>
                                         <td>{{ $keuangan->user->nama }}</td>
+                                        <td>
+                                            <div class="d-flex align-items-center ">
+                                                <div class="mr-3">
+                                                    <a href="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}"
+                                                        class="btn btn-info">Edit</a>
+                                                </div>
+                                                <div class="mr-3">
+                                                    <a href="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}"
+                                                        class="btn btn-primary">Hapus</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
 
@@ -87,9 +79,6 @@
             </div>
         </div>
     </div>
-    <div id="popup-container" class="popup-container" onclick="closePopup()">
-        <img src="" alt="Popup Image" id="popup-img">
-    </div>
 @endsection
 @section('addJs')
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
@@ -99,15 +88,19 @@
             $('#datatable').DataTable();
         });
     </script>
-    <script>
-        function openPopup(imageSrc) {
-            document.getElementById('popup-img').src = imageSrc;
-            document.getElementById('popup-container').style.display = 'flex';
-        }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('sukses'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
 
-        function closePopup() {
-            document.getElementById('popup-container').style.display = 'none';
-        }
-    </script>
-    
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
 @endsection

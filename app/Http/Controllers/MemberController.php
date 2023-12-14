@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Member;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
@@ -35,9 +36,16 @@ class MemberController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'profil' => 'required',
+            'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
-            'email' => 'required|email|unique:tbl_members',
-            'password' => 'required',
+            'alamat' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:20',
+            'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+            'instagram' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:tbl_members,email',
+            'password' => 'required|string|min:8',
         ]);
         DB::beginTransaction(); // Mulai transaksi database
         $hashedPassword = Hash::make($request->password);
@@ -48,7 +56,14 @@ class MemberController extends Controller
             $member = Member::create([
                 'nama' => $request->nama,
                 'profil' => $imageName,
+                'tempat_lahir' => $request->tempat_lahir,
                 'tanggal_lahir' => $request->tanggal_lahir,
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'instagram' => $request->instagram,
+                'facebook' => $request->facebook,
+                'twitter' => $request->twitter,
                 'email' => $request->email,
                 'password' => $hashedPassword,
             ]);
@@ -74,8 +89,16 @@ class MemberController extends Controller
             // Validate the incoming request data
             $request->validate([
                 'nama' => 'required|string|max:255',
+                'tempat_lahir' => 'required|string|max:255',
                 'tanggal_lahir' => 'required|date',
-                'email' => 'required|email|unique:tbl_members,email,' . $id,
+                'alamat' => 'required|string|max:255',
+                'no_hp' => 'required|string|max:20',
+                'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+                'instagram' => 'nullable|string|max:255',
+                'facebook' => 'nullable|string|max:255',
+                'twitter' => 'nullable|string|max:255',
+                'email' => ['required', 'email', Rule::unique('tbl_members')->ignore($id)],
+                'password' => $request->filled('password') ? 'min:8' : '',
             ]);
 
             $member = Member::find($id);
@@ -103,7 +126,14 @@ class MemberController extends Controller
                 $member->update([
                     'nama' => $request->nama,
                     'profil' => $imageName,
+                    'tempat_lahir' => $request->tempat_lahir,
                     'tanggal_lahir' => $request->tanggal_lahir,
+                    'alamat' => $request->alamat,
+                    'no_hp' => $request->no_hp,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'instagram' => $request->instagram,
+                    'facebook' => $request->facebook,
+                    'twitter' => $request->twitter,
                     'email' => $request->email,
                     'password' => $request->password ? Hash::make($request->password) : $member->password,
                 ]);
@@ -111,7 +141,14 @@ class MemberController extends Controller
                 // Use the existing profile image
                 $member->update([
                     'nama' => $request->nama,
+                    'tempat_lahir' => $request->tempat_lahir,
                     'tanggal_lahir' => $request->tanggal_lahir,
+                    'alamat' => $request->alamat,
+                    'no_hp' => $request->no_hp,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'instagram' => $request->instagram,
+                    'facebook' => $request->facebook,
+                    'twitter' => $request->twitter,
                     'email' => $request->email,
                     'password' => $request->password ? Hash::make($request->password) : $member->password,
                 ]);
@@ -125,11 +162,17 @@ class MemberController extends Controller
             return redirect()->back()->with('error', 'Gagal mengedit member. ' . $e->getMessage());
         }
     }
-    function destroy($id){
+    function destroy($id)
+    {
         $member = Member::find($id);
         // Hapus data
         $member->delete();
         return redirect('/admin/list-member')->with('sukses', 'Member Berhasil Di Hapus');
+    }
+    function profil($id)
+    {
+        $member = member::find($id);
+        return view('admin.profil-member', compact('member'));
     }
 
     function organizerIndex()
@@ -139,4 +182,5 @@ class MemberController extends Controller
             'members' => $members
         ]);
     }
+    
 }
