@@ -10,6 +10,7 @@ use App\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
 
 class EventController extends Controller
 {
@@ -89,8 +90,17 @@ class EventController extends Controller
             DB::commit(); // Commit transaksi database
 
             return redirect(route('admin-list-event'))->withInput()->with('sukses', 'Data berhasil disimpan');
-        } catch (\Exception $e) {
+        } catch (ValidationException $e) {
+            // Tangani pengecualian validasi
             DB::rollBack();
+            return redirect()
+                ->back()
+                ->withErrors($e->errors())
+                ->withInput(); // Untuk mempertahankan nilai lama (old value)
+        } catch (\Exception $e) {
+            // Tangani pengecualian di sini
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
     function adminEdit($id)

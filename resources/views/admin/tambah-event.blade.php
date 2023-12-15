@@ -88,7 +88,7 @@
                 </div>
                 <div class="form-group">
                     <label for="kontak">kontak</label>
-                    <input type="text" class="form-control" id="kontak" name="kontak" autocomplete="off" required>
+                    <input type="text" class="form-control" id="kontak" name="kontak" autocomplete="off" required value="{{ old('kontak') }}">
                 </div>
                 @error('kontak')
                     <div class="text-danger">{{ $message }}</div>

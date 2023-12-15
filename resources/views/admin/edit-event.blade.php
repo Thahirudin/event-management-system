@@ -44,12 +44,15 @@
                     <input type="text" class="form-control" id="nama_event" name="nama_event" oninput="generateSlug()" autocomplete="off" required
                         value="{{ $event->nama_event }}">
                 </div>
+                @error('nama_event')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="slug">slug</label>
                     <input type="text" class="form-control" id="slug" name="slug" autocomplete="off" required
                         value="{{ $event->slug }}">
                 </div>
-                @error('nama_event')
+                @error('slug')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
