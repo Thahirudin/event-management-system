@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('member.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin menambahkan CSS --}}
 @endsection

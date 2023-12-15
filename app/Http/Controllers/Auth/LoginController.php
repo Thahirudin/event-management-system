@@ -39,7 +39,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if ($request->jabatan == 'Member' && Auth::guard('member')->attempt($credentials)) {
-            return redirect(route('member-list-order'));
+            return redirect()->route('member-list-order');
         }
         elseif ($request->jabatan == 'Organizer' && Auth::attempt($credentials)) {
             if(Auth::user()->jabatan == 'Admin'){

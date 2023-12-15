@@ -123,7 +123,7 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::get('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerEdit'])->name('organizer-edit-keuangan');
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
 });
-Route::middleware(['auth', 'member'])->group(function () {
+Route::middleware([ 'member'])->group(function () {
     // order
     Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
 });

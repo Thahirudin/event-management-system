@@ -32,14 +32,30 @@
                     @if (Auth::user())
                         @if (Auth::user()->jabatan == 'Admin')
                             <li class="nav-item pt-3">
-                                <a href="{{ route('admin-dashboard') }}" class="btn btn-primary text-white px-3 py-1">Dashboard</a>
+                                <a href="{{ route('admin-dashboard') }}"
+                                    class="btn btn-primary text-white px-3 py-1">Dashboard</a>
                             </li>
-                        @endif
-                        @if (Auth::user()->jabatan == 'Organizer')
+                        @elseif (Auth::user()->jabatan == 'Organizer')
                             <li class="nav-item pt-3">
-                                <a href="{{ route('organizer-dashboard') }}" class="btn btn-primary text-white px-3 py-1">Dashboard</a>
+                                <a href="{{ route('organizer-dashboard') }}"
+                                    class="btn btn-primary text-white px-3 py-1">Dashboard</a>
                             </li>
                         @endif
+                    @elseif (auth()->guard('member')->check())
+                        <li class="nav-item pt-3">
+                            <div class="d-inline-block w-100 text-center p-3">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+
+                                <a class="bg-primary iq-sign-btn" href="#"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    role="button">
+                                    Keluar <i class="ri-login-box-line ml-2"></i>
+                                </a>
+                            </div>
+                        </li>
                     @else
                         <li class="nav-item pt-3">
                             <a href="{{ route('login') }}" class="btn btn-primary text-white px-3 py-1">Login</a>
