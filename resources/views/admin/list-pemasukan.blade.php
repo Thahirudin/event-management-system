@@ -71,6 +71,7 @@
                                     <th>Bukti</th>
                                     <th>Event_Id</th>
                                     <th>Organizer_Id</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                         </table>

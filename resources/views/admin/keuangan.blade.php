@@ -14,7 +14,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Keuangan</h4>
+                        <h4 class="card-title">List Keuangan</h4>
                     </div>
                 </div>
                 <div class="iq-card-body">
@@ -29,7 +29,7 @@
                                     <th>Total</th>
                                     <th>Bukti</th>
                                     <th>Event_Id</th>
-                                    <th>Orgaizer_Id</th>
+                                    <th>Organizer_Id</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -42,19 +42,21 @@
                                         <td>{{ $keuangan->catatan }}</td>
                                         <td>{{ $keuangan->jenis }}</td>
                                         <td class="text-right">{{ number_format($keuangan->total, 0, ',', '.') }}</td>
-                                        <td>{{ $keuangan->bukti }}</td>
+                                        <td><a href="{{ asset('uploads/keuangans') . '/'. $keuangan->bukti }}" class="btn btn-primary"><i class="fa fa-file"></i></a></td>
                                         <td>{{ $keuangan->event->nama_event }}</td>
                                         <td>{{ $keuangan->user->nama }}</td>
-                                        <td><div class="d-flex align-items-center ">
-                                        <div class="mr-3">
-                                                        <a href="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                    </div>
-                                                    <div class="mr-3">
-                                                        <a href="{{ route('admin-hapus-keuangan', ['id' => $keuangan->id]) }}"
-                                                            class="btn btn-primary">Hapus</a>
-                                                    </div>
-                                        </div></td>
+                                        <td>
+                                            <div class="d-flex align-items-center ">
+                                                <div class="mr-3">
+                                                    <a href="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}"
+                                                        class="btn btn-info">Edit</a>
+                                                </div>
+                                                <div class="mr-3">
+                                                    <a href="{{ route('admin-update-keuangan', ['id' => $keuangan->id]) }}"
+                                                        class="btn btn-primary">Hapus</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
 

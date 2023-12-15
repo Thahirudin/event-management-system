@@ -183,7 +183,7 @@
             <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                 <div class="iq-card-header d-flex align-items-center justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Categories</h4>
+                        <h4 class="card-title">Kategori</h4>
                     </div>
                 </div>
                 <div class="iq-card-body p-0">
@@ -392,8 +392,42 @@
 @section('addJs')
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
     <script>
-        
         var eventAkanDatang = @json($eventss);
+        if (jQuery('#view-chart-01').length) {
+            var options = {
+                series: eventAkanDatang,
+                chart: {
+                    width: 300,
+                    type: "donut",
+                },
+                colors: ["#e20e02", "#f68a04"],
+                labels: ["Event Akan Datang", "Event Selesai"],
+                dataLabels: {
+                    enabled: false,
+                },
+                stroke: {
+                    show: false,
+                    width: 0,
+                },
+                legend: {
+                    show: false,
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200,
+                        },
+                        legend: {
+                            position: "bottom",
+                        },
+                    },
+                }, ],
+            };
+
+            var chart = new ApexCharts(document.querySelector("#view-chart-01"), options);
+            chart.render();
+
+        }
     </script>
-       <script src="{{ asset('js') }}/chart-custom.js"></script>
 @endsection

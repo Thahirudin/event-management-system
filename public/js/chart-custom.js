@@ -1782,45 +1782,45 @@ $(document).ready(function() {
 });
 
 
-// top chart 1
- if(jQuery('#view-chart-01').length){
-       var options = {
-           series: eventAkanDatang,
-           chart: {
-               width: 250,
-               type: "donut",
-           },
-           colors: ["#e20e02", "#f68a04"],
-           labels: ["Event Akan Datang", "Event Selesai"],
-           dataLabels: {
-               enabled: false,
-           },
-           stroke: {
-               show: false,
-               width: 0,
-           },
-           legend: {
-               show: false,
-           },
-           responsive: [
-               {
-                   breakpoint: 480,
-                   options: {
-                       chart: {
-                           width: 200,
-                       },
-                       legend: {
-                           position: "bottom",
-                       },
-                   },
-               },
-           ],
-       };
+// // top chart 1
+//  if(jQuery('#view-chart-01').length){
+//        var options = {
+//            series: eventAkanDatang,
+//            chart: {
+//                width: 250,
+//                type: "donut",
+//            },
+//            colors: ["#e20e02", "#f68a04"],
+//            labels: ["Event Akan Datang", "Event Selesai"],
+//            dataLabels: {
+//                enabled: false,
+//            },
+//            stroke: {
+//                show: false,
+//                width: 0,
+//            },
+//            legend: {
+//                show: false,
+//            },
+//            responsive: [
+//                {
+//                    breakpoint: 480,
+//                    options: {
+//                        chart: {
+//                            width: 200,
+//                        },
+//                        legend: {
+//                            position: "bottom",
+//                        },
+//                    },
+//                },
+//            ],
+//        };
 
-        var chart = new ApexCharts(document.querySelector("#view-chart-01"), options);
-        chart.render();
+//         var chart = new ApexCharts(document.querySelector("#view-chart-01"), options);
+//         chart.render();
       
-      }
+//       }
 
     // top chart 2
  if(jQuery('#view-chart-02').length){
@@ -1866,10 +1866,10 @@ $(document).ready(function() {
  if(jQuery('#view-chart-03').length){
         var options = {
           series: [{
-          name: 'This Month',
+          name: 'Bulan Ini',
           data: [44, 55,30,60]
         }, {
-          name: 'Last Month',
+          name: 'Bulan Lalu',
           data: [35, 41,20,40]
         }],
         colors:['#e20e02', '#007aff'],

@@ -7,7 +7,7 @@
                   </div>
                   <div class="iq-navbar-logo d-flex justify-content-between">
                       <a href="{{ route('home') }}" class="header-logo">
-                          <img src="../assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+                          <img src="{{ asset('img/Logo 1.png') }}" class="img-fluid rounded-normal" alt="">
                           <div class="logo-title">
                               <span class="text-primary text-uppercase">Gamevent</span>
                           </div>
@@ -22,74 +22,6 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto navbar-list">
-                      <li class="nav-item nav-icon">
-                          <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
-                              <i class="ri-notification-2-line"></i>
-                              <span class="bg-primary dots"></span>
-                          </a>
-                          <div class="iq-sub-dropdown">
-                              <div class="iq-card shadow-none m-0">
-                                  <div class="iq-card-body p-0">
-                                      <div class="bg-primary p-3">
-                                          <h5 class="mb-0 text-white">All Notifications<small
-                                                  class="badge  badge-light float-right pt-1">4</small></h5>
-                                      </div>
-                                      <a href="#" class="iq-sub-card">
-                                          <div class="media align-items-center">
-                                              <div class="">
-                                                  <img class="avatar-40 rounded" src="../assets/images/user/01.jpg"
-                                                      alt="">
-                                              </div>
-                                              <div class="media-body ml-3">
-                                                  <h6 class="mb-0 ">Emma Watson Barry</h6>
-                                                  <small class="float-right font-size-12">Just Now</small>
-                                                  <p class="mb-0">95 MB</p>
-                                              </div>
-                                          </div>
-                                      </a>
-                                      <a href="#" class="iq-sub-card">
-                                          <div class="media align-items-center">
-                                              <div class="">
-                                                  <img class="avatar-40 rounded" src="../assets/images/user/02.jpg"
-                                                      alt="">
-                                              </div>
-                                              <div class="media-body ml-3">
-                                                  <h6 class="mb-0 ">New customer is join</h6>
-                                                  <small class="float-right font-size-12">5 days ago</small>
-                                                  <p class="mb-0">Cyst Barry</p>
-                                              </div>
-                                          </div>
-                                      </a>
-                                      <a href="#" class="iq-sub-card">
-                                          <div class="media align-items-center">
-                                              <div class="">
-                                                  <img class="avatar-40 rounded" src="../assets/images/user/03.jpg"
-                                                      alt="">
-                                              </div>
-                                              <div class="media-body ml-3">
-                                                  <h6 class="mb-0 ">Two customer is left</h6>
-                                                  <small class="float-right font-size-12">2 days ago</small>
-                                                  <p class="mb-0">Cyst Barry</p>
-                                              </div>
-                                          </div>
-                                      </a>
-                                      <a href="#" class="iq-sub-card">
-                                          <div class="media align-items-center">
-                                              <div class="">
-                                                  <img class="avatar-40 rounded" src="../assets/images/user/04.jpg"
-                                                      alt="">
-                                              </div>
-                                              <div class="media-body ml-3">
-                                                  <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                                  <small class="float-right font-size-12">3 days ago</small>
-                                                  <p class="mb-0">Cyst Barry</p>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </li>
                       <li class="line-height pt-3">
                           <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
                               <img src="{{ asset('uploads/organizers') . '/' . Auth::user()->profil }}"
@@ -102,7 +34,7 @@
                                           <h5 class="mb-0 text-white line-height">Hello {{ Auth::user()->nama }}</h5>
                                           <span class="text-white font-size-12">{{ Auth::user()->jabatan }}</span>
                                       </div>
-                                      <a href="{{ route('organizer-profil-organizer', ['id' => Auth::user()->id]) }}" class="iq-sub-card iq-bg-primary-hover">
+                                      <a href="{{ route('admin-profil-organizer', ['id' => Auth::user()->id]) }}" class="iq-sub-card iq-bg-primary-hover">
                                           <div class="media align-items-center">
                                               <div class="rounded iq-card-icon iq-bg-primary">
                                                   <i class="ri-file-user-line"></i>
@@ -113,7 +45,7 @@
                                               </div>
                                           </div>
                                       </a>
-                                      <a href="{{ route('organizer-edit-organizer', ['id' => Auth::user()->id]) }}" class="iq-sub-card iq-bg-primary-hover">
+                                      <a href="{{ route('admin-edit-organizer', ['id' => Auth::user()->id]) }}" class="iq-sub-card iq-bg-primary-hover">
                                           <div class="media align-items-center">
                                               <div class="rounded iq-card-icon iq-bg-primary">
                                                   <i class="ri-profile-line"></i>
