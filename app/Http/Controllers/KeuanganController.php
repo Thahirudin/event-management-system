@@ -138,6 +138,12 @@ class KeuanganController extends Controller
     }
     function destroy($id){
         $keuangan = Keuangan::find($id);
+        if ($keuangan->bukti) {
+            $oldImagePath = public_path('uploads/keuangans/' . $keuangan->bukti);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
         // Hapus data
         $keuangan->delete();
         return redirect('/admin/keuangan/list-keuangan')->with('sukses', 'Keuangan Berhasil Di Hapus');

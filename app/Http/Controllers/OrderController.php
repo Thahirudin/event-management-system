@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
@@ -91,7 +92,7 @@ class OrderController extends Controller
             // Periksa apakah jumlah tiket tersedia lebih besar dari 0
             if ($harga->jumlah_tiket > 0) {
                 $image = $request->file('bukti');
-                $imageName = now()->format('YmdHis') . '-' . $request->nama . '.' . $image->getClientOriginalExtension();
+                $imageName = now()->format('YmdHis') . '-' . $request->id_member . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/orders'), $imageName);
 
                 $order = Order::create([
@@ -161,11 +162,20 @@ class OrderController extends Controller
     function destroy($id)
     {
         try {
+            DB::beginTransaction();
             $order = Order::find($id);
+            if ($order->bukti) {
+                $thumbnailPath = public_path('uploads/orders/' . $order->bukti);
+                if (file_exists($thumbnailPath)) {
+                    unlink($thumbnailPath);
+                }
+            }
             // Hapus data
             $order->delete();
+            DB::commit();
             return redirect()->back()->with('sukses', 'Order Berhasil Di Hapus');
-        } catch (QueryException $e) {
+        } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

@@ -234,4 +234,18 @@
             @endphp
         </script>
     @endif
+     @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "Gagal",
+                text: "{{ session('error') }}",
+                icon: "warning"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('error');
+            @endphp
+        </script>
+    @endif
 @endsection

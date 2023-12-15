@@ -178,14 +178,42 @@ class EventController extends Controller
     }
     function destroy($id)
     {
-        $event = Event::find($id);
+        try {
+            // Menggunakan transaksi untuk memastikan konsistensi data
+            DB::beginTransaction();
 
-        // Hapus terlebih dahulu catatan terkait di tbl_orders
-        $event->orders()->delete();
+            $event = Event::find($id);
+            foreach ($event->orders as $order) {
+                if ($order->bukti) {
+                    $thumbnailPath = public_path('uploads/orders/' . $order->bukti);
+                    if (file_exists($thumbnailPath)) {
+                        unlink($thumbnailPath);
+                    }
+                }
+            }
 
-        // Setelah itu, baru hapus acara
-        $event->delete();
-        return redirect('/admin/list-event')->with('sukses', 'event Berhasil Di Hapus');
+            // Hapus thumbnail dari events
+            if ($event->thumbnail) {
+                $thumbnailPath = public_path('uploads/events/' . $event->thumbnail);
+                if (file_exists($thumbnailPath)) {
+                    unlink($thumbnailPath);
+                }
+            }
+            // Hapus terlebih dahulu catatan terkait di tbl_orders
+            $event->orders()->delete();
+            $event->delete();
+
+            // Commit transaksi jika semuanya berhasil
+            DB::commit();
+
+            return redirect('/admin/list-event')->with('sukses', 'Event Berhasil Dihapus');
+        } catch (\Exception $e) {
+            // Rollback transaksi jika terjadi kesalahan
+            DB::rollBack();
+
+            // Handle kesalahan, misalnya redirect dengan pesan error
+            return redirect('/admin/list-event')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     // Function Halaman Organizer
@@ -269,7 +297,7 @@ class EventController extends Controller
             return view('organizer.edit-event', compact('event', 'kategoris'));
         } catch (ModelNotFoundException $e) {
             // abort(404, 'Data not found.');
-           
+
             return redirect()->route('organizer-list-event');
         }
     }
