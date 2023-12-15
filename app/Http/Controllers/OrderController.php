@@ -22,7 +22,8 @@ class OrderController extends Controller
     function adminListOrderEvent($id)
     {
         $orders = Order::where('id_event', $id)->get();
-        return view('admin.list-order-event', ['orders' => $orders]);
+        $event = Event::findOrFail($id);
+        return view('admin.list-order-event', compact('orders', 'event'));
     }
 
     public function admincreate($id)
