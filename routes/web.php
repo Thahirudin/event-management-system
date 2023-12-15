@@ -116,12 +116,15 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::put('/organizer/edit-member/{id}', [MemberController::class, 'organizerUpdate'])->name('organizer-update-member');
     // keuangan
     Route::get('/organizer/keuangan/list-keuangan', [KeuanganController::class, 'organizerIndex'])->name('organizer-list-keuangan');
+    Route::get('/organizer/keuangan/list-keuangan/{id}', [KeuanganController::class, 'organizerListKeuanganEvent'])->name('organizer-list-keuangan-event');
     Route::get('/organizer//keuangan/pemasukan-event', [KeuanganController::class, 'organizerPemasukanEvent'])->name('organizer-list-pemasukan-event');
     Route::get('/organizer//keuangan/pengeluaran-event', [KeuanganController::class, 'organizerPengeluaranEvent'])->name('organizer-list-pengeluaran-event');
     Route::get('/organizer/keuangan/tambah-keuangan', [KeuanganController::class, 'organizerCreate'])->name('organizer-tambah-keuangan');
     Route::post('/organizer/keuangan/tambah-keuangan', [KeuanganController::class, 'organizerStore'])->name('organizer-store-keuangan');
     Route::get('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerEdit'])->name('organizer-edit-keuangan');
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
+    Route::get('/organizer//keuangan/list-pemasukan', [KeuanganController::class, 'organizerListPemasukan'])->name('organizer-list-pemasukan');
+    Route::get('/organizer//keuangan/list-pengeluaran', [KeuanganController::class, 'organizerListPengeluaran'])->name('organizer-list-pengeluaran');
 });
 Route::middleware([ 'member'])->group(function () {
     // order

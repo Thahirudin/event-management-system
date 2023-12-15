@@ -87,8 +87,10 @@
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('organizer-list-order-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Order</a>
-                                            <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
+                                            <a href="{{ route('organizer-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
+                                                <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
+                                                class="dropdown-item">Lihat Detail Event</a>
                                             <a onclick="confirmDelete(this)"
                                                 data-url="{{ route('organizer-hapus-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Hapus</a>
@@ -150,8 +152,10 @@
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('organizer-list-order-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Order</a>
-                                            <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
+                                            <a href="{{ route('organizer-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
+                                                <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
+                                                class="dropdown-item">Lihat Detail Event</a>
                                             <a onclick="confirmDelete(this)"
                                                 data-url="{{ route('organizer-hapus-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Hapus</a>
