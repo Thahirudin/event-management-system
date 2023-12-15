@@ -67,14 +67,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center justify-content-end ">
-                                                <div {{ $order->status != 'periksa' ? 'hidden' : '' }}>
-                                                    <form action="{{ route('admin-terima-order', ['id' => $order->id]) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button class="btn btn-success mr-3">Terima</button>
-                                                    </form>
-                                                </div>
+                                               
                                                 <div {{ $order->status != 'periksa' ? 'hidden' : '' }}>
                                                  
 
@@ -96,33 +89,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alasan Ditolak</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="rejectForm" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="detail">Alasan Ditolak</label>
-                            <textarea name="detail" class="form-control" id="detail" cols="30" rows="10"></textarea>
-                        </div>
-                        <input type="hidden" name="order_id" id="order-id-input" value="">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                     
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 @endsection
 
 @section('addJs')
