@@ -113,7 +113,7 @@ class EventController extends Controller
             'harga.*' => 'required',
             'jumlah_tiket.*' => '|integer',
             'status' => 'required',
-            'slug' => 'required|unique:tbl_events,slug,' . $id
+            'slug' => 'required|unique:tbl_events,slug,' . $id,
         ]);
         DB::beginTransaction();
 

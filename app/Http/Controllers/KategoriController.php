@@ -2,28 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Kategori;
+
 class KategoriController extends Controller
 {
     // Function Halaman Admin
-    function index(){
+    function index()
+    {
         $kategoris = Kategori::all();
         return view('admin.kategori', compact('kategoris'));
     }
-    function adminCreate(){
+    function adminCreate()
+    {
         return view('admin.tambah-kategori');
     }
-    function store(Request $request){
-        $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'slug' => 'required',
-        ]);
-        $kategori = new Kategori($validatedData);
-        $kategori->save();
+    function store(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'nama' => 'required|max:255',
+                'slug' => 'required|unique:tbl_kategoris,slug',
+            ]);
 
-        return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil Ditambah');
+            $kategori = new Kategori($validatedData);
+            $kategori->save();
+
+            return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil Ditambah');
+        } catch (ValidationException $e) {
+            // Tangani pengecualian validasi
+            return redirect()
+                ->back()
+                ->withErrors($e->errors())
+                ->withInput(); // Untuk mempertahankan nilai lama (old value)
+        } catch (\Exception $e) {
+            // Tangani pengecualian di sini
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
     function adminEdit($id)
     {
@@ -32,25 +49,37 @@ class KategoriController extends Controller
     }
     function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|max:255',
-            'slug' => 'required',
-        ]);
-        $kategori = Kategori::find($id);
-        $kategori->update([
-            'nama' => $request->nama,
-            'slug' => $request->slug,
-            // Sesuaikan dengan nama kolom yang ingin Anda edit
-        ]);
-        return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil DiEdit');
+        try {
+            $request->validate([
+                'nama' => 'required|max:255',
+                'slug' => 'required|unique:tbl_kategoris,slug,' . $id,
+            ]);
+            $kategori = Kategori::find($id);
+            $kategori->update([
+                'nama' => $request->nama,
+                'slug' => $request->slug,
+                // Sesuaikan dengan nama kolom yang ingin Anda edit
+            ]);
+            return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil DiEdit');
+        } catch (ValidationException $e) {
+            // Tangani pengecualian validasi
+            return redirect()
+                ->back()
+                ->withErrors($e->errors())
+                ->withInput(); // Untuk mempertahankan nilai lama (old value)
+        } catch (\Exception $e) {
+            // Tangani pengecualian di sini
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
-    function destroy($id){
+    function destroy($id)
+    {
         $kategori = Kategori::find($id);
         // Hapus data
         $kategori->delete();
         return redirect('/admin/list-kategori')->with('sukses', 'Kategori Berhasil Di Hapus');
     }
-    
+
     // Function Halaman Organizer
     function organizerIndex()
     {

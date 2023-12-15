@@ -46,7 +46,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/tambah-kategori', [KategoriController::class, 'store'])->name('admin-store-kategori');
     Route::get('/admin/edit-kategori/{id}', [KategoriController::class, 'adminEdit'])->name('admin-edit-kategori');
     Route::put('/admin/edit-kategori/{id}', [KategoriController::class, 'update'])->name('admin-update-kategori');
-    Route::put('/admin/hapus-kategori/{id}', [KategoriController::class, 'destroy'])->name('admin-hapus-kategori');
+    Route::get('/admin/hapus-kategori/{id}', [KategoriController::class, 'destroy'])->name('admin-hapus-kategori');
     // organizer
     Route::get('/admin/list-organizer', [OrganizerController::class, 'index'])->name('admin-list-organizer');
     Route::get('/admin/tambah-organizer', [OrganizerController::class, 'adminCreate'])->name('admin-tambah-organizer');
