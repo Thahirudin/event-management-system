@@ -84,6 +84,8 @@
                                         </a>
 
                                         <div class="dropdown-menu">
+                                            <a href="{{ route('organizer-list-harga', ['id' => $event->id]) }}"
+                                                class="dropdown-item">Harga</a>
                                             <a href="{{ route('organizer-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('organizer-list-order-event', ['id' => $event->id]) }}"
@@ -150,7 +152,9 @@
                                             aria-expanded="false"><i class="ion-gear-b"></i>
                                             Aksi
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-menu">
+                                            <a href="{{ route('organizer-list-harga', ['id' => $event->id]) }}"
+                                                class="dropdown-item">Harga</a>
                                             <a href="{{ route('organizer-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('organizer-list-order-event', ['id' => $event->id]) }}"
@@ -176,7 +180,6 @@
     </div>
 @endsection
 @section('addJs')
-
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -230,7 +233,7 @@
             @endphp
         </script>
     @endif
-     @if (session('error'))
+    @if (session('error'))
         <script>
             Swal.fire({
                 title: "Gagal",

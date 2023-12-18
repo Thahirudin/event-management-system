@@ -220,9 +220,6 @@ class EventController extends Controller
             'lokasi' => 'required',
             'detail' => 'required',
             'kontak' => 'required',
-            'nama_harga.*' => 'required',
-            'harga.*' => 'required',
-            'jumlah_tiket.*' => '|integer',
             'status' => 'required',
             'thumbnail' => 'required',
             'slug' => 'required|unique:tbl_events,slug'
@@ -247,15 +244,6 @@ class EventController extends Controller
                 'thumbnail' => $imageName,
                 'slug' => $request->slug,
             ]);
-
-            // Simpan data harga yang terkait dengan event
-            foreach ($request->nama_harga as $key => $namaHarga) {
-                $event->harga()->create([
-                    'nama_harga' => $namaHarga,
-                    'harga' => $request->harga[$key],
-                    'jumlah_tiket' => $request->jumlah_tiket[$key],
-                ]);
-            }
 
             DB::commit(); // Commit transaksi database
 
@@ -288,15 +276,13 @@ class EventController extends Controller
     public function organizerUpdate(Request $request, $id)
     {
         $request->validate([
+            'id_organizer' => 'required|exists:tbl_organizers,id',
             'kategori' => 'required|exists:tbl_kategoris,id',
             'nama_event' => 'required',
             'waktu' => 'required',
             'lokasi' => 'required',
             'detail' => 'required',
             'kontak' => 'required',
-            'nama_harga.*' => 'required',
-            'harga.*' => 'required',
-            'jumlah_tiket.*' => '|integer',
             'status' => 'required',
             'slug' => 'required|unique:tbl_events,slug,' . $id,
         ]);
@@ -320,6 +306,7 @@ class EventController extends Controller
             }
 
             // Update event data
+            $event->id_organizer = $request->id_organizer;
             $event->id_kategori = $request->kategori;
             $event->nama_event = $request->nama_event;
             $event->waktu = $request->waktu;
@@ -329,18 +316,6 @@ class EventController extends Controller
             $event->status = $request->status;
             $event->slug = $request->slug;
             $event->save();
-
-            // Delete existing prices and re-add the updated ones
-            $event->harga()->delete();
-
-            // Add updated prices
-            foreach ($request->nama_harga as $key => $namaHarga) {
-                $event->harga()->create([
-                    'nama_harga' => $namaHarga,
-                    'harga' => $request->harga[$key],
-                    'jumlah_tiket' => $request->jumlah_tiket[$key],
-                ]);
-            }
 
             DB::commit();
 

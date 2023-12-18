@@ -265,11 +265,11 @@ class OrderController extends Controller
     function organizerListOrderEvent($id)
     {
         try {
-            $orders = Order::join('tbl_events', 'tbl_orders.id_event', '=', 'tbl_events.id')
-                ->where('tbl_events.id_organizer', Auth::user()->id)
-                ->where('tbl_events.id', $id)
-                ->get(['tbl_orders.*']);
-            return view('organizer.list-order-event', ['orders' => $orders]);
+            $event = Event::where('id_organizer', Auth::user()->id)->findOrFail($id);
+
+            // Mengambil pesanan (orders) yang terkait dengan event yang telah ditemukan
+            $orders = $event->orders->pluck('id')->toArray();
+            return view('organizer.list-order-event', compact('orders', 'event'));
         } catch (QueryException $e) {
             // Tangani eksepsi di sini, bisa di-log atau memberikan respons yang sesuai
             // Contoh respons:

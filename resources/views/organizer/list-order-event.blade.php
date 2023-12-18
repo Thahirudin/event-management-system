@@ -1,7 +1,7 @@
 @extends('organizer.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin menambahkan CSS --}}
-     <style>
+    <style>
         .popup-container {
             display: none;
             position: fixed;
@@ -34,7 +34,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Order</h4>
+                        <h4 class="card-title">Order {{ $event->nama_event }}</h4>
                     </div>
                 </div>
                 <div class="iq-card-body">
@@ -62,15 +62,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($orders as $order)
+                                @foreach ($orders as $orderId)
+                                    @php
+                                        $order = \App\Order::find($orderId);
+                                    @endphp
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $order->member->nama }}</td>
                                         <td>{{ $order->event->nama_event }}</td>
                                         <td><a class="btn btn-primary popup-img"
-                                                onclick="openPopup('{{asset('uploads/orders').'/'. $order->bukti }}')"><i class="fa fa-file"></i></a>
+                                                onclick="openPopup('{{ asset('uploads/orders') . '/' . $order->bukti }}')"><i
+                                                    class="fa fa-file"></i></a>
                                         </td>
-                                        <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
+                                        <td class="text-right">{{ number_format($order->harga_tiket, 0, ',', '.') }}</td>
                                         <td>{{ $order->detail }}</td>
                                         <td>
                                             @if ($order->status == 'periksa')
@@ -86,7 +90,8 @@
                                         <td>
                                             <div class="d-flex align-items-center justify-content-end ">
                                                 <div {{ $order->status != 'periksa' ? 'hidden' : '' }}>
-                                                    <form action="{{ route('organizer-terima-order', ['id' => $order->id]) }}"
+                                                    <form
+                                                        action="{{ route('organizer-terima-order', ['id' => $order->id]) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('PUT')

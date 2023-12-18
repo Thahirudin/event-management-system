@@ -93,42 +93,6 @@
                 @error('kontak')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-                <button class="btn btn-info" onclick="tambahKolomHarga()">Tambah Kolom Harga</button>
-                <div id="kolomHarga">
-                    <!-- Kolom harga pertama -->
-                    <div class="row" id="kolomHarga-1">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="nama_harga">Nama Tiket</label>
-                                <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
-                                    autocomplete="off" required>
-                            </div>
-                            @error('nama_harga[]')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="harga">Harga</label>
-                                <input type="number" class="form-control" id="harga" name="harga[]"
-                                    autocomplete="off" required>
-                            </div>
-                            @error('harga[]')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="jumlah_tiket">Tiket Tersedia</label>
-                                <input type="number" class="form-control" id="jumlah_tiket" name="jumlah_tiket[]"
-                                    autocomplete="off" required>
-                            </div>
-                            @error('jumlah_tiket[]')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="status">Status</label>
                     <input type="text" class="form-control" id="status" name="status" readonly
@@ -153,63 +117,6 @@
             height: 550,
             uiColor: '#9AB8F3'
         });
-    </script>
-    <script>
-        let indexKolomHarga = 1; // Indeks kolom harga dimulai dari 1
-
-        function tambahKolomHarga() {
-            indexKolomHarga++;
-            let kolomHarga = document.getElementById("kolomHarga");
-
-            let divRow = document.createElement("div");
-            divRow.className = "row";
-            divRow.id = "kolomHarga-" + indexKolomHarga;
-
-            let divCol1 = document.createElement("div");
-            divCol1.className = "col-md-4";
-            let label1 = document.createElement("label");
-            label1.textContent = "Nama Harga";
-            let inputNamaHarga = document.createElement("input");
-            inputNamaHarga.type = "text";
-            inputNamaHarga.className = "form-control";
-            inputNamaHarga.name = "nama_harga[]";
-            inputNamaHarga.autocomplete = "off";
-            inputNamaHarga.required = true;
-            divCol1.appendChild(label1);
-            divCol1.appendChild(inputNamaHarga);
-
-            let divCol2 = document.createElement("div");
-            divCol2.className = "col-md-4";
-            let label2 = document.createElement("label");
-            label2.textContent = "Harga";
-            let inputHarga = document.createElement("input");
-            inputHarga.type = "number";
-            inputHarga.className = "form-control";
-            inputHarga.name = "harga[]";
-            inputHarga.autocomplete = "off";
-            inputHarga.required = true;
-            divCol2.appendChild(label2);
-            divCol2.appendChild(inputHarga);
-
-            let divCol3 = document.createElement("div");
-            divCol3.className = "col-md-4";
-            let label3 = document.createElement("label");
-            label3.textContent = "Jumlah Tiket";
-            let inputJumlahTiket = document.createElement("input");
-            inputJumlahTiket.type = "number";
-            inputJumlahTiket.className = "form-control";
-            inputJumlahTiket.name = "jumlah_tiket[]";
-            inputJumlahTiket.autocomplete = "off";
-            inputJumlahTiket.required = true;
-            divCol3.appendChild(label3);
-            divCol3.appendChild(inputJumlahTiket);
-
-            divRow.appendChild(divCol1);
-            divRow.appendChild(divCol2);
-            divRow.appendChild(divCol3);
-
-            kolomHarga.appendChild(divRow);
-        }
     </script>
     <!-- Moment.js -->
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>

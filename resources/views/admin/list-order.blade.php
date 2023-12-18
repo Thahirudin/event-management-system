@@ -71,7 +71,7 @@
                                                 onclick="openPopup('{{ asset('uploads/orders') . '/' . $order->bukti }}')"><i
                                                     class="fa fa-file"></i></a>
                                         </td>
-                                        <td class="text-right">{{ number_format($order->harga, 0, ',', '.') }}</td>
+                                        <td class="text-right">{{ number_format($order->harga_tiket, 0, ',', '.') }}</td>
                                         <td>{{ $order->detail }}</td>
                                         <td>
                                             @if ($order->status == 'periksa')

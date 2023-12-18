@@ -113,7 +113,7 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::get('/organizer/tambah-organizer', [OrganizerController::class, 'organizerCreate'])->name('organizer-tambah-organizer');
     Route::post('/organizer/tambah-organizer', [OrganizerController::class, 'store'])->name('organizer-store-organizer');
     Route::get('/organizer/edit-organizer/{id}', [OrganizerController::class, 'organizerEdit'])->name('organizer-edit-organizer');
-    Route::put('/organizer/edit-organizer/{id}', [OrganizerController::class, 'update'])->name('organizer-update-organizer');
+    Route::put('/organizer/edit-organizer/{id}', [OrganizerController::class, 'organizerUpdate'])->name('organizer-update-organizer');
     Route::get('/organizer/hapus-organizer/{id}', [OrganizerController::class, 'organizerDestroy'])->name('organizer-hapus-organizer');
     Route::get('/organizer/profil-organizer/{id}', [OrganizerController::class, 'organizerProfil'])->name('organizer-profil-organizer');
     // member
@@ -122,17 +122,25 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::post('/organizer/tambah-member', [MemberController::class, 'organizerStore'])->name('organizer-store-member');
     Route::get('/organizer/edit-member/{id}', [MemberController::class, 'organizerEdit'])->name('organizer-edit-member');
     Route::put('/organizer/edit-member/{id}', [MemberController::class, 'organizerUpdate'])->name('organizer-update-member');
+    Route::get('/organizer/profil-member/{id}', [MemberController::class, 'organizerProfil'])->name('organizer-profil-member');
     // keuangan
     Route::get('/organizer/keuangan/list-keuangan', [KeuanganController::class, 'organizerIndex'])->name('organizer-list-keuangan');
     Route::get('/organizer/keuangan/list-keuangan/{id}', [KeuanganController::class, 'organizerListKeuanganEvent'])->name('organizer-list-keuangan-event');
     Route::get('/organizer//keuangan/pemasukan-event', [KeuanganController::class, 'organizerPemasukanEvent'])->name('organizer-list-pemasukan-event');
     Route::get('/organizer//keuangan/pengeluaran-event', [KeuanganController::class, 'organizerPengeluaranEvent'])->name('organizer-list-pengeluaran-event');
-    Route::get('/organizer/keuangan/tambah-keuangan', [KeuanganController::class, 'organizerCreate'])->name('organizer-tambah-keuangan');
-    Route::post('/organizer/keuangan/tambah-keuangan', [KeuanganController::class, 'organizerStore'])->name('organizer-store-keuangan');
+    Route::get('/organizer/keuangan/tambah-keuangan/{id}', [KeuanganController::class, 'organizerCreate'])->name('organizer-tambah-keuangan');
+    Route::post('/organizer/keuangan/tambah-keuangan/{id}', [KeuanganController::class, 'organizerStore'])->name('organizer-store-keuangan');
     Route::get('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerEdit'])->name('organizer-edit-keuangan');
     Route::put('/organizer/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'organizerUpdate'])->name('organizer-update-keuangan');
     Route::get('/organizer//keuangan/list-pemasukan', [KeuanganController::class, 'organizerListPemasukan'])->name('organizer-list-pemasukan');
     Route::get('/organizer//keuangan/list-pengeluaran', [KeuanganController::class, 'organizerListPengeluaran'])->name('organizer-list-pengeluaran');
+    Route::get('/organizer/hapus-keuangan/{id}', [KeuanganController::class, 'organizerDestroy'])->name('organizer-hapus-keuangan');
+    Route::get('/organizer/harga/list-harga/{id}', [HargaController::class, 'organizerIndex'])->name('organizer-list-harga');
+    Route::get('/organizer/harga/tambah-harga/{id}', [HargaController::class, 'organizerCreate'])->name('organizer-tambah-harga');
+    Route::post('/organizer/harga/tambah-harga/{id}', [HargaController::class, 'organizerStore'])->name('organizer-store-harga');
+    Route::get('/organizer/harga/edit-harga/{id}', [HargaController::class, 'organizerEdit'])->name('organizer-edit-harga');
+    Route::put('/organizer/harga/edit-harga/{id}', [HargaController::class, 'organizerUpdate'])->name('organizer-update-harga');
+    Route::get('/organizer/hapus-harga/{id}', [HargaController::class, 'organizerDestroy'])->name('organizer-hapus-harga');
 });
 Route::middleware([ 'member'])->group(function () {
     // order

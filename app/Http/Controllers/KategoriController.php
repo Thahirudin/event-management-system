@@ -92,14 +92,26 @@ class KategoriController extends Controller
     }
     function organizerStore(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'slug' => 'required',
-        ]);
-        $kategori = new Kategori($validatedData);
-        $kategori->save();
+        try {
+            $validatedData = $request->validate([
+                'nama' => 'required|max:255',
+                'slug' => 'required|unique:tbl_kategoris,slug',
+            ]);
 
-        return redirect('/organizer/list-kategori')->with('sukses', 'Kategori Berhasil Ditambah');
+            $kategori = new Kategori($validatedData);
+            $kategori->save();
+
+            return redirect('/organizer/list-kategori')->with('sukses', 'Kategori Berhasil Ditambah');
+        } catch (ValidationException $e) {
+            // Tangani pengecualian validasi
+            return redirect()
+                ->back()
+                ->withErrors($e->errors())
+                ->withInput(); // Untuk mempertahankan nilai lama (old value)
+        } catch (\Exception $e) {
+            // Tangani pengecualian di sini
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
     function organizerEdit($id)
     {

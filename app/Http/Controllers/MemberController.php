@@ -174,6 +174,11 @@ class MemberController extends Controller
         $member = member::find($id);
         return view('admin.profil-member', compact('member'));
     }
+    function organizerProfil($id)
+    {
+        $member = member::find($id);
+        return view('organizer.profil-member', compact('member'));
+    }
 
     function organizerIndex()
     {

@@ -22,15 +22,18 @@
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
                     <input type="text" class="form-control" id="kategori" oninput="generateSlug()" name="nama"
-                        required>
+                        required value="{{ old('nama') }}">
                 </div>
                 @error('nama')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
                     <label for="slug">Slug URL</label>
-                    <input type="text" class="form-control" id="slug" name="slug">
+                    <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}">
                 </div>
+                @error('slug')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -56,6 +59,20 @@
             // Clear the session after displaying the success message
             @php
                 session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
+     @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "Gagal",
+                text: "{{ session('sukses') }}",
+                icon: "warning"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('error');
             @endphp
         </script>
     @endif
