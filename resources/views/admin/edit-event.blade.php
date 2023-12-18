@@ -11,7 +11,7 @@
     <div class="iq-card">
         <div class="iq-card-header d-flex justify-content-between">
             <div class="iq-header-title">
-                <h4 class="card-title">Tambah Event</h4>
+                <h4 class="card-title">Edit Event</h4>
             </div>
         </div>
         <div class="iq-card-body">
@@ -99,44 +99,6 @@
                 @error('kontak')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-                <button class="btn btn-info" onclick="tambahKolomHarga()">Tambah Kolom Harga</button>
-                @foreach ($event->harga as $harga)
-                    <div id="kolomHarga">
-                        <!-- Kolom harga pertama -->
-                        <div class="row" id="kolomHarga-1">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="nama_harga">Jenis Tiket</label>
-                                    <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
-                                        autocomplete="off" required value="{{ $harga->nama_harga }}">
-                                </div>
-                                @error('nama_harga[]')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="harga">Harga</label>
-                                    <input type="number" class="form-control" id="harga" name="harga[]"
-                                        autocomplete="off" required value="{{ $harga->harga }}">
-                                </div>
-                                @error('harga[]')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="jumlah_tiket">Jumlah Tiket</label>
-                                    <input type="number" class="form-control" id="jumlah_tiket" name="jumlah_tiket[]"
-                                        autocomplete="off" required value="{{ $harga->jumlah_tiket }}">
-                                </div>
-                                @error('jumlah_tiket[]')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
                 <div class="form-group mb-3 ">
                     <label for="status">status</label>
                     <select class="form-control" id="status" name="status" autocomplete="off" required>
@@ -165,63 +127,6 @@
             height: 550,
             uiColor: '#9AB8F3'
         });
-    </script>
-    <script>
-        let indexKolomHarga = 1; // Indeks kolom harga dimulai dari 1
-
-        function tambahKolomHarga() {
-            indexKolomHarga++;
-            let kolomHarga = document.getElementById("kolomHarga");
-
-            let divRow = document.createElement("div");
-            divRow.className = "row";
-            divRow.id = "kolomHarga-" + indexKolomHarga;
-
-            let divCol1 = document.createElement("div");
-            divCol1.className = "col-md-4";
-            let label1 = document.createElement("label");
-            label1.textContent = "Nama Harga";
-            let inputNamaHarga = document.createElement("input");
-            inputNamaHarga.type = "text";
-            inputNamaHarga.className = "form-control";
-            inputNamaHarga.name = "nama_harga[]";
-            inputNamaHarga.autocomplete = "off";
-            inputNamaHarga.required = true;
-            divCol1.appendChild(label1);
-            divCol1.appendChild(inputNamaHarga);
-
-            let divCol2 = document.createElement("div");
-            divCol2.className = "col-md-4";
-            let label2 = document.createElement("label");
-            label2.textContent = "Harga";
-            let inputHarga = document.createElement("input");
-            inputHarga.type = "number";
-            inputHarga.className = "form-control";
-            inputHarga.name = "harga[]";
-            inputHarga.autocomplete = "off";
-            inputHarga.required = true;
-            divCol2.appendChild(label2);
-            divCol2.appendChild(inputHarga);
-
-            let divCol3 = document.createElement("div");
-            divCol3.className = "col-md-4";
-            let label3 = document.createElement("label");
-            label3.textContent = "Jumlah Tiket";
-            let inputJumlahTiket = document.createElement("input");
-            inputJumlahTiket.type = "number";
-            inputJumlahTiket.className = "form-control";
-            inputJumlahTiket.name = "jumlah_tiket[]";
-            inputJumlahTiket.autocomplete = "off";
-            inputJumlahTiket.required = true;
-            divCol3.appendChild(label3);
-            divCol3.appendChild(inputJumlahTiket);
-
-            divRow.appendChild(divCol1);
-            divRow.appendChild(divCol2);
-            divRow.appendChild(divCol3);
-
-            kolomHarga.appendChild(divRow);
-        }
     </script>
     <!-- Moment.js -->
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>

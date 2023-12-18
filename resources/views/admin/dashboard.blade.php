@@ -387,6 +387,10 @@
     </div>
     @php
         $eventss = [$totalEventAkandatang, $totalEventSelesai];
+        $kategori = [];
+        foreach ($kategoris as $kategori2) {
+            $kategori[] = $kategori2->nama;
+        }
     @endphp
 @endsection
 @section('addJs')
@@ -428,6 +432,60 @@
             var chart = new ApexCharts(document.querySelector("#view-chart-01"), options);
             chart.render();
 
+        }
+        if (jQuery('#view-chart-03').length) {
+            var options = {
+                series: [{
+                    name: 'Bulan Ini',
+                    data: [2, 2, 2, 2, 2]
+                }, {
+                    name: 'Bulan Lalu',
+                    data: [2, 2, 2, 2, 2],
+                }],
+                colors: ['#e20e02', '#007aff'],
+                chart: {
+                    type: 'bar',
+                    height: 230,
+                    foreColor: '#D1D0CF'
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: @json($kategori),
+                },
+                yaxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    enabled: false,
+                    y: {
+                        formatter: function(val) {
+                            return "$ " + val + " thousands"
+                        }
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#view-chart-03"), options);
+            chart.render();
         }
     </script>
 @endsection

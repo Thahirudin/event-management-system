@@ -1,13 +1,30 @@
 @extends('organizer.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin menambahkan CSS --}}
-@endsection
+     <style>
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
 
+        #popup-img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+    </style>
+@endsection
 @section('title')
     Order
 @endsection
 
-@section('list-order')
+@section('order')
     active active-menu
 @endsection
 
@@ -35,8 +52,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Id Member</th>
-                                    <th>Id Event</th>
+                                    <th>Nama Member</th>
+                                    <th>Nama Event</th>
                                     <th>Bukti</th>
                                     <th>Harga</th>
                                     <th>Detail</th>
@@ -48,9 +65,10 @@
                                 @foreach ($orders as $order)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $order->id_member }}</td>
-                                        <td>{{ $order->id_event }}</td>
-                                        <td><a href="{{ asset('uploads/orders') . '/' . $order->bukti }}">Klik Disini</a>
+                                        <td>{{ $order->member->nama }}</td>
+                                        <td>{{ $order->event->nama_event }}</td>
+                                        <td><a class="btn btn-primary popup-img"
+                                                onclick="openPopup('{{asset('uploads/orders').'/'. $order->bukti }}')"><i class="fa fa-file"></i></a>
                                         </td>
                                         <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
                                         <td>{{ $order->detail }}</td>
@@ -83,13 +101,16 @@
                                                     </button>
 
                                                 </div>
+                                                @if ($order->status == 'sukses')
+                                                    <div class="mr-3">
+                                                        <a href="{{ route('organizer-tiket', ['id' => $order->id]) }}"
+                                                            class="btn btn-info">Lihat Tiket</a>
+                                                    </div>
+                                                @endif
                                                 <div>
-                                                    <form action="{{ route('organizer-terima-order', ['id' => $order->id]) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button class="btn btn-primary">Hapus</button>
-                                                    </form>
+                                                    <a onclick="confirmDelete(this)"
+                                                        data-url="{{ route('organizer-hapus-order', ['id' => $order->id]) }}"
+                                                        class="btn btn-primary">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -129,11 +150,24 @@
             </div>
         </div>
     </div>
+    <div id="popup-container" class="popup-container" onclick="closePopup()">
+        <img src="" alt="Popup Image" id="popup-img">
+    </div>
 @endsection
 
 @section('addJs')
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        function openPopup(imageSrc) {
+            document.getElementById('popup-img').src = imageSrc;
+            document.getElementById('popup-container').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup-container').style.display = 'none';
+        }
+    </script>
     <script>
         $(document).ready(function() {
             var dataTable = $('#datatable').DataTable();
@@ -142,6 +176,21 @@
                 dataTable.column(6).search(selectedValue)
                     .draw(); // Ganti 1 dengan indeks kolom yang ingin difilter
             });
+            confirmDelete = function(button) {
+                var url = $(button).data('url');
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: 'Data ini akan dihapus!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = url;
+                    }
+                })
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

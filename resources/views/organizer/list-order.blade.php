@@ -46,16 +46,17 @@
                             </thead>
                             <tbody>
                                 @foreach ($orders as $orderId)
-                                @php
-                                    $order = \App\Order::find($orderId);
-                                @endphp
+                                    @php
+                                        $order = \App\Order::find($orderId);
+                                    @endphp
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $order->member->nama }}</td>
                                         <td>{{ $order->event->nama_event }}</td>
                                         <td><a href="{{ asset('uploads/orders') . '/' . $order->bukti }}">Klik Disini</a>
                                         </td>
-                                        <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
+                                        <td>{{ $order->nama_harga }} : {{ number_format($order->harga_tiket, 0, ',', '.') }}
+                                        </td>
                                         <td>{{ $order->detail }}</td>
                                         <td>
                                             @if ($order->status == 'periksa')
@@ -71,7 +72,8 @@
                                         <td>
                                             <div class="d-flex align-items-center justify-content-end ">
                                                 <div {{ $order->status != 'periksa' ? 'hidden' : '' }}>
-                                                    <form action="{{ route('organizer-terima-order', ['id' => $order->id]) }}"
+                                                    <form
+                                                        action="{{ route('organizer-terima-order', ['id' => $order->id]) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('PUT')

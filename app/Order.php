@@ -12,6 +12,9 @@ class Order extends Model
         'id_event',
         'status',
         'id_harga',
+        'nama_event',
+        'nama_harga',
+        'harga_tiket',
         'bukti',
         'detail',
     ];

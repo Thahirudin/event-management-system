@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin menambahkan CSS --}}
-     <style>
+    <style>
         .popup-container {
             display: none;
             position: fixed;
@@ -68,9 +68,10 @@
                                         <td>{{ $order->member->nama }}</td>
                                         <td>{{ $order->event->nama_event }}</td>
                                         <td><a class="btn btn-primary popup-img"
-                                                onclick="openPopup('{{asset('uploads/orders').'/'. $order->bukti }}')"><i class="fa fa-file"></i></a>
+                                                onclick="openPopup('{{ asset('uploads/orders') . '/' . $order->bukti }}')"><i
+                                                    class="fa fa-file"></i></a>
                                         </td>
-                                        <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
+                                        <td class="text-right">{{ number_format($order->harga, 0, ',', '.') }}</td>
                                         <td>{{ $order->detail }}</td>
                                         <td>
                                             @if ($order->status == 'periksa')

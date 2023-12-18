@@ -1863,60 +1863,60 @@ $(document).ready(function() {
     }
       
 // top chart 2
- if(jQuery('#view-chart-03').length){
-        var options = {
-          series: [{
-          name: 'Bulan Ini',
-          data: [44, 55,30,60]
-        }, {
-          name: 'Bulan Lalu',
-          data: [35, 41,20,40]
-        }],
-        colors:['#e20e02', '#007aff'],
-          chart: {
-          type: 'bar',
-          height: 230,
-          foreColor: '#D1D0CF'
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-          },
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          show: true,
-          width: 2,
-          colors: ['transparent']
-        },
-        xaxis: {
-          categories: ['a','b','c','d'],
-        },
-        yaxis: {
-          title: {
-            text: ''
-          }
-        },
-        fill: {
-          opacity: 1
-        },
-        tooltip: {
-            enabled: false,
-          y: {
-            formatter: function (val) {
-              return "$ " + val + " thousands"
-            }
-          }
-        }
-        };
+//  if(jQuery('#view-chart-03').length){
+//         var options = {
+//           series: [{
+//           name: 'Bulan Ini',
+//           data: [44, 55,30,60]
+//         }, {
+//           name: 'Bulan Lalu',
+//           data: [35, 41,20,40]
+//         }],
+//         colors:['#e20e02', '#007aff'],
+//           chart: {
+//           type: 'bar',
+//           height: 230,
+//           foreColor: '#D1D0CF'
+//         },
+//         plotOptions: {
+//           bar: {
+//             horizontal: false,
+//             columnWidth: '55%',
+//             endingShape: 'rounded'
+//           },
+//         },
+//         dataLabels: {
+//           enabled: false
+//         },
+//         stroke: {
+//           show: true,
+//           width: 2,
+//           colors: ['transparent']
+//         },
+//         xaxis: {
+//           categories: ['a','b','c','d'],
+//         },
+//         yaxis: {
+//           title: {
+//             text: ''
+//           }
+//         },
+//         fill: {
+//           opacity: 1
+//         },
+//         tooltip: {
+//             enabled: false,
+//           y: {
+//             formatter: function (val) {
+//               return "$ " + val + " thousands"
+//             }
+//           }
+//         }
+//         };
 
-        var chart = new ApexCharts(document.querySelector("#view-chart-03"), options);
-        chart.render();
-    }
+//         var chart = new ApexCharts(document.querySelector("#view-chart-03"), options);
+//         chart.render();
+//     }
       
     
 

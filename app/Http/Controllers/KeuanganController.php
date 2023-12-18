@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
 use App\Keuangan;
 use App\Event;
 use Illuminate\Database\QueryException;
@@ -9,28 +11,34 @@ use Illuminate\Http\Request;
 
 class KeuanganController extends Controller
 {
-    function index(){
+    function index()
+    {
         $keuangans = Keuangan::all();
         return view('admin.keuangan', compact('keuangans'));
     }
-    function listKeuanganEvent($id){
+    function listKeuanganEvent($id)
+    {
         $keuangans = Keuangan::where('event_id', $id)->get();
         $event = Event::find($id);
-        return view('admin.list-keuangan-event', compact('keuangans','event'));
+        return view('admin.list-keuangan-event', compact('keuangans', 'event'));
     }
-    function listPemasukan(){
+    function listPemasukan()
+    {
         $keuangans = Keuangan::where('jenis', 'Pemasukan')->get();
         return view('admin.list-pemasukan', compact('keuangans'));
     }
-    function listPengeluaran(){
+    function listPengeluaran()
+    {
         $keuangans = Keuangan::where('jenis', 'Pengeluaran')->get();
         return view('admin.list-pengeluaran', compact('keuangans'));
     }
-    function adminCreate($id){
+    function adminCreate($id)
+    {
         $event = Event::find($id);
         return view('admin.tambah-keuangan', compact('event'));
     }
-    function store(Request $request, $id) {
+    function store(Request $request, $id)
+    {
         $request->validate([
             'tanggal' => 'required|date',
             'catatan' => 'required|string',
@@ -45,7 +53,7 @@ class KeuanganController extends Controller
         try {
             $event = Event::find($id);
             $image = $request->file('bukti');
-            $imageName = now()->format('YmdHis').'-'.$event->nama_event.'.'.$image->getClientOriginalExtension();
+            $imageName = now()->format('YmdHis') . '-' . $event->nama_event . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/keuangans'), $imageName);
 
             $keuangan = Keuangan::create([
@@ -102,7 +110,7 @@ class KeuanganController extends Controller
 
                 // Upload the new profile image
                 $image = $request->file('bukti');
-                
+
                 $imageName = now()->format('YmdHis') . '-' . $keuangan->event->nama_event . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/keuangans'), $imageName);
 
@@ -136,7 +144,8 @@ class KeuanganController extends Controller
             return redirect()->back()->with('error', 'Gagal mengedit organizer. ' . $e->getMessage());
         }
     }
-    function destroy($id){
+    function destroy($id)
+    {
         $keuangan = Keuangan::find($id);
         if ($keuangan->bukti) {
             $oldImagePath = public_path('uploads/keuangans/' . $keuangan->bukti);
@@ -147,5 +156,28 @@ class KeuanganController extends Controller
         // Hapus data
         $keuangan->delete();
         return redirect('/admin/keuangan/list-keuangan')->with('sukses', 'Keuangan Berhasil Di Hapus');
+    }
+
+    function organizerListKeuanganEvent($id)
+    {
+        try {
+            $userOrganizerId = Auth::user()->id;
+
+            // Mengambil event dengan $id dan memastikan bahwa event tersebut terkait dengan ID organizer pengguna
+            $event = Event::where('id', $id)
+                ->where('id_organizer', $userOrganizerId)
+                ->first();
+            if (!$event) {
+                // Jika tidak ada, tampilkan halaman 404
+                abort(404, 'Event not found');
+            }
+            // Mengambil catatan keuangan dari event yang terkait dengan ID organizer pengguna
+            $keuangans = $event->keuangan;
+            return view('organizer.list-keuangan-event', compact('keuangans', 'event'));
+        } catch (QueryException $e) {
+            // Tangani eksepsi di sini, bisa di-log atau memberikan respons yang sesuai
+            // Contoh respons:
+            abort(404, 'Data not found.');
+        }
     }
 }

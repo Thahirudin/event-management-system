@@ -10,6 +10,7 @@
             display: block !important;
         }
 
+        /* Menghilangkan seluruh ikon pada tombol dropdown */
         .btn.dropdown-toggle::after {
             content: none;
         }
@@ -89,7 +90,7 @@
                                                 class="dropdown-item">Lihat Order</a>
                                             <a href="{{ route('organizer-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
-                                                <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
+                                            <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
                                                 class="dropdown-item">Lihat Detail Event</a>
                                             <a onclick="confirmDelete(this)"
                                                 data-url="{{ route('organizer-hapus-event', ['id' => $event->id]) }}"
@@ -99,6 +100,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -115,11 +117,12 @@
                                 background-position: center;
                                 height: 400px;
                             ">
-                            <div class="mt-1"><span
+                            <div class="mt-3 ml-3"><span
                                     class="overlay-text @if ($event->status == 'Akan Datang') bg-success @endif @if ($event->status == 'Selesai') bg-secondary @endif @if ($event->status == 'Batal') bg-primary @endif p-2">{{ $event->status }}</span>
                             </div>
                         </div>
                         <div class="card-body">
+
                             <div class="row mb-md-2">
                                 <div class="col-md-8 ">
                                     <div class="mb-2">
@@ -154,7 +157,7 @@
                                                 class="dropdown-item">Lihat Order</a>
                                             <a href="{{ route('organizer-list-keuangan-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Lihat Keuangan</a>
-                                                <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
+                                            <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
                                                 class="dropdown-item">Lihat Detail Event</a>
                                             <a onclick="confirmDelete(this)"
                                                 data-url="{{ route('organizer-hapus-event', ['id' => $event->id]) }}"
@@ -173,6 +176,7 @@
     </div>
 @endsection
 @section('addJs')
+
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -219,8 +223,24 @@
                 text: "{{ session('sukses') }}",
                 icon: "success"
             });
+
+            // Clear the session after displaying the success message
             @php
                 session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
+     @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "Gagal",
+                text: "{{ session('error') }}",
+                icon: "warning"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('error');
             @endphp
         </script>
     @endif

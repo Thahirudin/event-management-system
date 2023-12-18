@@ -21,6 +21,6 @@ class Keuangan extends Model
         return $this->belongsTo(User::class, 'organizer_id');
     }
     public function event() {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class, 'event_id');
     }
 }

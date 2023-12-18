@@ -21,10 +21,10 @@
     </style>
 @endsection
 @section('title')
-    Order {{ $event->nama_event }}
+    Order
 @endsection
 
-@section('list-order')
+@section('order')
     active active-menu
 @endsection
 
@@ -34,7 +34,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Order {{ $event->nama_event }}</h4>
+                        <h4 class="card-title">Order</h4>
                     </div>
                 </div>
                 <div class="iq-card-body">
@@ -52,8 +52,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Id Member</th>
-                                    <th>Id Event</th>
+                                    <th>Nama Member</th>
+                                    <th>Nama Event</th>
                                     <th>Bukti</th>
                                     <th>Harga</th>
                                     <th>Detail</th>
@@ -65,12 +65,13 @@
                                 @foreach ($orders as $order)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $order->id_member }}</td>
-                                        <td>{{ $order->id_event }}</td>
+                                        <td>{{ $order->member->nama }}</td>
+                                        <td>{{ $order->event->nama_event }}</td>
                                         <td><a class="btn btn-primary popup-img"
-                                                onclick="openPopup('{{asset('uploads/orders').'/'. $order->bukti }}')"><i class="fa fa-file"></i></a>
+                                                onclick="openPopup('{{ asset('uploads/orders') . '/' . $order->bukti }}')"><i
+                                                    class="fa fa-file"></i></a>
                                         </td>
-                                        <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
+                                        <td class="text-right">{{ number_format($order->harga, 0, ',', '.') }}</td>
                                         <td>{{ $order->detail }}</td>
                                         <td>
                                             @if ($order->status == 'periksa')
@@ -101,13 +102,16 @@
                                                     </button>
 
                                                 </div>
+                                                @if ($order->status == 'sukses')
+                                                    <div class="mr-3">
+                                                        <a href="{{ route('admin-tiket', ['id' => $order->id]) }}"
+                                                            class="btn btn-info">Lihat Tiket</a>
+                                                    </div>
+                                                @endif
                                                 <div>
-                                                    <form action="{{ route('admin-terima-order', ['id' => $order->id]) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button class="btn btn-primary">Hapus</button>
-                                                    </form>
+                                                    <a onclick="confirmDelete(this)"
+                                                        data-url="{{ route('admin-hapus-order', ['id' => $order->id]) }}"
+                                                        class="btn btn-primary">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -155,7 +159,7 @@
 @section('addJs')
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-     <script>
+    <script>
         function openPopup(imageSrc) {
             document.getElementById('popup-img').src = imageSrc;
             document.getElementById('popup-container').style.display = 'flex';
@@ -173,6 +177,21 @@
                 dataTable.column(6).search(selectedValue)
                     .draw(); // Ganti 1 dengan indeks kolom yang ingin difilter
             });
+            confirmDelete = function(button) {
+                var url = $(button).data('url');
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: 'Data ini akan dihapus!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = url;
+                    }
+                })
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

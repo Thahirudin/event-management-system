@@ -34,16 +34,21 @@
                     <div class="iq-header-title mb-3">
                         <h4 class="card-title">List Keuangan {{ $event->nama_event }}</h4>
                     </div>
+
+                    <div>
+                        <a href="{{ route('admin-tambah-keuangan', ['id' => $event->id]) }}"
+                            class="btn btn-primary">Tambah Keuangan</a>
+                    </div>
                     <div>
                         <label for="kategori">Pilih Kategori:</label>
-                    <div class="form-group">
-                        
-                        <select class="form-control" id="kategori" onchange="filterData()">
-                            <option value="semua">Semua</option>
-                            <option value="pemasukan">Pemasukan</option>
-                            <option value="pengeluaran">Pengeluaran</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+
+                            <select class="form-control" id="kategori" onchange="filterData()">
+                                <option value="semua">Semua</option>
+                                <option value="pemasukan">Pemasukan</option>
+                                <option value="pengeluaran">Pengeluaran</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="iq-card-body">

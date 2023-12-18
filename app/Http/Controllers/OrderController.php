@@ -56,19 +56,32 @@ class OrderController extends Controller
 
             $order = Order::find($id);
             $harga = Harga::find($order->id_harga);
-            if ($order) {
-                $order->update([
-                    'detail' => $request->detail,
-                    'status' => 'ditolak',
-                    // Sesuaikan dengan nama kolom yang ingin Anda edit
-                ]);
-                $harga->update([
-                    'jumlah_tiket' => $harga->jumlah_tiket + 1,
-                ]);
+            if ($harga) {
+                if ($order) {
+                    $order->update([
+                        'detail' => $request->detail,
+                        'status' => 'ditolak',
+                        // Sesuaikan dengan nama kolom yang ingin Anda edit
+                    ]);
+                    $harga->update([
+                        'jumlah_tiket' => $harga->jumlah_tiket + 1,
+                    ]);
 
-                return redirect('/admin/list-order')->with('sukses', 'Order Berhasil Ditolak');
-            } else {
-                return redirect()->back()->with('error', 'Order tidak ditemukan.');
+                    return redirect('/admin/list-order')->with('sukses', 'Order Berhasil Ditolak');
+                } else {
+                    return redirect()->back()->with('error', 'Order tidak ditemukan.');
+                }
+            }else{
+                if ($order) {
+                    $order->update([
+                        'detail' => $request->detail,
+                        'status' => 'ditolak',
+                        // Sesuaikan dengan nama kolom yang ingin Anda edit
+                    ]);
+                    return redirect('/admin/list-order')->with('sukses', 'Order Berhasil Ditolak');
+                } else {
+                    return redirect()->back()->with('error', 'Order tidak ditemukan.');
+                }
             }
         } catch (QueryException $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -89,7 +102,7 @@ class OrderController extends Controller
 
         try {
             $harga = Harga::find($request->id_harga);
-
+            $event = Event::findOrFail($request->id_event);
             // Periksa apakah jumlah tiket tersedia lebih besar dari 0
             if ($harga->jumlah_tiket > 0) {
                 $image = $request->file('bukti');
@@ -100,6 +113,9 @@ class OrderController extends Controller
                     'id_member' => $request->id_member,
                     'id_event' => $request->id_event,
                     'id_harga' => $request->id_harga,
+                    'nama_event' => $event->nama_event,
+                    'nama_harga' => $harga->nama_harga,
+                    'harga_tiket' => $harga->harga,
                     'status' => $request->status,
                     'bukti' => $imageName,
                 ]);
@@ -219,18 +235,65 @@ class OrderController extends Controller
 
         return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Diterima oleh Organizer');
     }
+    public function organizerTolakOrder(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'detail' => 'required',
+            ]);
+
+            $order = Order::find($id);
+            $harga = Harga::find($order->id_harga);
+            if ($order) {
+                $order->update([
+                    'detail' => $request->detail,
+                    'status' => 'ditolak',
+                    // Sesuaikan dengan nama kolom yang ingin Anda edit
+                ]);
+                $harga->update([
+                    'jumlah_tiket' => $harga->jumlah_tiket + 1,
+                ]);
+
+                return redirect('/organizer/list-order')->with('sukses', 'Order Berhasil Ditolak');
+            } else {
+                return redirect()->back()->with('error', 'Order tidak ditemukan.');
+            }
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
     function organizerListOrderEvent($id)
     {
         try {
-            $orders = Order::join('events', 'orders.id_event', '=', 'events.id')
-                ->where('orders.id_organizer', Auth::user()->id)
-                ->where('events.id', $id)
-                ->get(['orders.*']);
+            $orders = Order::join('tbl_events', 'tbl_orders.id_event', '=', 'tbl_events.id')
+                ->where('tbl_events.id_organizer', Auth::user()->id)
+                ->where('tbl_events.id', $id)
+                ->get(['tbl_orders.*']);
             return view('organizer.list-order-event', ['orders' => $orders]);
         } catch (QueryException $e) {
             // Tangani eksepsi di sini, bisa di-log atau memberikan respons yang sesuai
             // Contoh respons:
             abort(404, 'Data not found.');
+        }
+    }
+    function organizerDestroy($id)
+    {
+        try {
+            DB::beginTransaction();
+            $order = Order::find($id);
+            if ($order->bukti) {
+                $thumbnailPath = public_path('uploads/orders/' . $order->bukti);
+                if (file_exists($thumbnailPath)) {
+                    unlink($thumbnailPath);
+                }
+            }
+            // Hapus data
+            $order->delete();
+            DB::commit();
+            return redirect()->back()->with('sukses', 'Order Berhasil Di Hapus');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     function memberIndex()

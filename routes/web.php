@@ -6,6 +6,7 @@ use App\http\Controllers\OrganizerController;
 use App\http\Controllers\MemberController;
 use App\http\Controllers\KeuanganController;
 use App\http\Controllers\DashboardController;
+use App\http\Controllers\HargaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,13 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'adminEdit'])->name('admin-edit-keuangan');
     Route::put('/admin/keuangan/edit-keuangan/{id}', [KeuanganController::class, 'update'])->name('admin-update-keuangan');
     Route::get('/admin/hapus-keuangan/{id}', [KeuanganController::class, 'destroy'])->name('admin-hapus-keuangan');
+
+    Route::get('/admin/harga/list-harga/{id}', [HargaController::class, 'index'])->name('admin-list-harga');
+    Route::get('/admin/harga/tambah-harga/{id}', [HargaController::class, 'adminCreate'])->name('admin-tambah-harga');
+    Route::post('/admin/harga/tambah-harga/{id}', [HargaController::class, 'store'])->name('admin-store-harga');
+    Route::get('/admin/harga/edit-harga/{id}', [HargaController::class, 'adminEdit'])->name('admin-edit-harga');
+    Route::put('/admin/harga/edit-harga/{id}', [HargaController::class, 'update'])->name('admin-update-harga');
+    Route::get('/admin/hapus-harga/{id}', [HargaController::class, 'destroy'])->name('admin-hapus-harga');
 });
 
 Route::middleware(['auth', 'organizer'])->group(function () {

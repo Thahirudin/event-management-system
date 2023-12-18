@@ -108,17 +108,28 @@ class KategoriController extends Controller
     }
     function organizerUpdate(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|max:255',
-            'slug' => 'required',
-        ]);
-        $kategori = Kategori::find($id);
-        $kategori->update([
-            'nama' => $request->nama,
-            'slug' => $request->slug,
-            // Sesuaikan dengan nama kolom yang ingin Anda edit
-        ]);
-        return redirect('/organizer/list-kategori')->with('sukses', 'Kategori Berhasil DiEdit');
+        try {
+            $request->validate([
+                'nama' => 'required|max:255',
+                'slug' => 'required|unique:tbl_kategoris,slug,' . $id,
+            ]);
+            $kategori = Kategori::find($id);
+            $kategori->update([
+                'nama' => $request->nama,
+                'slug' => $request->slug,
+                // Sesuaikan dengan nama kolom yang ingin Anda edit
+            ]);
+            return redirect('/organizer/list-kategori')->with('sukses', 'Kategori Berhasil DiEdit');
+        } catch (ValidationException $e) {
+            // Tangani pengecualian validasi
+            return redirect()
+                ->back()
+                ->withErrors($e->errors())
+                ->withInput(); // Untuk mempertahankan nilai lama (old value)
+        } catch (\Exception $e) {
+            // Tangani pengecualian di sini
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
     function organizerDestroy($id)
     {

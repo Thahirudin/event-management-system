@@ -41,7 +41,7 @@
                         <i class="la la-border-all"> Grid</i>
                     </button>
                 </div>
-                <div><a href="{{ route('admin-store-event') }}" class="btn btn-info">Tambah Event</a></div>
+                <div><a href="{{ route('admin-tambah-event') }}" class="btn btn-info">Tambah Event</a></div>
             </div>
         </div>
     </div>
@@ -86,6 +86,8 @@
                                         <div class="dropdown-menu">
                                             <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Beli</a>
+                                            <a href="{{ route('admin-list-harga', ['id' => $event->id]) }}"
+                                                class="dropdown-item">Harga</a>
                                             <a href="{{ route('admin-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
@@ -152,9 +154,11 @@
                                             aria-expanded="false"><i class="ion-gear-b"></i>
                                             Aksi
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-menu">
                                             <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
-                                                class="dropdown-item">Beli Tiket</a>
+                                                class="dropdown-item">Beli</a>
+                                            <a href="{{ route('admin-list-harga', ['id' => $event->id]) }}"
+                                                class="dropdown-item">Harga</a>
                                             <a href="{{ route('admin-edit-event', ['id' => $event->id]) }}"
                                                 class="dropdown-item">Edit</a>
                                             <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
@@ -180,7 +184,6 @@
     </div>
 @endsection
 @section('addJs')
-
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -234,7 +237,7 @@
             @endphp
         </script>
     @endif
-     @if (session('error'))
+    @if (session('error'))
         <script>
             Swal.fire({
                 title: "Gagal",

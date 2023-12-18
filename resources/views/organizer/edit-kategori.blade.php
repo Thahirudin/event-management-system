@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('organizer.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
@@ -31,6 +31,9 @@
                     <label for="slug">Slug URL</label>
                     <input type="text" class="form-control" id="slug" name="slug" value="{{ $kategori->slug }}">
                 </div>
+                @error('slug')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -44,4 +47,33 @@
             document.getElementById('slug').value = slugInput;
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('sukses'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "Gagal",
+                text: "{{ session('sukses') }}",
+                icon: "warning"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('error');
+            @endphp
+        </script>
+    @endif
 @endsection

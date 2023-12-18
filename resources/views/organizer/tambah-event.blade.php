@@ -29,7 +29,7 @@
                     <label for="kategori">Kategori</label>
                     <select class="form-control" id="kategori" name="kategori" autocomplete="off" required>
                         @foreach ($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                            <option value="{{ $kategori->id }}" {{ old('kategori') == "$kategori->id" ? 'selected' : '' }}>{{ $kategori->nama }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -38,10 +38,17 @@
                 @enderror
                 <div class="form-group">
                     <label for="nama_event">Nama Event</label>
-                    <input type="text" class="form-control" id="nama_event" name="nama_event" autocomplete="off" required
-                        value="{{ old('nama_event') }}">
+                    <input type="text" class="form-control" id="nama_event" name="nama_event" oninput="generateSlug()"
+                        autocomplete="off" required value="{{ old('nama_event') }}">
                 </div>
                 @error('nama_event')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                <div class="form-group">
+                    <label for="slug">slug</label>
+                    <input type="text" class="form-control" id="slug" name="slug" autocomplete="off" required value="{{ old('slug') }}">
+                </div>
+                @error('slug')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
@@ -55,8 +62,7 @@
                         <div class="form-group">
                             <label for="waktu">Waktu</label>
                             <input type="text" class="form-control" id="waktu" name="waktu"
-                                placeholder="Pilih Tanggal dan Waktu" autocomplete="off" required
-                                value="{{ old('waktu') }}">
+                                placeholder="Pilih Tanggal dan Waktu" autocomplete="off" required value="{{ old('waktu') }}">
                         </div>
                         @error('waktu')
                             <div class="text-danger">{{ $message }}</div>
@@ -75,7 +81,7 @@
                 </div>
                 <div class="form-group">
                     <label for="detail">Detail</label>
-                    <textarea name="detail" id="detail" autocomplete="off" required>{{ old('detail') }}"</textarea>
+                    <textarea name="detail" id="detail" autocomplete="off" required >{{ old('detail') }}</textarea>
                     @error('detail')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -93,9 +99,9 @@
                     <div class="row" id="kolomHarga-1">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="nama_harga">Nama Harga</label>
+                                <label for="nama_harga">Nama Tiket</label>
                                 <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
-                                    autocomplete="off" required value="{{ old('nama_harga[]') }}">
+                                    autocomplete="off" required>
                             </div>
                             @error('nama_harga[]')
                                 <div class="text-danger">{{ $message }}</div>
@@ -104,8 +110,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="harga">Harga</label>
-                                <input type="number" class="form-control" id="harga" name="harga[]" autocomplete="off"
-                                    required value="{{ old('harga[]') }}">
+                                <input type="number" class="form-control" id="harga" name="harga[]"
+                                    autocomplete="off" required>
                             </div>
                             @error('harga[]')
                                 <div class="text-danger">{{ $message }}</div>
@@ -113,9 +119,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="jumlah_tiket">Jumlah Tiket</label>
+                                <label for="jumlah_tiket">Tiket Tersedia</label>
                                 <input type="number" class="form-control" id="jumlah_tiket" name="jumlah_tiket[]"
-                                    autocomplete="off" required value="{{ old('jumlah_tiket[]') }}">
+                                    autocomplete="off" required>
                             </div>
                             @error('jumlah_tiket[]')
                                 <div class="text-danger">{{ $message }}</div>
@@ -136,8 +142,8 @@
 @section('addJs')
     <script>
         function generateSlug() {
-            var kategoriInput = document.getElementById('kategori').value;
-            var slugInput = kategoriInput.toLowerCase().replace(/\s+/g, '-');
+            var eventInput = document.getElementById('nama_event').value;
+            var slugInput = eventInput.toLowerCase().replace(/\s+/g, '-');
             document.getElementById('slug').value = slugInput;
         }
     </script>

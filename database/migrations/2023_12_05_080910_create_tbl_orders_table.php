@@ -20,10 +20,13 @@ class CreateTblOrdersTable extends Migration
             $table->unsignedBigInteger('id_event');
             $table->foreign('id_event')->references('id')->on('tbl_events')->onDelete('cascade');
             $table->text('status');
+              $table->text('nama_event');
+            $table->string('nama_harga');
+            $table->string('harga_tiket');
             $table->text('bukti');
             $table->text('detail')->nullable();
-            $table->unsignedBigInteger('id_harga');
-            $table->foreign('id_harga')->references('id')->on('tbl_hargas');
+            $table->unsignedBigInteger('id_harga')->nullable();
+            $table->foreign('id_harga')->references('id')->on('tbl_hargas')->onDelete('set null');
             $table->timestamps();
         });
     }

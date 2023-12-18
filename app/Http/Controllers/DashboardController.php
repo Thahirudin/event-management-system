@@ -38,11 +38,8 @@ class DashboardController extends Controller
             'orders' => function ($query) {
                 $query->where('status', 'sukses');
             }
-        ])
-            ->orderByDesc('orders_count')
-            ->take(5)
-            ->get();
-        return view('admin.dashboard', compact('totalEventAkandatang','totalEventSelesai','events', 'kategoris', 'topEvents', 'totalEventHariIni', 'totalOrganizerHariIni', 'persenEvent', 'persenOrganizer', 'persenMember', 'totalMemberHariIni'));
+        ])->orderByDesc('orders_count')->take(5)->get();
+        return view('admin.dashboard', compact('totalEventAkandatang','totalEventSelesai','events', 'kategoris', 'topEvents', 'totalEventHariIni', 'totalOrganizerHariIni', 'persenEvent', 'persenOrganizer', 'persenMember', 'totalMemberHariIni',));
     }
     function organizerIndex()
     {
