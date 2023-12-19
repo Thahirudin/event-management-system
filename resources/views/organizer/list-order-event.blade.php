@@ -108,7 +108,7 @@
                                                 </div>
                                                 @if ($order->status == 'sukses')
                                                     <div class="mr-3">
-                                                        <a href="{{ route('organizer-tiket', ['id' => $order->id]) }}"
+                                                        <a href="{{ route('member-tiket', ['id' => $order->id]) }}"
                                                             class="btn btn-info">Lihat Tiket</a>
                                                     </div>
                                                 @endif
