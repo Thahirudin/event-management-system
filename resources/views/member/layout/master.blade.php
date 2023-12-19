@@ -41,7 +41,7 @@
    <!-- Wrapper END -->
     
    <!-- Footer -->
-   @include('admin.layout.footer')
+   @include('member.layout.footer')
    <!-- Footer END -->
    <!-- Optional JavaScript -->
    <!-- jQuery first, then Popper.js, then Bootstrap JS -->

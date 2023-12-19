@@ -345,4 +345,19 @@ class EventController extends Controller
         $kategoris = Kategori::all();
         return view('member.detail-event', compact('event', 'events', 'kategoris'));
     }
+    function memberAllEvent()
+    {
+        $events = Event::latest('waktu')->paginate(3);
+        $kategoris = Kategori::all();
+        $kategori2 = null;
+        return view('member.all-event', compact( 'events', 'kategoris', 'kategori2'));
+    }
+    function memberEventKategori( $slug)
+    {
+        $kategori2 = Kategori::where('slug', $slug)->first();
+        $events = Event::where('id_kategori', $kategori2->id)->latest('waktu')->paginate(3);
+        $kategoris = Kategori::all();
+        return view('member.all-event', compact('events', 'kategoris', 'kategori2'));
+    }
+    
 }

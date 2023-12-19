@@ -145,9 +145,14 @@ Route::middleware(['auth', 'organizer'])->group(function () {
 Route::middleware([ 'member'])->group(function () {
     // order
     Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
+    Route::get('/member/tambah-order/{id}', [OrderController::class, 'memberCreate'])->name('member-tambah-order');
+    Route::post('/member/tambah-order/{id}', [OrderController::class, 'memberStore'])->name('member-store-order');
 });
 // Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
 // 
+Route::get('/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member-tiket');
+Route::get('/events', [EventController::class, 'memberAllEvent'])->name('member-all-event');
+Route::get('/events/kategori/{slug}', [EventController::class, 'memberEventKategori'])->name('member-event-kategori');
 Route::get('/', [DashboardController::class, 'memberHome'])->name('home');
 Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('tentang-kami');
 Route::get('/event/{id}', [EventController::class, 'detailEvent'])->name('detail-event');

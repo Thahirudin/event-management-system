@@ -18,6 +18,6 @@ class MemberMiddleware
         if (auth()->guard('member')->check()) {
             return $next($request);
         }
-        abort(404);
+        return redirect()->route('login');
     }
 }

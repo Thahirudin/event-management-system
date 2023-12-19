@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a href="" class="btn btn-primary btn-lg btn-block">Pesan Sekarang</a>
+                    <a href="{{ route('member-tambah-order', ['id' => $event->id]) }}" class="btn btn-primary btn-lg btn-block">Pesan Sekarang</a>
                 </div>
             </div>
             <div class="iq-card px-3 py-4">

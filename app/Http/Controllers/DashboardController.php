@@ -47,7 +47,9 @@ class DashboardController extends Controller
     }
     function memberHome()
     {
-        return view('member.home');
+        $events = Event::take(6)->orderBy('waktu', 'desc')->get();
+        $kategoris = Kategori::all();
+        return view('member.home', compact('events', 'kategoris'));
     }
     function memberDashboard()
     {
@@ -55,7 +57,8 @@ class DashboardController extends Controller
     }
     function tentangKami()
     {
-        return view('member.tentang-kami');
+        $organizers = User::all();
+        return view('member.tentang-kami', compact('organizers'));
     }
 
 }

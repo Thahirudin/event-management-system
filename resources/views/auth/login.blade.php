@@ -56,20 +56,16 @@
                                     </div>
                                     <div class="sign-info">
                                         <button type="submit" class="btn btn-primary">Sign in</button>
-                                        <div class="custom-control custom-checkbox d-inline-block">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember Me</label>
-                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="mt-3">
                             <div class="d-flex justify-content-center links">
-                                Don't have an account? <a href="sign-up.html" class="text-primary ml-2">Sign Up</a>
+                                Tidak Punya Akun? <a href="sign-up.html" class="text-primary ml-2">Daftar</a>
                             </div>
                             <div class="d-flex justify-content-center links">
-                                <a href="pages-recoverpw.html" class="f-link">Forgot your password?</a>
+                                <a href="pages-recoverpw.html" class="f-link">Lupa Password?</a>
                             </div>
                         </div>
                     </div>

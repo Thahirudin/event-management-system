@@ -71,7 +71,7 @@ class OrderController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Order tidak ditemukan.');
                 }
-            }else{
+            } else {
                 if ($order) {
                     $order->update([
                         'detail' => $request->detail,
@@ -206,6 +206,15 @@ class OrderController extends Controller
             abort(404, 'Data not found.');
         }
     }
+    public function memberTiket($orderid)
+    {
+        try {
+            $order = Order::where('status', 'Sukses')->findOrFail($orderid);
+            return view('member.tiket', ['order' => $order]);
+        } catch (ModelNotFoundException $e) {
+            abort(404, 'Data not found.');
+        }
+    }
     function organizerIndex()
     {
         $events = Event::where('id_organizer', Auth::user()->id)->get();
@@ -300,5 +309,63 @@ class OrderController extends Controller
     {
         $orders = Order::where('id_member', Auth::guard('member')->user()->id)->get();
         return view('member.list-order', ['orders' => $orders]);
+    }
+    public function memberCreate($id)
+    {
+        $event = Event::find($id);
+        return view('member.tambah-order', compact('event'));
+    }
+    public function memberStore(Request $request)
+    {
+        $request->validate([
+            'id_member' => 'required',
+            'id_event' => 'required',
+            'status' => 'required',
+            'id_harga' => 'required',
+            'bukti' => 'required',
+        ]);
+
+        DB::beginTransaction(); // Mulai transaksi database
+
+        try {
+            $harga = Harga::find($request->id_harga);
+            $event = Event::findOrFail($request->id_event);
+            // Periksa apakah jumlah tiket tersedia lebih besar dari 0
+            if ($harga->jumlah_tiket > 0) {
+                $image = $request->file('bukti');
+                $imageName = now()->format('YmdHis') . '-' . $request->id_member . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/orders'), $imageName);
+
+                $order = Order::create([
+                    'id_member' => $request->id_member,
+                    'id_event' => $request->id_event,
+                    'id_harga' => $request->id_harga,
+                    'nama_event' => $event->nama_event,
+                    'nama_harga' => $harga->nama_harga,
+                    'harga_tiket' => $harga->harga,
+                    'status' => $request->status,
+                    'bukti' => $imageName,
+                ]);
+
+                // Kurangi jumlah tiket hanya jika tiket tersedia
+                $harga->update([
+                    'jumlah_tiket' => $harga->jumlah_tiket - 1,
+                ]);
+
+                DB::commit(); // Commit transaksi database
+
+                // Redirect back or to a success page
+                return redirect(route('member-list-order'))->with('sukses', 'Order Berhasil Ditambahkan');
+            } else {
+                // Jumlah tiket tidak mencukupi
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Maaf Tiket Telah Habis ');
+            }
+        } catch (QueryException $e) {
+            // Tangani kesalahan query
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
     }
 }

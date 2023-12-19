@@ -1,8 +1,25 @@
 @extends('member.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin menambahkan CSS --}}
-@endsection
+    <style>
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
 
+        #popup-img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+    </style>
+@endsection
 @section('title')
     Order
 @endsection
@@ -50,9 +67,11 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $order->member->nama }}</td>
                                         <td>{{ $order->event->nama_event }}</td>
-                                        <td><a href="{{ asset('uploads/orders') . '/' . $order->bukti }}">Klik Disini</a>
+                                        <td><a class="btn btn-primary popup-img"
+                                                onclick="openPopup('{{ asset('uploads/orders') . '/' . $order->bukti }}')"><i
+                                                    class="fa fa-file"></i></a>
                                         </td>
-                                        <td class="text-right">{{ number_format($order->harga->harga, 0, ',', '.') }}</td>
+                                        <td class="text-right">{{ number_format($order->harga_tiket, 0, ',', '.') }}</td>
                                         <td>{{ $order->detail }}</td>
                                         <td>
                                             @if ($order->status == 'periksa')
@@ -66,19 +85,11 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="d-flex align-items-center justify-content-end ">
-                                               
-                                                <div {{ $order->status != 'periksa' ? 'hidden' : '' }}>
-                                                 
-
+                                            @if ($order->status == 'sukses')
+                                                <div>
+                                                    <a href="{{ route('member-tiket', ['id' => $order->id]) }}" class="btn btn-primary">Lihat Tiket</a>
                                                 </div>
-                                                @if ($order->status == 'sukses')
-                                                    <div class="mr-3">
-                                                        <a href="{{ route('admin-tiket', ['id' => $order->id]) }}"
-                                                            class="btn btn-info">Lihat Tiket</a>
-                                                    </div>
-                                                @endif
-                                          
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -89,12 +100,24 @@
             </div>
         </div>
     </div>
-
+    <div id="popup-container" class="popup-container" onclick="closePopup()">
+        <img src="" alt="Popup Image" id="popup-img">
+    </div>
 @endsection
 
 @section('addJs')
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        function openPopup(imageSrc) {
+            document.getElementById('popup-img').src = imageSrc;
+            document.getElementById('popup-container').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup-container').style.display = 'none';
+        }
+    </script>
     <script>
         $(document).ready(function() {
             var dataTable = $('#datatable').DataTable();
@@ -136,31 +159,4 @@
         </script>
     @endif
     {{-- Form Modal --}}
-    <script>
-        $(document).ready(function() {
-            $('.btn-warning').on('click', function() {
-                var orderId = $(this).data('id');
-
-                // Set data-id value to the form action
-                var formAction = "{{ route('admin-tolak-order', ['id' => ':order_id']) }}";
-                formAction = formAction.replace(':order_id', orderId);
-                $('#rejectForm').attr('action', formAction);
-
-                // Set data-id value to the hidden input
-                $('#order-id-input').val(orderId);
-
-                // Show the modal
-                $('#exampleModal').modal('show');
-            });
-
-            // Handle modal close event
-            $('#exampleModal').on('hidden.bs.modal', function() {
-                // Reset form action and hidden input value
-                $('#rejectForm').attr('action', '');
-                $('#order-id-input').val('');
-                // Optionally reset textarea value
-                $('#detail').val('');
-            });
-        });
-    </script>
 @endsection
