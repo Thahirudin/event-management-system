@@ -1,12 +1,12 @@
-@extends('admin.layout.master')
+@extends('member.layout.master')
 @section('addCss')
     {{-- Masukkan dibawah ini jika ingin nambahkan css --}}
 @endsection
 @section('title')
-    Admin - Dashboard
+    Gamelab Event
 @endsection
 @section('dashboard')
-    active active-menu
+active active-menu
 @endsection
 @section('content')
     <div class="row">
@@ -26,17 +26,8 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mt-3">
-                                <h4 class=" mb-0">
-                                    @if ($totalEventHariIni > 0)
-                                        +
-                                    @else
-                                        -
-                                    @endif{{ $totalEventHariIni }}
-                                </h4>
-                                </h4>
-                                <p class="mb-0 text-primary"><span><i
-                                            class="fa  {{ $persenEvent >= 0 ? 'fa-caret-up' : 'fa-caret-down' }} mr-2"></i></span>{{ $persenEvent }}%
-                                </p>
+                                <h4 class=" mb-0">+24K</h4>
+                                <p class="mb-0 text-primary"><span><i class="fa fa-caret-down mr-2"></i></span>35%</p>
                             </div>
                         </div>
                     </div>
@@ -55,16 +46,8 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mt-3">
-                                <h4 class=" mb-0">
-                                    @if ($totalOrganizerHariIni > 0)
-                                        +
-                                    @else
-                                        -
-                                    @endif{{ $totalOrganizerHariIni }}
-                                </h4>
-                                <p class="mb-0 text-warning"><span><i
-                                            class="fa {{ $persenOrganizer >= 0 ? 'fa-caret-up' : 'fa-caret-down' }} mr-2"></i></span>{{ $persenOrganizer }}%
-                                </p>
+                                <h4 class=" mb-0">+55K</h4>
+                                <p class="mb-0 text-warning"><span><i class="fa fa-caret-up mr-2"></i></span>50%</p>
                             </div>
                         </div>
                     </div>
@@ -83,16 +66,8 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mt-3">
-                                <h4 class=" mb-0">
-                                    @if ($totalMemberHariIni >= 0)
-                                        +
-                                    @else
-                                        -
-                                    @endif{{ $totalMemberHariIni }}
-                                </h4>
-                                <p class="mb-0 text-success"><span><i
-                                            class="fa {{ $persenMember >= 0 ? 'fa-caret-up' : 'fa-caret-down' }} mr-2"></i></span>{{ $persenMember }}%
-                                </p>
+                                <h4 class=" mb-0">+2M</h4>
+                                <p class="mb-0 text-success"><span><i class="fa fa-caret-up mr-2"></i></span>80%</p>
                             </div>
                         </div>
                     </div>
@@ -107,29 +82,126 @@
                 </div>
                 <div class="iq-card-body">
                     <ul class="list-unstyled row top-rated-item mb-0">
-                        @foreach ($topEvents as $topEvent)
-                            <li class="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
-                                <div class="card h-100 mb-0">
-                                    <div class="iq-card-body p-0">
-                                        <div class="iq-thumb">
-                                            <a href="javascript:void(0)">
-                                                <img src="{{ asset('uploads/events') . '/' . $topEvent->thumbnail }}"
-                                                    class="img-fluid w-100 img-border-radius" alt=""
-                                                    style="object-fit: cover; height: 95px">
-                                            </a>
-                                        </div>
-                                        <div class="iq-feature-list">
-                                            <h6 class="font-weight-600 mb-0">{{ $topEvent->nama_event }}</h6>
-                                            <p class="mb-0 mt-2">{{ $topEvent->kategori->nama }}</p>
-                                            <div class="d-flex align-items-center my-2 iq-ltr-direction">
-                                                <p class="mb-0 mr-2"><i
-                                                        class="lar la-eye mr-1"></i>{{ $topEvent->orders_count }}</p>
-                                            </div>
+                        <li class="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
+                            <div class="iq-card mb-0">
+                                <div class="iq-card-body p-0">
+                                    <div class="iq-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="../assets/images/dashboard/01.jpg"
+                                                class="img-fluid w-100 img-border-radius" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="iq-feature-list">
+                                        <h6 class="font-weight-600 mb-0">The Last Breath</h6>
+                                        <p class="mb-0 mt-2">T.v show</p>
+                                        <div class="d-flex align-items-center my-2 iq-ltr-direction">
+                                            <p class="mb-0 mr-2"><i class="lar la-eye mr-1"></i> 134</p>
+                                            <p class="mb-0 "><i class="las la-download ml-2"></i> 30 k</p>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                        @endforeach
+                            </div>
+                        </li>
+                        <li class="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
+                            <div class="iq-card mb-0">
+                                <div class="iq-card-body p-0">
+                                    <div class="iq-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="../assets/images/dashboard/02.jpg"
+                                                class="img-fluid w-100 img-border-radius" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="iq-feature-list">
+                                        <h6 class="font-weight-600 mb-0">Last Night</h6>
+                                        <p class="mb-0 mt-2">Movie</p>
+                                        <div class="d-flex align-items-center my-2 iq-ltr-direction">
+                                            <p class="mb-0 mr-2"><i class="lar la-eye mr-1"></i> 133</p>
+                                            <p class="mb-0 "><i class="las la-download ml-2"></i> 20 k</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
+                            <div class="iq-card mb-0">
+                                <div class="iq-card-body p-0">
+                                    <div class="iq-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="../assets/images/dashboard/03.jpg"
+                                                class="img-fluid w-100 img-border-radius" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="iq-feature-list">
+                                        <h6 class="font-weight-600 mb-0">Jeon Woochie</h6>
+                                        <p class="mb-0 mt-2">Movie</p>
+                                        <div class="d-flex align-items-center my-2 iq-ltr-direction">
+                                            <p class="mb-0 mr-2"><i class="lar la-eye mr-1"></i> 222</p>
+                                            <p class="mb-0 "><i class="las la-download ml-2"></i> 40 k</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
+                            <div class="iq-card mb-0">
+                                <div class="iq-card-body p-0">
+                                    <div class="iq-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="../assets/images/dashboard/04.jpg"
+                                                class="img-fluid w-100 img-border-radius" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="iq-feature-list">
+                                        <h6 class="font-weight-600 mb-0">Dino Land</h6>
+                                        <p class="mb-0 mt-2">T.v show</p>
+                                        <div class="d-flex align-items-center my-2 iq-ltr-direction">
+                                            <p class="mb-0 mr-2"><i class="lar la-eye mr-1"></i> 122</p>
+                                            <p class="mb-0 "><i class="las la-download ml-2"></i> 25 k</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
+                            <div class="iq-card mb-0">
+                                <div class="iq-card-body p-0">
+                                    <div class="iq-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="../assets/images/dashboard/05.jpg"
+                                                class="img-fluid w-100 img-border-radius" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="iq-feature-list">
+                                        <h6 class="font-weight-600 mb-0">Last Race</h6>
+                                        <p class="mb-0 mt-2">T.v show</p>
+                                        <div class="d-flex align-items-center my-2 iq-ltr-direction">
+                                            <p class="mb-0 mr-2"><i class="lar la-eye mr-1"></i> 144</p>
+                                            <p class="mb-0 "><i class="las la-download ml-2"></i> 35 k</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
+                            <div class="iq-card mb-0">
+                                <div class="iq-card-body p-0">
+                                    <div class="iq-thumb">
+                                        <a href="javascript:void(0)">
+                                            <img src="../assets/images/dashboard/06.jpg"
+                                                class="img-fluid w-100 img-border-radius" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="iq-feature-list">
+                                        <h6 class="font-weight-600 mb-0">Opend Dead Shot</h6>
+                                        <p class="mb-0 mt-2">T.v show</p>
+                                        <div class="d-flex align-items-center my-2 iq-ltr-direction">
+                                            <p class="mb-0 mr-2"><i class="lar la-eye mr-1"></i> 134</p>
+                                            <p class="mb-0 "><i class="las la-download ml-2"></i> 30 k</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -152,7 +224,7 @@
                                         <div class="iq-user-box bg-primary"></div>
                                         <div class="media-body text-white">
                                             <p class="mb-0 font-size-14 line-height">Event <br>
-                                                Akan Datang
+                                                Terbaru
                                             </p>
                                         </div>
                                     </div>
@@ -183,7 +255,7 @@
             <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                 <div class="iq-card-header d-flex align-items-center justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Kategori</h4>
+                        <h4 class="card-title">Categories</h4>
                     </div>
                 </div>
                 <div class="iq-card-body p-0">
@@ -306,78 +378,143 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Table List Event</h4>
+                        <h4 class="card-title">Recently Viewed Items</h4>
+                    </div>
+                    <div class="iq-card-header-toolbar d-flex align-items-center seasons">
+                        <div class="iq-custom-select d-inline-block sea-epi s-margin">
+                            <select name="cars" class="form-control season-select">
+                                <option value="season1">Most Likely</option>
+                                <option value="season2">Unlikely</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="iq-card-body">
                     <div class="table-responsive">
                         <table class="data-tables table movie_table" style="width:100%">
                             <thead>
-                                <tr class="te">
-                                    <th>No</th>
-                                    <th>Organizer</th>
-                                    <th>Kategori</th>
-                                    <th>Nama Event</th>
-                                    <th>Waktu</th>
-                                    <th>Tiket Tersedia</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
+                                <tr>
+                                    <th style="width:20%;">Movie</th>
+                                    <th style="width:10%;">Rating</th>
+                                    <th style="width:20%;">Category</th>
+                                    <th style="width:10%;">Download/Views</th>
+                                    <th style="width:10%;">User</th>
+                                    <th style="width:20%;">Date</th>
+                                    <th style="width:10%;"><i class="lar la-heart"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($events as $event)
-                                    <tr>
-                                        <td>
-                                            <div class="text-left">{{ $loop->index + 1 }}</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-left">{{ $event->user->nama }}</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-left">{{ $event->kategori->nama }}</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-left">{{ $event->nama_event }}</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-left">{{ $event->waktu }}</div>
-                                        </td>
-                                        <td>
-                                            @foreach ($event->harga as $harga)
-                                                <div class="text-left"><span>
-                                                        {{ $harga->nama_harga . ':' . $harga->jumlah_tiket }}</span>
-                                                </div>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            <div class="text-left">{{ $event->status }}</div>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <a class="btn btn-primary dropdown-toggle" href="#" role="button"
-                                                    data-toggle="dropdown" aria-expanded="false">
-                                                    Aksi
-                                                </a>
-
-                                                <div class="dropdown-menu">
-                                                    <a href="{{ route('admin-tambah-order', ['id' => $event->id]) }}"
-                                                        class="dropdown-item">Beli</a>
-                                                    <a href="{{ route('admin-edit-event', ['id' => $event->id]) }}"
-                                                        class="dropdown-item">Edit</a>
-                                                    <a href="{{ route('admin-list-order-event', ['id' => $event->id]) }}"
-                                                        class="dropdown-item">Lihat Order</a>
-                                                    <a href="{{ route('admin-list-keuangan-event', ['id' => $event->id]) }}"
-                                                        class="dropdown-item">Lihat Keuangan</a>
-                                                    <a href="{{ route('detail-event', ['id' => $event->slug]) }}"
-                                                        class="dropdown-item">Lihat Detail Event</a>
-                                                    <a onclick="confirmDelete(this)"
-                                                        data-url="{{ route('admin-hapus-event', ['id' => $event->id]) }}"
-                                                        class="dropdown-item">Hapus</a>
-                                                </div>
+                                <tr>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="iq-movie">
+                                                <a href="javascript:void(0);"><img
+                                                        src="../assets/images/movie-thumb/01.jpg"
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                             </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <div class="media-body text-white text-left ml-3">
+                                                <p class="mb-0">Champions</p>
+                                                <small>1h 40m</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><i class="lar la-star mr-2"></i> 9.2</td>
+                                    <td>Horror</td>
+                                    <td>
+                                        <i class="lar la-eye "></i>
+                                    </td>
+                                    <td>Unsubcriber</td>
+                                    <td>21 July,2020</td>
+                                    <td><i class="las la-heart text-primary"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="iq-movie">
+                                                <a href="javascript:void(0);"><img
+                                                        src="../assets/images/show-thumb/05.jpg"
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                            </div>
+                                            <div class="media-body text-white text-left ml-3">
+                                                <p class="mb-0">Last Race</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><i class="lar la-star mr-2"></i> 7.2</td>
+                                    <td>Horror</td>
+                                    <td>
+                                        <i class="lar la-eye "></i>
+                                    </td>
+                                    <td>subcriber</td>
+                                    <td>22 July,2020</td>
+                                    <td><i class="las la-heart text-primary"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="iq-movie">
+                                                <a href="javascript:void(0);"><img
+                                                        src="../assets/images/show-thumb/07.jpg"
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                            </div>
+                                            <div class="media-body text-white text-left ml-3">
+                                                <p class="mb-0">Boop Bitty</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><i class="lar la-star mr-2"></i> 8.2</td>
+                                    <td>Thriller</td>
+                                    <td>
+                                        <i class="lar la-eye "></i>
+                                    </td>
+                                    <td>Unsubcriber</td>
+                                    <td>23 July,2020</td>
+                                    <td><i class="las la-heart text-primary"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="iq-movie">
+                                                <a href="javascript:void(0);"><img
+                                                        src="../assets/images/show-thumb/10.jpg"
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                            </div>
+                                            <div class="media-body text-white text-left ml-3">
+                                                <p class="mb-0">Dino Land</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><i class="lar la-star mr-2"></i> 8.5</td>
+                                    <td>Action</td>
+                                    <td>
+                                        <i class="lar la-eye "></i>
+                                    </td>
+                                    <td>Unsubcriber</td>
+                                    <td>24 July,2020</td>
+                                    <td><i class="las la-heart text-primary"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="iq-movie">
+                                                <a href="javascript:void(0);"><img
+                                                        src="../assets/images/show-thumb/04.jpg"
+                                                        class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                            </div>
+                                            <div class="media-body text-white text-left ml-3">
+                                                <p class="mb-0">The Last Breath</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><i class="lar la-star mr-2"></i> 8.9</td>
+                                    <td>Horror</td>
+                                    <td>
+                                        <i class="lar la-eye "></i>
+                                    </td>
+                                    <td>subcriber</td>
+                                    <td>25 July,2020</td>
+                                    <td><i class="las la-heart text-primary"></i></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -385,107 +522,7 @@
             </div>
         </div>
     </div>
-    @php
-        $eventss = [$totalEventAkandatang, $totalEventSelesai];
-        $kategori = [];
-        foreach ($kategoris as $kategori2) {
-            $kategori[] = $kategori2->nama;
-        }
-    @endphp
 @endsection
 @section('addJs')
     {{-- Masukkan dibawah ini jika ingin menambahkan JS --}}
-    <script>
-        var eventAkanDatang = @json($eventss);
-        if (jQuery('#view-chart-01').length) {
-            var options = {
-                series: eventAkanDatang,
-                chart: {
-                    width: 300,
-                    type: "donut",
-                },
-                colors: ["#e20e02", "#f68a04"],
-                labels: ["Event Akan Datang", "Event Selesai"],
-                dataLabels: {
-                    enabled: false,
-                },
-                stroke: {
-                    show: false,
-                    width: 0,
-                },
-                legend: {
-                    show: false,
-                },
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 200,
-                        },
-                        legend: {
-                            position: "bottom",
-                        },
-                    },
-                }, ],
-            };
-
-            var chart = new ApexCharts(document.querySelector("#view-chart-01"), options);
-            chart.render();
-
-        }
-        if (jQuery('#view-chart-03').length) {
-            var options = {
-                series: [{
-                    name: 'Bulan Ini',
-                    data: [2, 2, 2, 2, 2]
-                }, {
-                    name: 'Bulan Lalu',
-                    data: [2, 2, 2, 2, 2],
-                }],
-                colors: ['#e20e02', '#007aff'],
-                chart: {
-                    type: 'bar',
-                    height: 230,
-                    foreColor: '#D1D0CF'
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '55%',
-                        endingShape: 'rounded'
-                    },
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    show: true,
-                    width: 2,
-                    colors: ['transparent']
-                },
-                xaxis: {
-                    categories: @json($kategori),
-                },
-                yaxis: {
-                    title: {
-                        text: ''
-                    }
-                },
-                fill: {
-                    opacity: 1
-                },
-                tooltip: {
-                    enabled: false,
-                    y: {
-                        formatter: function(val) {
-                            return "$ " + val + " thousands"
-                        }
-                    }
-                }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#view-chart-03"), options);
-            chart.render();
-        }
-    </script>
 @endsection
