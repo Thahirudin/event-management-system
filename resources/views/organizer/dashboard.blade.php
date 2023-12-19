@@ -197,103 +197,31 @@
                     <div class="iq-header-title">
                         <h4 class="card-title">Top Category</h4>
                     </div>
-                    <div class="iq-card-header-toolbar d-flex align-items-center seasons">
-                        <div class="iq-custom-select d-inline-block sea-epi s-margin">
-                            <select name="cars" class="form-control season-select">
-                                <option value="season1">Today</option>
-                                <option value="season2">This Week</option>
-                                <option value="season2">This Month</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
                 <div class="iq-card-body row align-items-center">
                     <div class="col-lg-7">
                         <div class="row list-unstyled mb-0 pb-0">
-                            <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
-                                <div class="iq-progress-bar progress-bar-vertical iq-bg-primary">
-                                    <span class="bg-primary" data-percent="100"
-                                        style="transition: height 2s ease 0s; width: 100%; height: 40%;"></span>
-                                </div>
-                                <div class="media align-items-center">
-                                    <div class="iq-icon-box-view rounded mr-3 iq-bg-primary"><i
-                                            class="las la-film font-size-32"></i></div>
-                                    <div class="media-body text-white">
-                                        <h6 class="mb-0 font-size-14 line-height">Actions</h6>
-                                        <small class="text-primary mb-0">+34%</small>
+                             @php
+                                $warna = ['bg-primary', 'bg-danger', 'bg-info','bg-warning', 'bg-success'];
+                            @endphp
+                            @foreach ($topKategoris as $key =>  $kategori)
+                           
+                                <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
+                                    <div class="iq-progress-bar progress-bar-vertical iq-{{  $warna[$key]  }}">
+                                        <span class="{{  $warna[$key]  }}" data-percent="100"
+                                            style="transition: height 2s ease 0s; width: 100%; height: 40%;"></span>
+                                    </div>
+                                    <div class="media align-items-center">
+                                        <div class="iq-icon-box-view rounded mr-3 iq-{{ $warna[$key] }}"><i
+                                                class="las la-film font-size-32"></i></div>
+                                        <div class="media-body text-white">
+                                            <h6 class="mb-0 font-size-14 line-height">{{ $kategori->nama }}</h6>
+                                            <small class="text-primary mb-0">{{ $kategori->event_count }}</small>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
-                                <div class="iq-progress-bar progress-bar-vertical iq-bg-secondary">
-                                    <span class="bg-secondary" data-percent="100"
-                                        style="transition: height 2s ease 0s; width: 100%; height: 70%;"></span>
-                                </div>
-                                <div class="media align-items-center">
-                                    <div class="iq-icon-box-view rounded mr-3 iq-bg-secondary"><i
-                                            class="las la-laugh-squint font-size-32"></i></div>
-                                    <div class="media-body text-white">
-                                        <p class="mb-0 font-size-14 line-height">Comedy</p>
-                                        <small class="text-secondary mb-0">+44%</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
-                                <div class="iq-progress-bar progress-bar-vertical iq-bg-info">
-                                    <span class="bg-info" data-percent="100"
-                                        style="transition: height 2s ease 0s; width: 100%; height: 40%;"></span>
-                                </div>
-                                <div class="media align-items-center">
-                                    <div class="iq-icon-box-view rounded mr-3 iq-bg-info"><i
-                                            class="las la-skull-crossbones font-size-32"></i></div>
-                                    <div class="media-body text-white">
-                                        <p class="mb-0 font-size-14 line-height">Horror</p>
-                                        <small class="text-info mb-0">+56%</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
-                                <div class="iq-progress-bar progress-bar-vertical iq-bg-warning">
-                                    <span class="bg-warning" data-percent="100"
-                                        style="transition: height 2s ease 0s; width: 40%; height: 40%;"></span>
-                                </div>
-                                <div class="media align-items-center">
-                                    <div class="iq-icon-box-view rounded mr-3 iq-bg-warning"><i
-                                            class="las la-theater-masks font-size-32"></i></div>
-                                    <div class="media-body text-white">
-                                        <p class="mb-0 font-size-14 line-height">Drama</p>
-                                        <small class="text-warning mb-0">+65%</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-6 mb-lg-0 mb-3">
-                                <div class="iq-progress-bar progress-bar-vertical iq-bg-success">
-                                    <span class="bg-success" data-percent="100"
-                                        style="transition: height 2s ease 0s; width: 60%; height: 60%;"></span>
-                                </div>
-                                <div class="media align-items-center mb-lg-0 mb-3">
-                                    <div class="iq-icon-box-view rounded mr-3 iq-bg-success"><i
-                                            class="las la-child font-size-32"></i></div>
-                                    <div class="media-body text-white">
-                                        <p class="mb-0 font-size-14 line-height">Kids</p>
-                                        <small class="text-success mb-0">+74%</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-6  mb-lg-0 mb-3">
-                                <div class="iq-progress-bar progress-bar-vertical iq-bg-danger">
-                                    <span class="bg-danger" data-percent="100"
-                                        style="transition: height 2s ease 0s; width: 80%; height: 80%;"></span>
-                                </div>
-                                <div class="media align-items-center">
-                                    <div class="iq-icon-box-view rounded mr-3 iq-bg-danger"><i
-                                            class="las la-grin-beam font-size-32"></i></div>
-                                    <div class="media-body text-white">
-                                        <p class="mb-0 font-size-14 line-height">Thrilled</p>
-                                        <small class="text-danger mb-0">+40%</small>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                     <div class="col-lg-5">
@@ -389,6 +317,12 @@
         foreach ($kategoris as $kategori2) {
             $kategori[] = $kategori2->nama;
         }
+        $topKategoriNama = [];
+        $topKategoriTotal = [];
+        foreach ($topKategoris as $kategori2) {
+            $topKategoriNama[] = $kategori2->nama;
+            $topKategoriTotal[] = $kategori2->event_count;
+        }
     @endphp
 @endsection
 @section('addJs')
@@ -431,14 +365,15 @@
             chart.render();
 
         }
+
         if (jQuery('#view-chart-03').length) {
             var options = {
                 series: [{
                     name: 'Bulan Ini',
-                    data: [2, 2, 2, 2, 2]
+                    data: @json($dataBulanIni),
                 }, {
                     name: 'Bulan Lalu',
-                    data: [2, 2, 2, 2, 2],
+                    data: @json($dataBulanLalu),
                 }],
                 colors: ['#e20e02', '#007aff'],
                 chart: {
@@ -483,6 +418,44 @@
             };
 
             var chart = new ApexCharts(document.querySelector("#view-chart-03"), options);
+            chart.render();
+        }
+        if (jQuery('#view-chart-02').length) {
+            var options = {
+                series: @json($topKategoriTotal),
+                chart: {
+                    width: 250,
+                    type: 'donut',
+                },
+                colors: ['#e20e02', '#83878a', '#007aff', '#f68a04', '#14e788'],
+                labels: @json($topKategoriNama),
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: false,
+                    width: 0
+                },
+                legend: {
+                    show: false,
+                    formatter: function(val, opts) {
+                        return val + " - " + opts.w.globals.series[opts.seriesIndex]
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#view-chart-02"), options);
             chart.render();
         }
     </script>

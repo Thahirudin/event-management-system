@@ -13,6 +13,6 @@ class Kategori extends Model
     ];
      public function event()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'id_kategori');
     }
 }
