@@ -147,7 +147,9 @@ Route::middleware([ 'member'])->group(function () {
     Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
     Route::get('/member/tambah-order/{id}', [OrderController::class, 'memberCreate'])->name('member-tambah-order');
     Route::post('/member/tambah-order/{id}', [OrderController::class, 'memberStore'])->name('member-store-order');
-     Route::get('/member/profil-member/{id}', [MemberController::class, 'memberProfil'])->name('member-profil-member');
+    Route::get('/member/profil-member/{id}', [MemberController::class, 'memberProfil'])->name('member-profil-member');
+    Route::get('/member/edit-member/{id}', [MemberController::class, 'memberEdit'])->name('member-edit-member');
+
 });
 // Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
 // 

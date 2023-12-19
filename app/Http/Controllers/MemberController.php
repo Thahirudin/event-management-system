@@ -187,5 +187,19 @@ class MemberController extends Controller
             'members' => $members
         ]);
     }
+
+    function memberProfil($id)
+    {
+        $member = member::find($id);
+        return view('member.profil-member', compact('member'));
+    }
+
+    function memberEdit($id)
+    {
+        $member = Member::find($id);
+        return view('member.edit-member', compact('member'));
+    }
+
+
     
 }

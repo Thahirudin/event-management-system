@@ -53,7 +53,7 @@
                                                   <span
                                                       class="text-white font-size-12">{{ auth()->guard('member')->user()->jabatan }}</span>
                                               </div>
-                                              <a href="{{ route('admin-profil-organizer', ['id' => auth()->guard('member')->user()->id]) }}"
+                                              <a href="{{ route('member-profil-member', ['id' => auth()->guard('member')->user()->id]) }}"
                                                   class="iq-sub-card iq-bg-primary-hover">
                                                   <div class="media align-items-center">
                                                       <div class="rounded iq-card-icon iq-bg-primary">
@@ -65,7 +65,7 @@
                                                       </div>
                                                   </div>
                                               </a>
-                                              <a href="{{ route('admin-edit-organizer', ['id' => auth()->guard('member')->user()->id]) }}"
+                                              <a href="{{ route('member-edit-member', ['id' => auth()->guard('member')->user()->id]) }}"
                                                   class="iq-sub-card iq-bg-primary-hover">
                                                   <div class="media align-items-center">
                                                       <div class="rounded iq-card-icon iq-bg-primary">
