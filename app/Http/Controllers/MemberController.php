@@ -281,7 +281,56 @@ class MemberController extends Controller
             return redirect()->back()->with('error', 'Gagal mengedit member. ' . $e->getMessage());
         }
     }
+    function memberStore(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'profil' => 'required',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:20',
+            'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+            'instagram' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:tbl_members,email',
+            'password' => 'required|string|min:8',
+        ]);
+        DB::beginTransaction(); // Mulai transaksi database
+        $hashedPassword = Hash::make($request->password);
+        try {
+            $image = $request->file('profil');
+            $imageName = now()->format('YmdHis') . '-' . $request->nama . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/members'), $imageName);
+            $member = Member::create([
+                'nama' => $request->nama,
+                'profil' => $imageName,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'instagram' => $request->instagram,
+                'facebook' => $request->facebook,
+                'twitter' => $request->twitter,
+                'email' => $request->email,
+                'password' => $hashedPassword,
+            ]);
 
+            DB::commit(); // Commit transaksi database
 
+            // Redirect back or to a success page
+            return redirect(route('login'))->with('sukses', 'Member Berhasil Ditambahkan');
+
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        // Create a new Organizer instance and save it to the database
+
+    }
     
 }

@@ -159,7 +159,7 @@ Route::get('/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member
 Route::get('/events', [EventController::class, 'memberAllEvent'])->name('member-all-event');
 Route::get('/events/kategori/{slug}', [EventController::class, 'memberEventKategori'])->name('member-event-kategori');
 Route::get('/', [DashboardController::class, 'memberHome'])->name('home');
-Route::get('/daftar', [MemberController::class, 'memberCreate'])->name('member-tambah-member');
+Route::post('/daftar', [MemberController::class, 'memberStore'])->name('member-store-member');
 Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('tentang-kami');
 Route::get('/event/{id}', [EventController::class, 'detailEvent'])->name('detail-event');
 Route::get('/member/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member-tiket');
