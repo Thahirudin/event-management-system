@@ -7,6 +7,7 @@ use App\http\Controllers\MemberController;
 use App\http\Controllers\KeuanganController;
 use App\http\Controllers\DashboardController;
 use App\http\Controllers\HargaController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,6 +150,7 @@ Route::middleware([ 'member'])->group(function () {
     Route::post('/member/tambah-order/{id}', [OrderController::class, 'memberStore'])->name('member-store-order');
     Route::get('/member/profil-member/{id}', [MemberController::class, 'memberProfil'])->name('member-profil-member');
     Route::get('/member/edit-member/{id}', [MemberController::class, 'memberEdit'])->name('member-edit-member');
+    Route::put('/member/edit-member/{id}', [MemberController::class, 'memberUpdate'])->name('member-update-member');
 
 });
 // Route::get('/member/list-order', [OrderController::class, 'memberIndex'])->name('member-list-order');
@@ -162,4 +164,5 @@ Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('
 Route::get('/event/{id}', [EventController::class, 'detailEvent'])->name('detail-event');
 Route::get('/member/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member-tiket');
 Route::get('/profil-organizer/{id}', [OrganizerController::class, 'memberProfil'])->name('member-profil-organizer');
+Route::post('/kontak/kirim-email', [ContactController::class, 'sendEmail'])->name('kontak-kirim-email');
 Auth::routes();

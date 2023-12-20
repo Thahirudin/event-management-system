@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form action="{{ route('admin-update-member', ['id' => $member->id]) }}" method="post"
+            <form action="{{ route('member-update-member', ['id' => $member->id]) }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
