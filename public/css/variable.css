@@ -3,7 +3,7 @@
 :root {
   --iq-title-text: #ffffff;
   --iq-body-text: #D1D0CF;
-  --iq-body-bg : #141414;
+  --iq-body-bg : #191919;
   --iq-primary: #e20e02;
   --iq-secondary:#83878a;
   --iq-success: #14e788;
@@ -35,7 +35,7 @@
   --iq-border: #141414;
   --iq-border-light: #141414;
   --iq-border-danger: #ff9273;
-  --iq-light-card:#191919;
+  --iq-light-card:#141414;
   --iq-primary-rgb: 100, 114, 248;
   --iq-primary-light: #f3fffe;
   --iq-bg1:#363636;

@@ -2,34 +2,34 @@
 @section('addCss')
 @endsection
 @section('title')
-Semua Event
+    Semua Event
 @endsection
 @section('')
     active active-menu
 @endsection
 @section('content')
     <section>
-        <div class="row mb-5 justify-content-between ">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="kategori">Kategori</label>
-                    <select class="form-control" id="kategori" name="kategori" required="required"
-                        style="background-color: #191919">
-                        <option value="{{ route('member-all-event') }}">Semua</option>
-                        @foreach ($kategoris as $kategori)
-                            <option value="{{ route('member-event-kategori', ['slug' => $kategori->slug]) }}"
-                                @if ($kategori2) {{ $kategori2->id == $kategori->id ? 'selected' : '' }} @endif>
-                                {{ $kategori->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
+        <div class=" mb-3">
+            <div class="row justify-content-between ">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" id="kategori" name="kategori" required="required"
+                            style="background-color: #141414">
+                            <option value="{{ route('member-all-event') }}">Semua Kategori</option>
+                            @foreach ($kategoris as $kategori)
+                                <option value="{{ route('member-event-kategori', ['slug' => $kategori->slug]) }}"
+                                    @if ($kategori2) {{ $kategori2->id == $kategori->id ? 'selected' : '' }} @endif>
+                                    {{ $kategori->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="cari">Pencarian</label>
-                    <input type="text" class="form-control" style="background-color: #191919" id="cari"
-                        name="cari" placeholder="Masukkan Pencarian">
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group iq-search-bar d-flex align-items-center  " style="background-color: #141414">
+                        <input type="text" class="form-control" style="background-color: #141414" id="cari"
+                            name="cari" placeholder="Masukkan Pencarian"> <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
