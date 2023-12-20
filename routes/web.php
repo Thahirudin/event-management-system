@@ -7,6 +7,7 @@ use App\http\Controllers\MemberController;
 use App\http\Controllers\KeuanganController;
 use App\http\Controllers\DashboardController;
 use App\http\Controllers\HargaController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,4 +163,5 @@ Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('
 Route::get('/event/{id}', [EventController::class, 'detailEvent'])->name('detail-event');
 Route::get('/member/tiket/{id}', [OrderController::class, 'memberTiket'])->name('member-tiket');
 Route::get('/profil-organizer/{id}', [OrganizerController::class, 'memberProfil'])->name('member-profil-organizer');
+Route::post('/kontak/kirim-email', [ContactController::class, 'sendEmail'])->name('kontak-kirim-email');
 Auth::routes();

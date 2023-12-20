@@ -229,15 +229,14 @@
     </section>
     <section class="mb-5">
         <div>
-            <div class="container">
+            <div class="container ">
                 <h3>Tim Kami</h3>
                 <div class="row h-100 ">
                     @foreach ($organizers as $organizer)
                         <div class="col-sm-6 col-lg-3 my-auto">
                             <div class="box shadow-sm p-4">
                                 <div class="image-wrapper mb-3">
-                                    <img class="img-fluid"
-                                        src="{{ asset('uploads/organizers') .'/'. $organizer->profil }}"
+                                    <img class="img-fluid" src="{{ asset('uploads/organizers') . '/' . $organizer->profil }}"
                                         alt="{{ $organizer->profil }}" />
                                 </div>
                                 <div class="box-desc">
@@ -257,7 +256,7 @@
                 <span class="h1  font-weight-bold text-primary">Kontak</span>
             </div>
             <hr>
-            <div class="row">
+            <div class="row iq-card py-5">
                 <div class="col-md-6 mb-5">
                     <div class="mb-3"><span class="h2">Hubungi Kami</span></div>
                     <div class="d-flex align-items-center mb-3">
@@ -272,7 +271,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form action="">
+                    <form action="{{ route('kontak-kirim-email') }}" method="post">
+                        @csrf
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" style="background-color: #191919" id="email"
@@ -297,4 +297,19 @@
     </section>
 @endsection
 @section('addJs')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('sukses'))
+        <script>
+            Swal.fire({
+                title: "Sukses",
+                text: "{{ session('sukses') }}",
+                icon: "success"
+            });
+
+            // Clear the session after displaying the success message
+            @php
+                session()->forget('sukses');
+            @endphp
+        </script>
+    @endif
 @endsection

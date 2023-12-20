@@ -347,7 +347,7 @@ class EventController extends Controller
     }
     function memberAllEvent()
     {
-        $events = Event::latest('waktu')->paginate(3);
+        $events = Event::latest('waktu')->paginate(6);
         $kategoris = Kategori::all();
         $kategori2 = null;
         return view('member.all-event', compact( 'events', 'kategoris', 'kategori2'));
