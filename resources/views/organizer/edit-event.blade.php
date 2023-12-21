@@ -99,44 +99,6 @@
                 @error('kontak')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-                <button class="btn btn-info" onclick="tambahKolomHarga()">Tambah Kolom Harga</button>
-                @foreach ($event->harga as $harga)
-                    <div id="kolomHarga">
-                        <!-- Kolom harga pertama -->
-                        <div class="row" id="kolomHarga-1">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="nama_harga">Jenis Tiket</label>
-                                    <input type="text" class="form-control" id="nama_harga" name="nama_harga[]"
-                                        autocomplete="off" required value="{{ $harga->nama_harga }}">
-                                </div>
-                                @error('nama_harga[]')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="harga">Harga</label>
-                                    <input type="number" class="form-control" id="harga" name="harga[]"
-                                        autocomplete="off" required value="{{ $harga->harga }}">
-                                </div>
-                                @error('harga[]')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="jumlah_tiket">Jumlah Tiket</label>
-                                    <input type="number" class="form-control" id="jumlah_tiket" name="jumlah_tiket[]"
-                                        autocomplete="off" required value="{{ $harga->jumlah_tiket }}">
-                                </div>
-                                @error('jumlah_tiket[]')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
                 <div class="form-group mb-3 ">
                     <label for="status">status</label>
                     <select class="form-control" id="status" name="status" autocomplete="off" required>
