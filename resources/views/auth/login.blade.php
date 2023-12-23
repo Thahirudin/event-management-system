@@ -62,10 +62,7 @@
                         </div>
                         <div class="mt-3">
                             <div class="d-flex justify-content-center links">
-                                Tidak Punya Akun? <a href="sign-up.html" class="text-primary ml-2">Daftar</a>
-                            </div>
-                            <div class="d-flex justify-content-center links">
-                                <a href="pages-recoverpw.html" class="f-link">Lupa Password?</a>
+                                Tidak Punya Akun? <a href="{{ route('register') }}" class="text-primary ml-2">Daftar</a>
                             </div>
                         </div>
                     </div>

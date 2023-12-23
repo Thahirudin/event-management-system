@@ -29,7 +29,7 @@ class ContactController extends Controller
         $mail = new KontakMailable($data);
 
         // Mengirim email menggunakan kelas Mail Laravel
-        Mail::to('tohiruzain098@gmail.com')->send($mail);
+        Mail::to('thairudin1@gmail.com')->send($mail);
 
         return redirect('tentang-kami')->with('sukses', 'Email Berhasil Dikirim');
     }

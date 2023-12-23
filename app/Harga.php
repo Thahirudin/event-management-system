@@ -10,7 +10,7 @@ class Harga extends Model
     protected $fillable = [
         'id_event',
         'nama_harga',
-        'harga',
+        'harga', 
         'jumlah_tiket',
     ];
     public function event()
